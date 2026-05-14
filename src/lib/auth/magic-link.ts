@@ -8,17 +8,23 @@ export async function createMagicToken(
   email: string,
 ): Promise<string> {
   const token = randomBytes(32).toString("hex");
-  await kv.set(`magic:${token}`, JSON.stringify({ customerId, email }), {
-    ex: TOKEN_TTL_SECONDS,
-  });
+  await kv.set(
+    `magic:${token}`,
+    { customerId, email },
+    {
+      ex: TOKEN_TTL_SECONDS,
+    },
+  );
   return token;
 }
 
 export async function consumeMagicToken(
   token: string,
 ): Promise<{ customerId: string; email: string } | null> {
-  const raw = await kv.get<string>(`magic:${token}`);
-  if (!raw) return null;
+  const data = await kv.get<{ customerId: string; email: string }>(
+    `magic:${token}`,
+  );
+  if (!data) return null;
   await kv.del(`magic:${token}`);
-  return JSON.parse(raw);
+  return data;
 }
