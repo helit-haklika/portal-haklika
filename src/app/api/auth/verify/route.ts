@@ -10,15 +10,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(new URL("/login?error=missing", req.url));
   }
 
-  let result;
-  try {
-    result = await consumeMagicToken(token);
-  } catch (err) {
-    console.error("consumeMagicToken error:", err);
-    return NextResponse.redirect(new URL("/login?error=server", req.url));
-  }
+  const result = await consumeMagicToken(token).catch(() => null);
   if (!result) {
-    console.error("Token not found or expired:", token.slice(0, 8) + "...");
     return NextResponse.redirect(new URL("/login?error=expired", req.url));
   }
 
@@ -27,17 +20,9 @@ export async function GET(req: NextRequest) {
     email: result.email,
   });
 
-  console.log(
-    "verify: JWT signed for",
-    result.email,
-    "customerId:",
-    result.customerId.slice(0, 8),
-  );
-
   const cookieOptions = getSessionCookieOptions();
   const response = NextResponse.redirect(new URL("/dashboard", req.url));
   response.cookies.set(cookieOptions.name, jwt, cookieOptions);
 
-  console.log("verify: cookie set, redirecting to /dashboard");
   return response;
 }

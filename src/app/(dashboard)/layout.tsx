@@ -8,11 +8,7 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const session = await getCurrentSession();
-  if (!session) {
-    console.error("Dashboard layout: no session, redirecting to login");
-    redirect("/login");
-  }
-  console.log("Dashboard layout: session found for", session.email);
+  if (!session) redirect("/login");
 
   const phoneNumber = process.env.HAKLIKA_WHATSAPP_NUMBER ?? "";
   // We don't have the name here — WhatsApp message will be generic; the page itself renders with name
