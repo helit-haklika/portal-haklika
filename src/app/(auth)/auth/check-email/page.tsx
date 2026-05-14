@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
+import Image from "next/image";
 
 function MailIcon() {
   return (
@@ -70,8 +71,15 @@ function CheckEmailContent() {
   return (
     <div className="hk-auth">
       <div className="hk-auth__brand">
-        <div className="hk-logo">ה</div>
-        <div className="hk-brand-name">הקליקה · פורטל לקוחות</div>
+        <Image
+          src="/logo.png"
+          alt="HAKLIKA"
+          width={160}
+          height={100}
+          className="hk-logo"
+          priority
+        />
+        <div className="hk-brand-name">פורטל לקוחות</div>
       </div>
       <div className="hk-check">
         <div className="hk-check__icon">
