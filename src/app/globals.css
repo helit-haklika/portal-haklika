@@ -563,7 +563,7 @@
   width: 160px;
   height: auto;
   display: block;
-  mix-blend-mode: multiply;
+  filter: drop-shadow(0 6px 18px rgba(138, 92, 0, 0.18));
 }
 .hk-brand-name {
   font-size: 13px;

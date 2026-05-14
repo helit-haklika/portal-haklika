@@ -40,7 +40,7 @@ export default function LoginForm() {
     <div className="hk-auth">
       <div className="hk-auth__brand">
         <Image
-          src="/logo.jpg"
+          src="/logo.png"
           alt="HAKLIKA"
           width={160}
           height={100}
