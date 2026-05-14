@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
 
     const token = await createMagicToken(customer.id, normalizedEmail);
     const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
-    const magicLink = `${appUrl}/auth/verify?token=${token}`;
+    const magicLink = `${appUrl}/api/auth/verify?token=${token}`;
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
