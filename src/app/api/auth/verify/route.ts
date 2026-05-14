@@ -27,9 +27,17 @@ export async function GET(req: NextRequest) {
     email: result.email,
   });
 
+  console.log(
+    "verify: JWT signed for",
+    result.email,
+    "customerId:",
+    result.customerId.slice(0, 8),
+  );
+
   const cookieOptions = getSessionCookieOptions();
   const response = NextResponse.redirect(new URL("/dashboard", req.url));
   response.cookies.set(cookieOptions.name, jwt, cookieOptions);
 
+  console.log("verify: cookie set, redirecting to /dashboard");
   return response;
 }
