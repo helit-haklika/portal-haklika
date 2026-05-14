@@ -10,8 +10,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(new URL("/login?error=missing", req.url));
   }
 
-  const result = await consumeMagicToken(token);
+  let result;
+  try {
+    result = await consumeMagicToken(token);
+  } catch (err) {
+    console.error("consumeMagicToken error:", err);
+    return NextResponse.redirect(new URL("/login?error=server", req.url));
+  }
   if (!result) {
+    console.error("Token not found or expired:", token.slice(0, 8) + "...");
     return NextResponse.redirect(new URL("/login?error=expired", req.url));
   }
 
