@@ -13,15 +13,19 @@ const CUSTOMERS_TABLE = "tblIUoXFMdWuFldvr";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
-  const rateLimitKey = RATE_LIMIT_KEY(ip);
-  const count = await kv.incr(rateLimitKey);
-  if (count === 1) await kv.expire(rateLimitKey, RATE_LIMIT_WINDOW);
 
-  if (count > RATE_LIMIT_MAX) {
-    return NextResponse.json(
-      { error: "יותר מדי ניסיונות. נסו שוב בעוד 15 דקות." },
-      { status: 429 },
-    );
+  try {
+    const rateLimitKey = RATE_LIMIT_KEY(ip);
+    const count = await kv.incr(rateLimitKey);
+    if (count === 1) await kv.expire(rateLimitKey, RATE_LIMIT_WINDOW);
+    if (count > RATE_LIMIT_MAX) {
+      return NextResponse.json(
+        { error: "יותר מדי ניסיונות. נסו שוב בעוד 15 דקות." },
+        { status: 429 },
+      );
+    }
+  } catch (kvErr) {
+    console.error("KV rate-limit error:", kvErr);
   }
 
   const { email } = await req.json().catch(() => ({ email: "" }));
