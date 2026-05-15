@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { LogoutIcon } from "@/components/shared/Icons";
 
@@ -18,6 +19,14 @@ export function Header({ name, updatedRange }: HeaderProps) {
 
   return (
     <header className="hk-header">
+      <Image
+        src="/logo.png"
+        alt="הקליקה"
+        width={48}
+        height={48}
+        className="hk-header__logo"
+        priority
+      />
       <div className="hk-header__title">
         <h1 className="hk-header__brand">דף מידע אישי - הקליקה</h1>
         <div className="hk-header__name">{name}</div>

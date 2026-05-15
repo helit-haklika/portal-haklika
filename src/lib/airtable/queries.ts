@@ -146,7 +146,7 @@ export async function fetchSessionPayments(
   customerId: string,
 ): Promise<SessionPayment[]> {
   const records = await listRecords<SessionPaymentFields>(TABLES.PAYMENTS, {
-    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סוג תשלום}='ססיה', {סטטוס}!='לא שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
+    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סוג תשלום}='ססיה', {סטטוס}='שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
     sort: [{ field: "תאריך תשלום", direction: "desc" }],
   });
   return records.map((r) => ({

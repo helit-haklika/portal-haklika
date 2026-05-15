@@ -93,6 +93,14 @@
   align-items: flex-start;
   gap: 12px;
 }
+.hk-header__logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
 .hk-header__title {
   flex: 1;
   min-width: 0;
@@ -610,7 +618,15 @@
   }
   .hk-table__th-num,
   .hk-table__td-num {
-    width: 68px;
+    width: 56px;
+    font-size: 12px;
+  }
+  .hk-table th.hk-table__th-num,
+  .hk-table th.hk-table__th-status {
+    font-size: 10px;
+    padding-inline: 4px;
+    line-height: 1.2;
+    white-space: normal;
   }
   .hk-table__th-invoice,
   .hk-table__td-invoice {
@@ -623,7 +639,16 @@
   }
   .hk-table__th-status,
   .hk-table__td-status {
-    width: 68px;
+    width: 60px;
+  }
+  .hk-table__th-room,
+  .hk-table__td-room {
+    min-width: 90px;
+  }
+  .hk-table__td-room {
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.25;
   }
   .hk-row__invoice {
     width: 32px;
