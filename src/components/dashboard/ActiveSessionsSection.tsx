@@ -1,3 +1,4 @@
+import { CollapsibleSection } from "@/components/shared/CollapsibleSection";
 import type { ActiveSession } from "@/types";
 
 interface Props {
@@ -6,11 +7,11 @@ interface Props {
 
 export function ActiveSessionsSection({ sessions }: Props) {
   return (
-    <section className="hk-section">
-      <div className="hk-section__head">
-        <div className="hk-section__title">הססיות שלי</div>
-        <div className="hk-section__count">{sessions.length} פעילות</div>
-      </div>
+    <CollapsibleSection
+      title="הססיות שלי"
+      countLabel={`${sessions.length} פעילות`}
+      defaultOpen={sessions.length <= 5}
+    >
       <div className="hk-list">
         <table className="hk-table">
           <thead>
@@ -46,6 +47,6 @@ export function ActiveSessionsSection({ sessions }: Props) {
           </tbody>
         </table>
       </div>
-    </section>
+    </CollapsibleSection>
   );
 }

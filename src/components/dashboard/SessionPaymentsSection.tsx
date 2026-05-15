@@ -1,5 +1,6 @@
 import { ReceiptIcon } from "@/components/shared/Icons";
 import { ExportToolbar } from "@/components/shared/ExportButton";
+import { CollapsibleSection } from "@/components/shared/CollapsibleSection";
 import type { SessionPayment } from "@/types";
 
 interface Props {
@@ -14,11 +15,11 @@ export function SessionPaymentsSection({ payments }: Props) {
   }));
 
   return (
-    <section className="hk-section">
-      <div className="hk-section__head">
-        <div className="hk-section__title">תשלומי ססיה</div>
-        <div className="hk-section__count">{payments.length} רשומות</div>
-      </div>
+    <CollapsibleSection
+      title="תשלומי ססיה"
+      countLabel={`${payments.length} רשומות`}
+      defaultOpen={payments.length <= 5}
+    >
       <div className="hk-list">
         <ExportToolbar
           label={`${payments.length} תשלומים`}
@@ -61,6 +62,6 @@ export function SessionPaymentsSection({ payments }: Props) {
           </tbody>
         </table>
       </div>
-    </section>
+    </CollapsibleSection>
   );
 }

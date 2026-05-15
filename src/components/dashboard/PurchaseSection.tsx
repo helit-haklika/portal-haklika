@@ -1,5 +1,6 @@
 import { ReceiptIcon } from "@/components/shared/Icons";
 import { ExportToolbar } from "@/components/shared/ExportButton";
+import { CollapsibleSection } from "@/components/shared/CollapsibleSection";
 import type { PunchCardPayment } from "@/types";
 
 interface Props {
@@ -16,11 +17,11 @@ export function PurchaseSection({ payments }: Props) {
   }));
 
   return (
-    <section className="hk-section">
-      <div className="hk-section__head">
-        <div className="hk-section__title">כרטיסיות שנרכשו</div>
-        <div className="hk-section__count">{payments.length} רשומות</div>
-      </div>
+    <CollapsibleSection
+      title="כרטיסיות שנרכשו"
+      countLabel={`${payments.length} רשומות`}
+      defaultOpen={payments.length <= 5}
+    >
       <div className="hk-list">
         <ExportToolbar
           label={`${payments.length} רכישות · ${totalHours} שעות סך הכל`}
@@ -65,6 +66,6 @@ export function PurchaseSection({ payments }: Props) {
           </tbody>
         </table>
       </div>
-    </section>
+    </CollapsibleSection>
   );
 }
