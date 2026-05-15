@@ -39,8 +39,8 @@ export function BookingsSection({ bookings }: Props) {
               <th className="hk-table__th-day">יום</th>
               <th className="hk-table__th-time">שעות</th>
               <th className="hk-table__th-room">חדר</th>
-              <th className="hk-table__th-num">שנוצלו</th>
-              <th className="hk-table__th-num">יתרה לאחר</th>
+              <th className="hk-table__th-num">סך שעות</th>
+              <th className="hk-table__th-num">יתרה לאחר שימוש</th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +56,9 @@ export function BookingsSection({ bookings }: Props) {
                   </span>
                 </td>
                 <td className="hk-table__td-room">{b.roomName}</td>
-                <td className="hk-table__td-num hk-num">{b.durationHours}</td>
+                <td className="hk-table__td-num hk-num">
+                  {Math.abs(b.durationHours)}
+                </td>
                 <td className="hk-table__td-num hk-num">{b.balanceAfter}</td>
               </tr>
             ))}

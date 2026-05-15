@@ -27,40 +27,43 @@ export function PurchaseSection({ payments }: Props) {
           data={csvData}
           csvFilename="רכישות-כרטיסיות.csv"
         />
-        <div className="hk-payments-head">
-          <span className="hk-payments-head__invoice">חשבונית</span>
-        </div>
-        {payments.map((p) => (
-          <div key={p.id} className="hk-row">
-            <div className="hk-row__lead">
-              <div className="hk-row__date hk-num">{p.date}</div>
-              <div className="hk-row__dow">{p.dayOfWeek}</div>
-            </div>
-            <div className="hk-row__body">
-              <div className="hk-row__main">כרטיסיית {p.hours} שעות</div>
-              <div className="hk-row__meta">
-                <span>שולם</span>
-                <span className="hk-row__meta-sep" />
-                <span className="hk-num">{p.amountPaid}</span>
-              </div>
-            </div>
-            <div className="hk-row__trail">
-              <div className="hk-row__value hk-num">{p.hours}</div>
-              <div className="hk-row__sub">שעות</div>
-            </div>
-            {p.invoiceUrl && (
-              <a
-                className="hk-row__invoice"
-                href={p.invoiceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="חשבונית"
-              >
-                <ReceiptIcon />
-              </a>
-            )}
-          </div>
-        ))}
+        <table className="hk-table">
+          <thead>
+            <tr>
+              <th className="hk-table__th-day">תאריך</th>
+              <th className="hk-table__th-desc">תיאור</th>
+              <th className="hk-table__th-num">שעות</th>
+              <th className="hk-table__th-num">סכום</th>
+              <th className="hk-table__th-invoice">חשבונית</th>
+            </tr>
+          </thead>
+          <tbody>
+            {payments.map((p) => (
+              <tr key={p.id}>
+                <td className="hk-table__td-day">
+                  <div className="hk-row__date hk-num">{p.date}</div>
+                  <div className="hk-row__dow">{p.dayOfWeek}</div>
+                </td>
+                <td className="hk-table__td-desc">כרטיסיית {p.hours} שעות</td>
+                <td className="hk-table__td-num hk-num">{p.hours}</td>
+                <td className="hk-table__td-num hk-num">{p.amountPaid}</td>
+                <td className="hk-table__td-invoice">
+                  {p.invoiceUrl && (
+                    <a
+                      className="hk-row__invoice"
+                      href={p.invoiceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="חשבונית"
+                    >
+                      <ReceiptIcon />
+                    </a>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );

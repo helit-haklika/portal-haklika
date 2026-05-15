@@ -12,30 +12,37 @@ export function ActiveSessionsSection({ sessions }: Props) {
         <div className="hk-section__count">{sessions.length} פעילות</div>
       </div>
       <div className="hk-list">
-        {sessions.map((s) => (
-          <div key={s.id} className="hk-row">
-            <div className="hk-row__lead">
-              <div className="hk-row__date">{s.dayOfWeek}</div>
-              <div className="hk-row__dow">שבועי</div>
-            </div>
-            <div className="hk-row__body">
-              <div className="hk-row__main">{s.roomName}</div>
-              <div className="hk-row__meta">
-                <span className="hk-num">
-                  {s.startTime}–{s.endTime}
-                </span>
-                <span className="hk-row__meta-sep" />
-                <span>פעיל</span>
-              </div>
-            </div>
-            <div className="hk-row__trail">
-              <div className="hk-row__value hk-num">
-                {s.basePriceBeforeDiscount}
-              </div>
-              <div className="hk-row__sub">מחיר בסיס</div>
-            </div>
-          </div>
-        ))}
+        <table className="hk-table">
+          <thead>
+            <tr>
+              <th className="hk-table__th-day">יום</th>
+              <th className="hk-table__th-time">שעות</th>
+              <th className="hk-table__th-room">חדר</th>
+              <th className="hk-table__th-num">מחיר בסיס</th>
+              <th className="hk-table__th-num">סטטוס</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sessions.map((s) => (
+              <tr key={s.id}>
+                <td className="hk-table__td-day">
+                  <div className="hk-row__date">{s.dayOfWeek}</div>
+                  <div className="hk-row__dow">שבועי</div>
+                </td>
+                <td className="hk-table__td-time">
+                  <span className="hk-num" dir="ltr">
+                    {s.startTime}-{s.endTime}
+                  </span>
+                </td>
+                <td className="hk-table__td-room">{s.roomName}</td>
+                <td className="hk-table__td-num hk-num">
+                  {s.basePriceBeforeDiscount}
+                </td>
+                <td className="hk-table__td-num">פעיל</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );

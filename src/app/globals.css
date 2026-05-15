@@ -500,6 +500,25 @@
   width: 90px;
   text-align: center;
 }
+.hk-table__th-room,
+.hk-table__td-room {
+  width: auto;
+}
+.hk-table__th-desc,
+.hk-table__td-desc {
+  width: auto;
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.hk-table__th-invoice,
+.hk-table__td-invoice {
+  width: 70px;
+  text-align: center;
+}
+.hk-table__td-invoice {
+  padding: 8px 12px;
+}
 .hk-table__td-time {
   font-size: 12.5px;
   color: var(--ink-muted);
