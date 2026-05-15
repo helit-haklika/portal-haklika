@@ -61,6 +61,7 @@ export async function POST(req: NextRequest) {
       from: `${process.env.RESEND_FROM_NAME ?? "הקליקה"} <${process.env.RESEND_FROM_EMAIL ?? "noreply@example.com"}>`,
       to: normalizedEmail,
       subject: "הלינק שלך לכניסה לפורטל הקליקה",
+      headers: { "X-Resend-Click-Tracking": "false" },
       html: `
         <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px 24px;">
           <h2 style="color: #2F5D54; margin-bottom: 8px;">כניסה לפורטל הקליקה</h2>

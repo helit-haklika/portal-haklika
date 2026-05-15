@@ -3,16 +3,19 @@ import { consumeMagicToken } from "@/lib/auth/magic-link";
 import { signJWT } from "@/lib/auth/jwt";
 import { getSessionCookieOptions } from "@/lib/auth/session";
 
-export async function GET(req: NextRequest) {
-  const token = req.nextUrl.searchParams.get("token");
+export async function POST(req: NextRequest) {
+  const { token } = await req.json().catch(() => ({ token: null }));
 
   if (!token) {
-    return NextResponse.redirect(new URL("/login?error=missing", req.url));
+    return NextResponse.json({ error: "חסר token" }, { status: 400 });
   }
 
   const result = await consumeMagicToken(token).catch(() => null);
   if (!result) {
-    return NextResponse.redirect(new URL("/login?error=expired", req.url));
+    return NextResponse.json(
+      { error: "הלינק פג תוקף או כבר נוצל. בקשו לינק חדש." },
+      { status: 401 },
+    );
   }
 
   const jwt = await signJWT({
@@ -21,8 +24,17 @@ export async function GET(req: NextRequest) {
   });
 
   const cookieOptions = getSessionCookieOptions();
-  const response = NextResponse.redirect(new URL("/dashboard", req.url));
+  const response = NextResponse.json({ ok: true });
   response.cookies.set(cookieOptions.name, jwt, cookieOptions);
-
   return response;
+}
+
+export async function GET(req: NextRequest) {
+  const token = req.nextUrl.searchParams.get("token");
+  if (token) {
+    return NextResponse.redirect(
+      new URL(`/auth/verify?token=${token}`, req.url),
+    );
+  }
+  return NextResponse.redirect(new URL("/login", req.url));
 }

@@ -71,7 +71,7 @@ export async function fetchPunchCardPayments(
   customerId: string,
 ): Promise<PunchCardPayment[]> {
   const records = await listRecords<PunchCardPaymentFields>(TABLES.PAYMENTS, {
-    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({לקוח})), {סוג תשלום}='כרטיסיה', {סטטוס}='שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
+    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סוג תשלום}='כרטיסיה', {סטטוס}!='לא שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
     sort: [{ field: "תאריך תשלום", direction: "desc" }],
   });
   return records.map((r) => ({
@@ -86,8 +86,17 @@ export async function fetchPunchCardPayments(
 
 export async function fetchBookings(customerId: string): Promise<Booking[]> {
   const records = await listRecords<BookingFields>(TABLES.BOOKINGS, {
-    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({לקוח})), {Booking Title}='שעתי', IS_AFTER({תאריך}, '2024-12-31'))`,
+    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {Booking Title}='שעתי', IS_AFTER({תאריך}, '2024-12-31'))`,
     sort: [{ field: "תאריך", direction: "desc" }],
+    fields: [
+      "תאריך",
+      "שעת התחלה מפורמט",
+      "שעת סיום מפורמט",
+      "משך בשעות",
+      "ייתרת שעות לאחר שימוש",
+      "בחודש הנוכחי?",
+      "flddbuSSDRPL50dlT",
+    ],
   });
   return records.map((r) => ({
     id: r.id,
@@ -106,7 +115,7 @@ export async function fetchActiveSessions(
   customerId: string,
 ): Promise<ActiveSession[]> {
   const records = await listRecords<SessionFields>(TABLES.SESSIONS, {
-    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({לקוח})), {סטטוס ססיה}='פעיל')`,
+    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סטטוס ססיה}='פעיל')`,
   });
   return records.map((r) => ({
     id: r.id,
@@ -124,7 +133,7 @@ export async function fetchSessionTransactions(
   const records = await listRecords<SessionTransactionFields>(
     TABLES.SESSION_TRANSACTIONS,
     {
-      filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({לקוח})), {סטטוס עסקה}='פעיל')`,
+      filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סטטוס עסקה}='פעיל')`,
     },
   );
   return records.map((r) => ({
@@ -137,7 +146,7 @@ export async function fetchSessionPayments(
   customerId: string,
 ): Promise<SessionPayment[]> {
   const records = await listRecords<SessionPaymentFields>(TABLES.PAYMENTS, {
-    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({לקוח})), {סוג תשלום}='ססיה', {סטטוס}='שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
+    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סוג תשלום}='ססיה', {סטטוס}!='לא שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
     sort: [{ field: "תאריך תשלום", direction: "desc" }],
   });
   return records.map((r) => ({
