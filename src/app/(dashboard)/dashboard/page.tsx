@@ -165,7 +165,7 @@ export default async function DashboardPage() {
             />
             <KpiSmall
               icon="clock"
-              label="שימושים החודש"
+              label="כמה השתמשתי החודש? (כרטיסיות)"
               value={hoursThisMonth.toString()}
               unit="שעות"
             />
