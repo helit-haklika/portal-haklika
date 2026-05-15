@@ -6,39 +6,39 @@
 
 :root {
   /* Surface & Background */
-  --bg: #faf4e3;
+  --bg: #fdfaf0;
   --surface: #ffffff;
-  --surface-2: #fdf8ee;
-  --border: #ecdfc0;
-  --border-strong: #d9c89a;
+  --surface-2: #fefdf6;
+  --border: #ede8d5;
+  --border-strong: #d8d0bb;
 
   /* Ink (Text) */
-  --ink: #1b2230;
-  --ink-soft: #2e3645;
-  --ink-muted: #6b7280;
-  --ink-faint: #9aa0ac;
+  --ink: #1c1a12;
+  --ink-soft: #38342a;
+  --ink-muted: #706c60;
+  --ink-faint: #a8a49c;
 
   /* Brand & Semantic */
-  --primary: #8a5c00;
-  --primary-ink: #6b4700;
-  --primary-soft: #fdefc9;
-  --primary-tint: #fff8e8;
-  --success: #4a8970;
-  --warning: #b07f2c;
-  --danger: #b84a3e;
-  --danger-soft: #fbeae5;
+  --primary: #d97706;
+  --primary-ink: #b45309;
+  --primary-soft: #fef3c7;
+  --primary-tint: #fffbeb;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
   --whatsapp: #25d366;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(27, 34, 48, 0.04);
-  --shadow-md: 0 4px 14px rgba(27, 34, 48, 0.06);
-  --shadow-lg: 0 14px 40px rgba(27, 34, 48, 0.1);
+  --shadow-sm: 0 1px 3px rgba(28, 26, 18, 0.06);
+  --shadow-md: 0 4px 18px rgba(28, 26, 18, 0.08);
+  --shadow-lg: 0 12px 40px rgba(28, 26, 18, 0.12);
 
   /* Radii */
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 22px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
 }
 
 /* ── Base ───────────────────────────────────────── */
@@ -83,7 +83,7 @@
   position: sticky;
   top: 0;
   z-index: 5;
-  background: rgba(245, 241, 234, 0.92);
+  background: rgba(253, 250, 240, 0.92);
   -webkit-backdrop-filter: blur(14px) saturate(150%);
   backdrop-filter: blur(14px) saturate(150%);
   padding: 14px 18px 12px;
@@ -190,15 +190,15 @@
   position: relative;
 }
 .hk-kpi--hero {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #f5f1ea;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 60%, #fde68a 100%);
+  border: 1.5px solid #fcd34d;
+  color: var(--ink);
   grid-column: 1 / -1;
   padding: 18px 18px 16px;
 }
 .hk-kpi--danger {
-  background: linear-gradient(180deg, #fceeea 0%, #f8e0da 100%);
-  border-color: #e9b7ac;
+  background: linear-gradient(180deg, #fff1f0 0%, #fee2e2 100%);
+  border-color: #fca5a5;
   color: var(--danger);
 }
 .hk-kpi__label {
@@ -212,8 +212,8 @@
   gap: 6px;
 }
 .hk-kpi--hero .hk-kpi__label {
-  opacity: 0.78;
-  color: #dceae6;
+  opacity: 1;
+  color: #92400e;
 }
 .hk-kpi__value {
   font-size: 34px;
@@ -226,6 +226,7 @@
 }
 .hk-kpi--hero .hk-kpi__value {
   font-size: 42px;
+  color: #78350f;
 }
 .hk-kpi__unit {
   font-size: 14px;
@@ -239,7 +240,7 @@
   font-weight: 500;
 }
 .hk-kpi--hero .hk-kpi__sub {
-  color: #dceae6;
+  color: #92400e;
   opacity: 0.85;
 }
 
@@ -642,7 +643,7 @@
   width: 100%;
 }
 .hk-btn:hover {
-  background: #264e46;
+  background: #b45309;
 }
 .hk-btn:active {
   transform: scale(0.99);
@@ -812,4 +813,89 @@
   color: var(--ink-faint);
   font-family: ui-monospace, monospace;
   direction: ltr;
+}
+
+/* ── Responsive: tablet 640px+ ───────────────────── */
+@media (min-width: 640px) {
+  /* Center all major sections — background spans full width, content is capped */
+  .hk-header,
+  .hk-section,
+  .hk-footer {
+    padding-inline: max(28px, calc(50% - 380px));
+  }
+
+  .hk-section {
+    padding-block-start: 28px;
+  }
+  .hk-section--tight {
+    padding-block-start: 18px;
+  }
+
+  /* Header inner layout */
+  .hk-header__name {
+    font-size: 24px;
+  }
+
+  /* KPIs: 3 in a row when there are 3 (hero + 2 smalls) */
+  .hk-kpis--2 {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  .hk-kpis--2 .hk-kpi--hero {
+    grid-column: 1;
+  }
+  .hk-kpi--hero .hk-kpi__value {
+    font-size: 46px;
+  }
+
+  /* Footer links: 2 columns */
+  .hk-footer__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Auth: center as a narrow column */
+  .hk-auth {
+    padding-block: 64px;
+    padding-inline: max(24px, calc(50% - 200px));
+  }
+
+  .hk-auth__brand {
+    padding-top: 0;
+  }
+
+  .hk-auth__head {
+    text-align: center;
+  }
+}
+
+/* ── Responsive: desktop 1024px+ ─────────────────── */
+@media (min-width: 1024px) {
+  .hk-header,
+  .hk-section,
+  .hk-footer {
+    padding-inline: max(40px, calc(50% - 420px));
+  }
+
+  .hk-header__name {
+    font-size: 26px;
+  }
+
+  .hk-section {
+    padding-block-start: 32px;
+  }
+  .hk-section--tight {
+    padding-block-start: 22px;
+  }
+
+  .hk-kpi--hero .hk-kpi__value {
+    font-size: 50px;
+  }
+
+  .hk-row {
+    font-size: 14px;
+  }
+
+  .hk-row__main {
+    font-size: 14px;
+  }
 }
