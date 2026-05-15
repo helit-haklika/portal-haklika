@@ -33,29 +33,35 @@ export function BookingsSection({ bookings }: Props) {
           data={csvData}
           csvFilename="שימושים.csv"
         />
-        <div className="hk-table-head">
-          <span>יום</span>
-          <span>שעות</span>
-          <span>חדר</span>
-          <span style={{ textAlign: "center" }}>שנוצלו</span>
-          <span style={{ textAlign: "center" }}>יתרה לאחר</span>
-        </div>
-        {bookings.map((b) => (
-          <div key={b.id} className="hk-row hk-row--table">
-            <div className="hk-row__col-day">
-              <div className="hk-row__date hk-num">{b.date}</div>
-              <div className="hk-row__dow">{b.dayOfWeek}</div>
-            </div>
-            <div className="hk-row__col-time">
-              <span className="hk-num" dir="ltr">
-                {b.startTime}-{b.endTime}
-              </span>
-            </div>
-            <div className="hk-row__col-room">{b.roomName}</div>
-            <div className="hk-row__col-hours hk-num">{b.durationHours}</div>
-            <div className="hk-row__col-balance hk-num">{b.balanceAfter}</div>
-          </div>
-        ))}
+        <table className="hk-table">
+          <thead>
+            <tr>
+              <th className="hk-table__th-day">יום</th>
+              <th className="hk-table__th-time">שעות</th>
+              <th className="hk-table__th-room">חדר</th>
+              <th className="hk-table__th-num">שנוצלו</th>
+              <th className="hk-table__th-num">יתרה לאחר</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((b) => (
+              <tr key={b.id}>
+                <td className="hk-table__td-day">
+                  <div className="hk-row__date hk-num">{b.date}</div>
+                  <div className="hk-row__dow">{b.dayOfWeek}</div>
+                </td>
+                <td className="hk-table__td-time">
+                  <span className="hk-num" dir="ltr">
+                    {b.startTime}-{b.endTime}
+                  </span>
+                </td>
+                <td className="hk-table__td-room">{b.roomName}</td>
+                <td className="hk-table__td-num hk-num">{b.durationHours}</td>
+                <td className="hk-table__td-num hk-num">{b.balanceAfter}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );
