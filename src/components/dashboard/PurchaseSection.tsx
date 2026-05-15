@@ -1,14 +1,22 @@
+"use client";
+
+import { useState } from "react";
 import { ReceiptIcon } from "@/components/shared/Icons";
 import { ExportToolbar } from "@/components/shared/ExportButton";
-import { CollapsibleSection } from "@/components/shared/CollapsibleSection";
+import { ShowMoreButton } from "@/components/shared/ShowMoreButton";
 import type { PunchCardPayment } from "@/types";
+
+const INITIAL_ROWS = 5;
 
 interface Props {
   payments: PunchCardPayment[];
 }
 
 export function PurchaseSection({ payments }: Props) {
+  const [expanded, setExpanded] = useState(false);
   const totalHours = payments.reduce((s, p) => s + p.hours, 0);
+  const visiblePayments = expanded ? payments : payments.slice(0, INITIAL_ROWS);
+  const hiddenCount = payments.length - INITIAL_ROWS;
   const csvData = payments.map((p) => ({
     תאריך: p.date,
     יום: p.dayOfWeek,
@@ -17,11 +25,11 @@ export function PurchaseSection({ payments }: Props) {
   }));
 
   return (
-    <CollapsibleSection
-      title="כרטיסיות שנרכשו"
-      countLabel={`${payments.length} רשומות`}
-      defaultOpen={payments.length <= 5}
-    >
+    <section className="hk-section">
+      <div className="hk-section__head">
+        <div className="hk-section__title">כרטיסיות שנרכשו</div>
+        <div className="hk-section__count">{payments.length} רשומות</div>
+      </div>
       <div className="hk-list">
         <ExportToolbar
           label={`${payments.length} רכישות · ${totalHours} שעות סך הכל`}
@@ -39,7 +47,7 @@ export function PurchaseSection({ payments }: Props) {
             </tr>
           </thead>
           <tbody>
-            {payments.map((p) => (
+            {visiblePayments.map((p) => (
               <tr key={p.id}>
                 <td className="hk-table__td-day">
                   <div className="hk-row__date hk-num">{p.date}</div>
@@ -65,7 +73,12 @@ export function PurchaseSection({ payments }: Props) {
             ))}
           </tbody>
         </table>
+        <ShowMoreButton
+          expanded={expanded}
+          hiddenCount={hiddenCount}
+          onToggle={() => setExpanded((v) => !v)}
+        />
       </div>
-    </CollapsibleSection>
+    </section>
   );
 }

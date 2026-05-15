@@ -1,12 +1,20 @@
+"use client";
+
+import { useState } from "react";
 import { ExportToolbar } from "@/components/shared/ExportButton";
-import { CollapsibleSection } from "@/components/shared/CollapsibleSection";
+import { ShowMoreButton } from "@/components/shared/ShowMoreButton";
 import type { Booking } from "@/types";
+
+const INITIAL_ROWS = 5;
 
 interface Props {
   bookings: Booking[];
 }
 
 export function BookingsSection({ bookings }: Props) {
+  const [expanded, setExpanded] = useState(false);
+  const visibleBookings = expanded ? bookings : bookings.slice(0, INITIAL_ROWS);
+  const hiddenCount = bookings.length - INITIAL_ROWS;
   const csvData = bookings.map((b) => ({
     תאריך: b.date,
     יום: b.dayOfWeek,
@@ -18,12 +26,16 @@ export function BookingsSection({ bookings }: Props) {
   }));
 
   return (
-    <CollapsibleSection
-      title="שימושים (Bookings)"
-      subtitle="רשימת הBookings ממערכת סקדה"
-      countLabel={`${bookings.length} רשומות`}
-      defaultOpen={bookings.length <= 5}
-    >
+    <section className="hk-section">
+      <div className="hk-section__head">
+        <div>
+          <div className="hk-section__title">שימושים (Bookings)</div>
+          <div className="hk-section__subtitle">
+            רשימת הBookings ממערכת סקדה
+          </div>
+        </div>
+        <div className="hk-section__count">{bookings.length} רשומות</div>
+      </div>
       <div className="hk-list">
         <ExportToolbar
           label={`${bookings.length} שימושים`}
@@ -41,7 +53,7 @@ export function BookingsSection({ bookings }: Props) {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((b) => (
+            {visibleBookings.map((b) => (
               <tr key={b.id}>
                 <td className="hk-table__td-day">
                   <div className="hk-row__date hk-num">{b.date}</div>
@@ -61,7 +73,12 @@ export function BookingsSection({ bookings }: Props) {
             ))}
           </tbody>
         </table>
+        <ShowMoreButton
+          expanded={expanded}
+          hiddenCount={hiddenCount}
+          onToggle={() => setExpanded((v) => !v)}
+        />
       </div>
-    </CollapsibleSection>
+    </section>
   );
 }

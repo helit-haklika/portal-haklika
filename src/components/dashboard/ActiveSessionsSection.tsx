@@ -1,17 +1,26 @@
-import { CollapsibleSection } from "@/components/shared/CollapsibleSection";
+"use client";
+
+import { useState } from "react";
+import { ShowMoreButton } from "@/components/shared/ShowMoreButton";
 import type { ActiveSession } from "@/types";
+
+const INITIAL_ROWS = 5;
 
 interface Props {
   sessions: ActiveSession[];
 }
 
 export function ActiveSessionsSection({ sessions }: Props) {
+  const [expanded, setExpanded] = useState(false);
+  const visibleSessions = expanded ? sessions : sessions.slice(0, INITIAL_ROWS);
+  const hiddenCount = sessions.length - INITIAL_ROWS;
+
   return (
-    <CollapsibleSection
-      title="הססיות שלי"
-      countLabel={`${sessions.length} פעילות`}
-      defaultOpen={sessions.length <= 5}
-    >
+    <section className="hk-section">
+      <div className="hk-section__head">
+        <div className="hk-section__title">הססיות שלי</div>
+        <div className="hk-section__count">{sessions.length} פעילות</div>
+      </div>
       <div className="hk-list">
         <table className="hk-table">
           <thead>
@@ -24,7 +33,7 @@ export function ActiveSessionsSection({ sessions }: Props) {
             </tr>
           </thead>
           <tbody>
-            {sessions.map((s) => (
+            {visibleSessions.map((s) => (
               <tr key={s.id}>
                 <td className="hk-table__td-day">
                   <div className="hk-row__date">{s.dayOfWeek}</div>
@@ -46,7 +55,12 @@ export function ActiveSessionsSection({ sessions }: Props) {
             ))}
           </tbody>
         </table>
+        <ShowMoreButton
+          expanded={expanded}
+          hiddenCount={hiddenCount}
+          onToggle={() => setExpanded((v) => !v)}
+        />
       </div>
-    </CollapsibleSection>
+    </section>
   );
 }
