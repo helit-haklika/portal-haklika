@@ -156,9 +156,7 @@ export default async function DashboardPage() {
 
       {hasPunchCardData && (
         <section className="hk-section hk-section--tight">
-          <div
-            className={`hk-kpis ${hasSessionData ? "hk-kpis--2" : "hk-kpis--1"}`}
-          >
+          <div className="hk-kpis hk-kpis--1">
             <KpiHero
               value={balance.toString()}
               variant={isNegative ? "danger" : "default"}
@@ -169,14 +167,6 @@ export default async function DashboardPage() {
               value={hoursThisMonth.toString()}
               unit="שעות"
             />
-            {hasSessionData && (
-              <KpiSmall
-                icon="wallet"
-                label="הוראת קבע חודשית"
-                value={monthlyRecurring.toLocaleString("he-IL")}
-                unit="₪"
-              />
-            )}
           </div>
           {isNegative && (
             <NegativeBalanceAlert hoursOverdrawn={Math.abs(balance)} />
@@ -184,7 +174,7 @@ export default async function DashboardPage() {
         </section>
       )}
 
-      {!hasPunchCardData && hasSessionData && (
+      {hasSessionData && (
         <section className="hk-section hk-section--tight">
           <div className="hk-kpis hk-kpis--1">
             <KpiSmall
@@ -192,7 +182,11 @@ export default async function DashboardPage() {
               label="הוראת קבע חודשית"
               value={monthlyRecurring.toLocaleString("he-IL")}
               unit="₪"
-              sub={`מחושב מ-${activeSessions.length} ססיות פעילות בשבוע`}
+              sub={
+                hasActiveSessions
+                  ? `מחושב מ-${activeSessions.length} ססיות פעילות בשבוע`
+                  : undefined
+              }
             />
           </div>
         </section>
