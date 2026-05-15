@@ -61,8 +61,11 @@ export async function listRecords<T>(
     }
 
     if (!res.ok) {
-      const err = await res.text();
-      throw new Error(`Airtable error ${res.status}: ${err}`);
+      if (process.env.NODE_ENV !== "production") {
+        const err = await res.text();
+        console.error(`Airtable error ${res.status}: ${err}`);
+      }
+      throw new Error(`Airtable error ${res.status}`);
     }
 
     const json = await res.json();

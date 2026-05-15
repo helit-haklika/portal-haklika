@@ -21,10 +21,9 @@ export async function createMagicToken(
 export async function consumeMagicToken(
   token: string,
 ): Promise<{ customerId: string; email: string } | null> {
-  const data = await kv.get<{ customerId: string; email: string }>(
+  const data = await kv.getdel<{ customerId: string; email: string }>(
     `magic:${token}`,
   );
   if (!data) return null;
-  await kv.del(`magic:${token}`);
   return data;
 }

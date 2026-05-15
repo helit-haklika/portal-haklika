@@ -16,6 +16,13 @@ import type {
   SessionPayment,
 } from "@/types";
 
+function assertRecordId(id: string): string {
+  if (!/^rec[A-Za-z0-9]{14,17}$/.test(id)) {
+    throw new Error("Invalid Airtable record id");
+  }
+  return id;
+}
+
 const TABLES = {
   CUSTOMERS: "tblIUoXFMdWuFldvr",
   PAYMENTS: "tblfGq7ezJ45irjed",
@@ -53,7 +60,10 @@ function getDayOfWeek(isoDate?: string): string {
 export async function fetchCustomer(
   customerId: string,
 ): Promise<Customer | null> {
-  const record = await getRecord<CustomerFields>(TABLES.CUSTOMERS, customerId);
+  const record = await getRecord<CustomerFields>(
+    TABLES.CUSTOMERS,
+    assertRecordId(customerId),
+  );
   if (!record) return null;
   const f = record.fields;
   return {
@@ -70,8 +80,9 @@ export async function fetchCustomer(
 export async function fetchPunchCardPayments(
   customerId: string,
 ): Promise<PunchCardPayment[]> {
+  const safeId = assertRecordId(customerId);
   const records = await listRecords<PunchCardPaymentFields>(TABLES.PAYMENTS, {
-    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סוג תשלום}='כרטיסיה', {סטטוס}!='לא שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
+    filterByFormula: `AND(FIND('${safeId}', ARRAYJOIN({recID (from לקוח)})), {סוג תשלום}='כרטיסיה', {סטטוס}!='לא שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
     sort: [{ field: "תאריך תשלום", direction: "desc" }],
   });
   return records.map((r) => ({
@@ -85,8 +96,9 @@ export async function fetchPunchCardPayments(
 }
 
 export async function fetchBookings(customerId: string): Promise<Booking[]> {
+  const safeId = assertRecordId(customerId);
   const records = await listRecords<BookingFields>(TABLES.BOOKINGS, {
-    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {Booking Title}='שעתי', IS_AFTER({תאריך}, '2024-12-31'))`,
+    filterByFormula: `AND(FIND('${safeId}', ARRAYJOIN({recID (from לקוח)})), {Booking Title}='שעתי', IS_AFTER({תאריך}, '2024-12-31'))`,
     sort: [{ field: "תאריך", direction: "desc" }],
     fields: [
       "תאריך",
@@ -114,8 +126,9 @@ export async function fetchBookings(customerId: string): Promise<Booking[]> {
 export async function fetchActiveSessions(
   customerId: string,
 ): Promise<ActiveSession[]> {
+  const safeId = assertRecordId(customerId);
   const records = await listRecords<SessionFields>(TABLES.SESSIONS, {
-    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סטטוס ססיה}='פעיל')`,
+    filterByFormula: `AND(FIND('${safeId}', ARRAYJOIN({recID (from לקוח)})), {סטטוס ססיה}='פעיל')`,
   });
   return records.map((r) => ({
     id: r.id,
@@ -130,10 +143,11 @@ export async function fetchActiveSessions(
 export async function fetchSessionTransactions(
   customerId: string,
 ): Promise<SessionTransaction[]> {
+  const safeId = assertRecordId(customerId);
   const records = await listRecords<SessionTransactionFields>(
     TABLES.SESSION_TRANSACTIONS,
     {
-      filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סטטוס עסקה}='פעיל')`,
+      filterByFormula: `AND(FIND('${safeId}', ARRAYJOIN({recID (from לקוח)})), {סטטוס עסקה}='פעיל')`,
     },
   );
   return records.map((r) => ({
@@ -145,8 +159,9 @@ export async function fetchSessionTransactions(
 export async function fetchSessionPayments(
   customerId: string,
 ): Promise<SessionPayment[]> {
+  const safeId = assertRecordId(customerId);
   const records = await listRecords<SessionPaymentFields>(TABLES.PAYMENTS, {
-    filterByFormula: `AND(FIND('${customerId}', ARRAYJOIN({recID (from לקוח)})), {סוג תשלום}='ססיה', {סטטוס}='שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
+    filterByFormula: `AND(FIND('${safeId}', ARRAYJOIN({recID (from לקוח)})), {סוג תשלום}='ססיה', {סטטוס}='שולם', IS_AFTER({תאריך תשלום}, '2024-12-31'))`,
     sort: [{ field: "תאריך תשלום", direction: "desc" }],
   });
   return records.map((r) => ({

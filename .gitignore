@@ -42,6 +42,10 @@ next-env.d.ts
 
 # Screenshots from playwright/testing
 login-*.png
+login-*.jpeg
 .playwright-mcp/
 .claude/
 .env*.local
+
+# Local dev scripts (contain real customer IDs / generate live tokens)
+mktoken.mjs

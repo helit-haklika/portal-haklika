@@ -11,8 +11,19 @@ const RATE_LIMIT_WINDOW = 15 * 60;
 
 const CUSTOMERS_TABLE = "tblIUoXFMdWuFldvr";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_EMAIL_LENGTH = 254;
+
+function getClientIp(req: NextRequest): string {
+  const realIp = req.headers.get("x-real-ip");
+  if (realIp) return realIp;
+  const fwd = req.headers.get("x-forwarded-for");
+  if (fwd) return fwd.split(",")[0].trim();
+  return "unknown";
+}
+
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
+  const ip = getClientIp(req);
 
   try {
     const rateLimitKey = RATE_LIMIT_KEY(ip);
@@ -26,10 +37,19 @@ export async function POST(req: NextRequest) {
     }
   } catch (kvErr) {
     console.error("KV rate-limit error:", kvErr);
+    return NextResponse.json(
+      { error: "השירות אינו זמין כרגע. נסו שוב בעוד מספר רגעים." },
+      { status: 503 },
+    );
   }
 
   const { email } = await req.json().catch(() => ({ email: "" }));
-  if (!email || typeof email !== "string") {
+  if (
+    !email ||
+    typeof email !== "string" ||
+    email.length > MAX_EMAIL_LENGTH ||
+    !EMAIL_REGEX.test(email.trim())
+  ) {
     return NextResponse.json(
       { error: "כתובת אימייל לא תקינה." },
       { status: 400 },
@@ -37,13 +57,14 @@ export async function POST(req: NextRequest) {
   }
 
   const normalizedEmail = email.trim().toLowerCase();
+  const escapedEmail = normalizedEmail.replace(/'/g, "\\'");
 
   // Always return 200 to not reveal whether email exists
   const successResponse = NextResponse.json({ ok: true });
 
   try {
     const records = await listRecords<CustomerFields>(CUSTOMERS_TABLE, {
-      filterByFormula: `OR({אימייל}='${normalizedEmail}', {אימייל נוסף}='${normalizedEmail}')`,
+      filterByFormula: `OR({אימייל}='${escapedEmail}', {אימייל נוסף}='${escapedEmail}')`,
       maxRecords: 1,
     });
 
