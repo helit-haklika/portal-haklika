@@ -19,7 +19,12 @@ export function BookingsSection({ bookings }: Props) {
   return (
     <section className="hk-section">
       <div className="hk-section__head">
-        <div className="hk-section__title">שימושים (Bookings)</div>
+        <div>
+          <div className="hk-section__title">שימושים (Bookings)</div>
+          <div className="hk-section__subtitle">
+            רשימת הBookings ממערכת סקדה
+          </div>
+        </div>
         <div className="hk-section__count">{bookings.length} רשומות</div>
       </div>
       <div className="hk-list">
@@ -28,26 +33,27 @@ export function BookingsSection({ bookings }: Props) {
           data={csvData}
           csvFilename="שימושים.csv"
         />
+        <div className="hk-table-head">
+          <span>יום</span>
+          <span>שעות</span>
+          <span>חדר</span>
+          <span style={{ textAlign: "center" }}>שנוצלו</span>
+          <span style={{ textAlign: "center" }}>יתרה לאחר</span>
+        </div>
         {bookings.map((b) => (
-          <div key={b.id} className="hk-row">
-            <div className="hk-row__lead">
+          <div key={b.id} className="hk-row hk-row--table">
+            <div className="hk-row__col-day">
               <div className="hk-row__date hk-num">{b.date}</div>
               <div className="hk-row__dow">{b.dayOfWeek}</div>
             </div>
-            <div className="hk-row__body">
-              <div className="hk-row__main">{b.roomName}</div>
-              <div className="hk-row__meta">
-                <span className="hk-num">
-                  {b.startTime}–{b.endTime}
-                </span>
-                <span className="hk-row__meta-sep" />
-                <span className="hk-num">{b.durationHours} ש׳</span>
-              </div>
+            <div className="hk-row__col-time">
+              <span className="hk-num" dir="ltr">
+                {b.startTime}-{b.endTime}
+              </span>
             </div>
-            <div className="hk-row__trail">
-              <div className="hk-row__sub">יתרה לאחר</div>
-              <div className="hk-row__value hk-num">{b.balanceAfter}</div>
-            </div>
+            <div className="hk-row__col-room">{b.roomName}</div>
+            <div className="hk-row__col-hours hk-num">{b.durationHours}</div>
+            <div className="hk-row__col-balance hk-num">{b.balanceAfter}</div>
           </div>
         ))}
       </div>

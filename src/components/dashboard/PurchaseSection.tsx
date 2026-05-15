@@ -18,7 +18,7 @@ export function PurchaseSection({ payments }: Props) {
   return (
     <section className="hk-section">
       <div className="hk-section__head">
-        <div className="hk-section__title">רכישות כרטיסיות</div>
+        <div className="hk-section__title">כרטיסיות שנרכשו</div>
         <div className="hk-section__count">{payments.length} רשומות</div>
       </div>
       <div className="hk-list">
@@ -27,6 +27,9 @@ export function PurchaseSection({ payments }: Props) {
           data={csvData}
           csvFilename="רכישות-כרטיסיות.csv"
         />
+        <div className="hk-payments-head">
+          <span className="hk-payments-head__invoice">חשבונית</span>
+        </div>
         {payments.map((p) => (
           <div key={p.id} className="hk-row">
             <div className="hk-row__lead">
@@ -42,7 +45,7 @@ export function PurchaseSection({ payments }: Props) {
               </div>
             </div>
             <div className="hk-row__trail">
-              <div className="hk-row__value hk-num">+{p.hours}</div>
+              <div className="hk-row__value hk-num">{p.hours}</div>
               <div className="hk-row__sub">שעות</div>
             </div>
             {p.invoiceUrl && (

@@ -11,7 +11,7 @@ interface KpiHeroProps {
 export function KpiHero({
   value,
   unit = "שעות",
-  label = "יתרת שעות בכרטיסייה",
+  label = "מה מצב הכרטיסיה שלי? (ייתרת שעות)",
   sub,
   variant = "default",
 }: KpiHeroProps) {
@@ -19,10 +19,10 @@ export function KpiHero({
     return (
       <div className="hk-kpi hk-kpi--danger">
         <div className="hk-kpi__label">
-          <WarnIcon width={14} height={14} /> יתרת שעות בכרטיסייה
+          <WarnIcon width={14} height={14} /> מה מצב הכרטיסיה שלי? (ייתרת שעות)
         </div>
         <div className="hk-kpi__value hk-num">
-          {value}
+          <span dir="ltr">{value}</span>
           <span className="hk-kpi__unit">{unit}</span>
         </div>
         <div className="hk-kpi__sub">
@@ -34,7 +34,7 @@ export function KpiHero({
   return (
     <div className="hk-kpi hk-kpi--hero">
       <div className="hk-kpi__label">
-        <ClockIcon /> {label}
+        <ClockIcon /> מה מצב הכרטיסיה שלי? (ייתרת שעות)
       </div>
       <div className="hk-kpi__value hk-num">
         {value}

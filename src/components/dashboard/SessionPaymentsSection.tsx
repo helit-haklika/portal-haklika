@@ -25,6 +25,9 @@ export function SessionPaymentsSection({ payments }: Props) {
           data={csvData}
           csvFilename="תשלומי-ססיה.csv"
         />
+        <div className="hk-payments-head">
+          <span className="hk-payments-head__invoice">חשבונית</span>
+        </div>
         {payments.map((p) => (
           <div key={p.id} className="hk-row">
             <div className="hk-row__lead">

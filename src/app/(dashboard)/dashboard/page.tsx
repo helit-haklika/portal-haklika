@@ -154,9 +154,8 @@ export default async function DashboardPage() {
             className={`hk-kpis ${hasSessionData ? "hk-kpis--2" : "hk-kpis--1"}`}
           >
             <KpiHero
-              value={Math.abs(balance).toString()}
+              value={balance.toString()}
               variant={isNegative ? "danger" : "default"}
-              sub={`מתוך ${punchCardPayments.reduce((s, p) => s + p.hours, 0)} שעות שנרכשו השנה`}
             />
             <KpiSmall
               icon="clock"
