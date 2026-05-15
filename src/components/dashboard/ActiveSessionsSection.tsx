@@ -19,7 +19,7 @@ export function ActiveSessionsSection({ sessions }: Props) {
               <th className="hk-table__th-time">שעות</th>
               <th className="hk-table__th-room">חדר</th>
               <th className="hk-table__th-num">מחיר בסיס</th>
-              <th className="hk-table__th-num">סטטוס</th>
+              <th className="hk-table__th-status">סטטוס</th>
             </tr>
           </thead>
           <tbody>
@@ -38,7 +38,9 @@ export function ActiveSessionsSection({ sessions }: Props) {
                 <td className="hk-table__td-num hk-num">
                   {s.basePriceBeforeDiscount}
                 </td>
-                <td className="hk-table__td-num">פעיל</td>
+                <td className="hk-table__td-status">
+                  <span className="hk-pill hk-pill--success">פעיל</span>
+                </td>
               </tr>
             ))}
           </tbody>

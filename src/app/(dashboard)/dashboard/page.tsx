@@ -115,7 +115,13 @@ export default async function DashboardPage() {
     sessionPayments,
   } = data;
   const hasPunchCardData = punchCardPayments.length > 0 || bookings.length > 0;
-  const hasSessionData = activeSessions.length > 0;
+  const hasActiveSessions = activeSessions.length > 0;
+  const hasSessionTransactions =
+    sessionTransactions.length > 0 ||
+    sessionTransactions.reduce((s, t) => s + t.priceAfterDiscount, 0) > 0;
+  const hasSessionPayments = sessionPayments.length > 0;
+  const hasSessionData =
+    hasActiveSessions || hasSessionTransactions || hasSessionPayments;
   const balance = customer.balance;
   const isNegative = balance < 0;
   const hoursThisMonth = bookings
@@ -194,14 +200,16 @@ export default async function DashboardPage() {
 
       {hasPunchCardData && <PurchaseSection payments={punchCardPayments} />}
       {hasPunchCardData && <BookingsSection bookings={bookings} />}
-      {hasSessionData && <ActiveSessionsSection sessions={activeSessions} />}
-      {hasSessionData && (
+      {hasActiveSessions && <ActiveSessionsSection sessions={activeSessions} />}
+      {hasSessionTransactions && (
         <RecurringPaymentSummary
           totalMonthly={monthlyRecurring}
           sessionCount={activeSessions.length}
         />
       )}
-      {hasSessionData && <SessionPaymentsSection payments={sessionPayments} />}
+      {hasSessionPayments && (
+        <SessionPaymentsSection payments={sessionPayments} />
+      )}
 
       <Footer
         purchaseLinks={purchaseLinks}

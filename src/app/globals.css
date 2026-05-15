@@ -76,6 +76,7 @@
   min-height: 100dvh;
   background: var(--bg);
   position: relative;
+  padding-bottom: 80px;
 }
 
 /* ── Header ─────────────────────────────────────── */
@@ -146,7 +147,7 @@
 
 /* ── Section block ──────────────────────────────── */
 .hk-section {
-  padding: 22px 16px 4px;
+  padding: 22px 18px 4px;
 }
 .hk-section--tight {
   padding-top: 14px;
@@ -473,11 +474,25 @@
 .hk-table th:last-child {
   border-inline-end: none;
 }
+.hk-table thead {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  z-index: 1;
+}
 .hk-table tbody tr {
   border-bottom: 1px solid var(--border);
 }
 .hk-table tbody tr:last-child {
   border-bottom: none;
+}
+@media (hover: hover) {
+  .hk-table tbody tr {
+    transition: background 0.12s;
+  }
+  .hk-table tbody tr:hover {
+    background: var(--surface-2);
+  }
 }
 .hk-table td {
   padding: 11px 12px;
@@ -546,14 +561,74 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background: var(--primary-tint);
   color: var(--primary);
-  margin-inline-start: 4px;
   text-decoration: none;
   flex-shrink: 0;
+  position: relative;
+  transition: background 0.12s;
+}
+.hk-row__invoice::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+}
+.hk-row__invoice:hover {
+  background: var(--primary-soft);
+}
+
+.hk-table__th-status,
+.hk-table__td-status {
+  width: 84px;
+  text-align: center;
+}
+
+/* Mobile: tighter columns + horizontal scroll fallback for wide tables */
+@media (max-width: 639px) {
+  .hk-list {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .hk-table {
+    min-width: 100%;
+  }
+  .hk-table th,
+  .hk-table td {
+    padding-inline: 8px;
+  }
+  .hk-table__th-day,
+  .hk-table__td-day {
+    width: 76px;
+  }
+  .hk-table__th-time,
+  .hk-table__td-time {
+    width: 92px;
+    font-size: 11.5px;
+  }
+  .hk-table__th-num,
+  .hk-table__td-num {
+    width: 68px;
+  }
+  .hk-table__th-invoice,
+  .hk-table__td-invoice {
+    width: 48px;
+    padding-inline: 4px;
+  }
+  .hk-table__th-desc,
+  .hk-table__td-desc {
+    font-size: 12.5px;
+  }
+  .hk-table__th-status,
+  .hk-table__td-status {
+    width: 68px;
+  }
+  .hk-row__invoice {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 /* ── Big stat panel ─────────────────────────────── */

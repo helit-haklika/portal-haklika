@@ -54,7 +54,7 @@ export function PurchaseSection({ payments }: Props) {
                       href={p.invoiceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      title="חשבונית"
+                      aria-label="צפייה בחשבונית"
                     >
                       <ReceiptIcon />
                     </a>
