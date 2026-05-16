@@ -47,7 +47,7 @@ export default function LoginForm() {
           className="hk-logo"
           priority
         />
-        <div className="hk-brand-name">פורטל לקוחות</div>
+        <div className="hk-brand-name">אזור אישי</div>
       </div>
       <div className="hk-auth__head">
         <div className="hk-auth__title">ברוכים הבאים</div>
@@ -90,7 +90,7 @@ export default function LoginForm() {
         </a>
       </div>
       <div className="hk-auth__legal">
-        הכניסה לפורטל בטוחה ומוצפנת.
+        הכניסה לאזור האישי בטוחה ומוצפנת.
         <br />
         הפרטים שלכם נשמרים אצלנו בלבד.
       </div>

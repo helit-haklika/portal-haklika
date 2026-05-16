@@ -81,14 +81,14 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: `${process.env.RESEND_FROM_NAME ?? "הקליקה"} <${process.env.RESEND_FROM_EMAIL ?? "noreply@example.com"}>`,
       to: normalizedEmail,
-      subject: "הלינק שלך לכניסה לפורטל הקליקה",
+      subject: "הלינק שלך לכניסה לאזור האישי בהקליקה",
       headers: { "X-Resend-Click-Tracking": "false" },
       html: `
         <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px 24px;">
-          <h2 style="color: #2F5D54; margin-bottom: 8px;">כניסה לפורטל הקליקה</h2>
-          <p style="color: #2E3645; margin-bottom: 24px;">לחצו על הכפתור כדי להיכנס לפורטל שלכם. הלינק תקף ל-15 דקות.</p>
+          <h2 style="color: #2F5D54; margin-bottom: 8px;">כניסה לאזור האישי בהקליקה</h2>
+          <p style="color: #2E3645; margin-bottom: 24px;">לחצו על הכפתור כדי להיכנס לאזור האישי שלכם. הלינק תקף ל-15 דקות.</p>
           <a href="${magicLink}" style="display: inline-block; background: #2F5D54; color: #F5F1EA; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600;">
-            כניסה לפורטל
+            כניסה לאזור האישי
           </a>
           <p style="color: #6B7280; font-size: 12px; margin-top: 24px;">
             אם לא ביקשתם את הלינק הזה, אתם יכולים להתעלם ממייל זה.

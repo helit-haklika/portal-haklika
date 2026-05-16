@@ -10,8 +10,8 @@ const heebo = Heebo({
 });
 
 export const metadata: Metadata = {
-  title: "פורטל לקוחות · הקליקה",
-  description: "פורטל אישי לניהול שעות ותשלומים",
+  title: "אזור אישי · הקליקה",
+  description: "אזור אישי לניהול שעות ותשלומים",
 };
 
 export default function RootLayout({

@@ -79,7 +79,7 @@ function CheckEmailContent() {
           className="hk-logo"
           priority
         />
-        <div className="hk-brand-name">פורטל לקוחות</div>
+        <div className="hk-brand-name">אזור אישי</div>
       </div>
       <div className="hk-check">
         <div className="hk-check__icon">

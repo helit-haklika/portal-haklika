@@ -139,7 +139,7 @@ export default async function DashboardPage() {
       <div>
         <Header name={customer.name} updatedRange={updatedRange} />
         <EmptyState
-          title="עוד אין לכם פעילות בפורטל"
+          title="עוד אין לכם פעילות באזור האישי"
           subtitle="ברגע שתרכשו את הכרטיסייה הראשונה או תפתחו ססיה, הנתונים יופיעו כאן."
         />
         <Footer
