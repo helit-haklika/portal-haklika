@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@/lib/cache/kv";
 import { listRecords } from "@/lib/airtable/client";
 import { createMagicToken } from "@/lib/auth/magic-link";
-import { Resend } from "resend";
 import type { CustomerFields } from "@/lib/airtable/types";
 
 const RATE_LIMIT_KEY = (ip: string) => `ratelimit:login:${ip}`;
@@ -77,25 +76,31 @@ export async function POST(req: NextRequest) {
     const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
     const magicLink = `${appUrl}/api/auth/verify?token=${token}`;
 
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
-      from: `${process.env.RESEND_FROM_NAME ?? "הקליקה"} <${process.env.RESEND_FROM_EMAIL ?? "noreply@example.com"}>`,
-      to: normalizedEmail,
-      subject: "הלינק שלך לכניסה לאזור האישי בהקליקה",
-      headers: { "X-Resend-Click-Tracking": "false" },
-      html: `
-        <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px 24px;">
-          <h2 style="color: #2F5D54; margin-bottom: 8px;">כניסה לאזור האישי בהקליקה</h2>
-          <p style="color: #2E3645; margin-bottom: 24px;">לחצו על הכפתור כדי להיכנס לאזור האישי שלכם. הלינק תקף ל-15 דקות.</p>
-          <a href="${magicLink}" style="display: inline-block; background: #2F5D54; color: #F5F1EA; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600;">
-            כניסה לאזור האישי
-          </a>
-          <p style="color: #6B7280; font-size: 12px; margin-top: 24px;">
-            אם לא ביקשתם את הלינק הזה, אתם יכולים להתעלם ממייל זה.
-          </p>
-        </div>
-      `,
+    const webhookUrl = process.env.MAKE_EMAIL_WEBHOOK_URL;
+    if (!webhookUrl) {
+      console.error("MAKE_EMAIL_WEBHOOK_URL is not configured");
+      return successResponse;
+    }
+
+    const customerName =
+      customer.fields["שם פרטי"] || customer.fields["שם לקוח"] || "";
+
+    const webhookRes = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: normalizedEmail,
+        magic_link: magicLink,
+        customer_name: customerName,
+      }),
     });
+
+    if (!webhookRes.ok) {
+      const body = await webhookRes.text().catch(() => "");
+      console.error(
+        `Make webhook failed: ${webhookRes.status} ${webhookRes.statusText} - ${body}`,
+      );
+    }
   } catch (err) {
     console.error("request-link error:", err);
   }

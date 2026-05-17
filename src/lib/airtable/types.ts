@@ -6,6 +6,7 @@ export interface AirtableRecord<T> {
 
 export interface CustomerFields {
   "שם לקוח"?: string;
+  "שם פרטי"?: string;
   אימייל?: string;
   "אימייל נוסף"?: string;
   "ייתרה לפי חישוב"?: number;
