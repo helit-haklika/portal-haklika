@@ -42,7 +42,7 @@ export function BookingsSection({ bookings }: Props) {
           data={csvData}
           csvFilename="שימושים.csv"
         />
-        <table className="hk-table hk-table--bookings">
+        <table className="hk-table">
           <thead>
             <tr>
               <th className="hk-table__th-day">יום</th>
@@ -55,27 +55,20 @@ export function BookingsSection({ bookings }: Props) {
           <tbody>
             {visibleBookings.map((b) => (
               <tr key={b.id}>
-                <td className="hk-table__td-day" data-label="יום">
+                <td className="hk-table__td-day">
                   <div className="hk-row__date hk-num">{b.date}</div>
                   <div className="hk-row__dow">{b.dayOfWeek}</div>
                 </td>
-                <td className="hk-table__td-time" data-label="שעות">
+                <td className="hk-table__td-time">
                   <span className="hk-num" dir="ltr">
                     {b.startTime}-{b.endTime}
                   </span>
                 </td>
-                <td className="hk-table__td-room" data-label="חדר">
-                  {b.roomName}
-                </td>
-                <td className="hk-table__td-num hk-num" data-label="סך שעות">
+                <td className="hk-table__td-room">{b.roomName}</td>
+                <td className="hk-table__td-num hk-num">
                   {Math.abs(b.durationHours)}
                 </td>
-                <td
-                  className="hk-table__td-num hk-num"
-                  data-label="יתרה לאחר שימוש"
-                >
-                  {b.balanceAfter}
-                </td>
+                <td className="hk-table__td-num hk-num">{b.balanceAfter}</td>
               </tr>
             ))}
           </tbody>
