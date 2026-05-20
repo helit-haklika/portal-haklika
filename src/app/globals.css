@@ -735,6 +735,76 @@
     width: 32px;
     height: 32px;
   }
+
+  /* Bookings: render as cards instead of cramped table */
+  .hk-table--bookings,
+  .hk-table--bookings thead,
+  .hk-table--bookings tbody,
+  .hk-table--bookings tr,
+  .hk-table--bookings td {
+    display: block;
+    width: auto;
+  }
+  .hk-table--bookings {
+    table-layout: auto;
+  }
+  .hk-table--bookings thead {
+    display: none;
+  }
+  .hk-table--bookings tbody tr {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 12px;
+    row-gap: 8px;
+    box-shadow: var(--shadow-sm);
+  }
+  .hk-table--bookings tbody tr:last-child {
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .hk-table--bookings td {
+    border: none;
+    padding: 0;
+    min-height: 0;
+    width: auto;
+  }
+  .hk-table--bookings td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    letter-spacing: 0.03em;
+    margin-bottom: 3px;
+    text-transform: none;
+  }
+  .hk-table--bookings td.hk-table__td-day {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .hk-table--bookings td.hk-table__td-day::before {
+    display: none;
+  }
+  .hk-table--bookings td.hk-table__td-day .hk-row__date {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .hk-table--bookings td.hk-table__td-room {
+    grid-column: 1 / -1;
+  }
+  .hk-table--bookings td.hk-table__td-num {
+    text-align: right;
+    font-size: 14px;
+  }
 }
 
 /* ── Big stat panel ─────────────────────────────── */
