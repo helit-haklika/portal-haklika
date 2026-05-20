@@ -63,14 +63,24 @@ export async function POST(req: NextRequest) {
 
   try {
     const records = await listRecords<CustomerFields>(CUSTOMERS_TABLE, {
-      filterByFormula: `OR({אימייל}='${escapedEmail}', {אימייל נוסף}='${escapedEmail}')`,
-      maxRecords: 1,
+      filterByFormula: `OR(LOWER({אימייל})='${escapedEmail}', LOWER({אימייל נוסף})='${escapedEmail}')`,
+      maxRecords: 10,
     });
 
-    const customer = records[0];
-    if (!customer) return successResponse;
+    if (records.length === 0) {
+      console.log(`[request-link] no customer found for ${normalizedEmail}`);
+      return successResponse;
+    }
 
-    if (customer.fields["סטטוס לקוח"] === "לא פעיל") return successResponse;
+    const customer =
+      records.find((r) => r.fields["סטטוס לקוח"] !== "לא פעיל") ?? null;
+
+    if (!customer) {
+      console.log(
+        `[request-link] all ${records.length} matching customer(s) inactive for ${normalizedEmail}`,
+      );
+      return successResponse;
+    }
 
     const token = await createMagicToken(customer.id, normalizedEmail);
     const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
