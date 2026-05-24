@@ -49,10 +49,14 @@ const TIME_IL_FORMATTER = new Intl.DateTimeFormat("he-IL", {
   hour12: false,
 });
 
-function formatTimeIL(iso?: string): string {
-  if (!iso) return "";
+function convertUtcTimeToIL(utcTime?: string, isoDate?: string): string {
+  if (!utcTime || !isoDate) return utcTime ?? "";
+  const m = utcTime.match(/^(\d{1,2}):(\d{2})/);
+  if (!m) return utcTime;
+  const datePart = isoDate.split("T")[0];
+  const iso = `${datePart}T${m[1].padStart(2, "0")}:${m[2]}:00.000Z`;
   const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return "";
+  if (Number.isNaN(d.getTime())) return utcTime;
   return TIME_IL_FORMATTER.format(d);
 }
 
@@ -116,8 +120,8 @@ export async function fetchBookings(customerId: string): Promise<Booking[]> {
     sort: [{ field: "תאריך", direction: "desc" }],
     fields: [
       "תאריך",
-      "fld3M7bYSsHvSncRD",
-      "fldq1K9gbUtJcsKPr",
+      "שעת התחלה מפורמט",
+      "שעת סיום מפורמט",
       "משך בשעות",
       "ייתרת שעות לאחר שימוש",
       "בחודש הנוכחי?",
@@ -129,8 +133,11 @@ export async function fetchBookings(customerId: string): Promise<Booking[]> {
     date: formatDate(r.fields["תאריך"]),
     dayOfWeek: getDayOfWeek(r.fields["תאריך"]),
     roomName: r.fields["שם חדר (from חדר)"]?.[0] ?? "",
-    startTime: formatTimeIL(r.fields["שעת התחלה"]),
-    endTime: formatTimeIL(r.fields["שעת סיום"]),
+    startTime: convertUtcTimeToIL(
+      r.fields["שעת התחלה מפורמט"],
+      r.fields["תאריך"],
+    ),
+    endTime: convertUtcTimeToIL(r.fields["שעת סיום מפורמט"], r.fields["תאריך"]),
     durationHours: r.fields["משך בשעות"] ?? 0,
     balanceAfter: r.fields["ייתרת שעות לאחר שימוש"] ?? 0,
     isCurrentMonth: r.fields["בחודש הנוכחי?"] ?? false,
