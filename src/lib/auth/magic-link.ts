@@ -3,14 +3,21 @@ import { randomBytes } from "crypto";
 
 const TOKEN_TTL_SECONDS = 15 * 60;
 
+export interface MagicTokenPayload {
+  customerId: string;
+  email: string;
+  name?: string;
+}
+
 export async function createMagicToken(
   customerId: string,
   email: string,
+  name?: string,
 ): Promise<string> {
   const token = randomBytes(32).toString("hex");
   await kv.set(
     `magic:${token}`,
-    { customerId, email },
+    { customerId, email, name },
     {
       ex: TOKEN_TTL_SECONDS,
     },
@@ -20,10 +27,8 @@ export async function createMagicToken(
 
 export async function consumeMagicToken(
   token: string,
-): Promise<{ customerId: string; email: string } | null> {
-  const data = await kv.getdel<{ customerId: string; email: string }>(
-    `magic:${token}`,
-  );
+): Promise<MagicTokenPayload | null> {
+  const data = await kv.getdel<MagicTokenPayload>(`magic:${token}`);
   if (!data) return null;
   return data;
 }

@@ -22,6 +22,7 @@ import { RecurringPaymentSummary } from "@/components/dashboard/RecurringPayment
 import { SessionPaymentsSection } from "@/components/dashboard/SessionPaymentsSection";
 import { Footer } from "@/components/dashboard/Footer";
 import { EmptyState } from "@/components/shared/EmptyState";
+import { logError } from "@/lib/logs";
 import type { DashboardData } from "@/types";
 
 function getYesterdayDate(): string {
@@ -92,6 +93,7 @@ export default async function DashboardPage() {
     data = await fetchDashboardData(session.customerId);
   } catch (err) {
     console.error("Dashboard fetch error:", err);
+    await logError("dashboard", err, { customerId: session.customerId });
   }
 
   if (!data) {

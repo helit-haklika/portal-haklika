@@ -1,4 +1,5 @@
 import type { AirtableRecord } from "./types";
+import { logError } from "@/lib/logs";
 
 const BASE_URL = "https://api.airtable.com/v0";
 
@@ -61,10 +62,18 @@ export async function listRecords<T>(
     }
 
     if (!res.ok) {
+      const errBody = await res.text().catch(() => "");
       if (process.env.NODE_ENV !== "production") {
-        const err = await res.text();
-        console.error(`Airtable error ${res.status}: ${err}`);
+        console.error(`Airtable error ${res.status}: ${errBody}`);
       }
+      await logError(
+        "airtable",
+        new Error(`Airtable ${res.status}: ${errBody}`),
+        {
+          tableId,
+          url: url.toString(),
+        },
+      );
       throw new Error(`Airtable error ${res.status}`);
     }
 

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { consumeMagicToken } from "@/lib/auth/magic-link";
 import { signJWT } from "@/lib/auth/jwt";
 import { getSessionCookieOptions } from "@/lib/auth/session";
+import { isAdminEmail } from "@/lib/auth/admin";
+import { logLogin } from "@/lib/logs";
 
 export async function POST(req: NextRequest) {
   const { token } = await req.json().catch(() => ({ token: null }));
@@ -18,9 +20,19 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const isAdmin = isAdminEmail(result.email);
+
   const jwt = await signJWT({
     customerId: result.customerId,
     email: result.email,
+    isAdmin,
+  });
+
+  await logLogin({
+    customerId: result.customerId,
+    email: result.email,
+    name: result.name ?? "",
+    isAdmin,
   });
 
   const cookieOptions = getSessionCookieOptions();

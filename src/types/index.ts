@@ -63,5 +63,6 @@ export interface DashboardData {
 export interface JWTPayload {
   customerId: string;
   email: string;
+  isAdmin?: boolean;
   exp: number;
 }
