@@ -29,8 +29,8 @@ export interface BookingFields {
   "Booking Title"?: string;
   תאריך?: string;
   "שם חדר (from חדר)"?: string[];
-  "שעת התחלה מפורמט"?: string;
-  "שעת סיום מפורמט"?: string;
+  "שעת התחלה"?: string;
+  "שעת סיום"?: string;
   "משך בשעות"?: number;
   "ייתרת שעות לאחר שימוש"?: number;
   "בחודש הנוכחי?"?: boolean;

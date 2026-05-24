@@ -6,10 +6,10 @@ import { LogoutIcon } from "@/components/shared/Icons";
 
 interface HeaderProps {
   name: string;
-  updatedRange: string;
+  yesterdayDate: string;
 }
 
-export function Header({ name, updatedRange }: HeaderProps) {
+export function Header({ name, yesterdayDate }: HeaderProps) {
   const router = useRouter();
 
   async function handleLogout() {
@@ -30,10 +30,11 @@ export function Header({ name, updatedRange }: HeaderProps) {
       <div className="hk-header__title">
         <h1 className="hk-header__brand">דף מידע אישי - הקליקה</h1>
         <div className="hk-header__name">{name}</div>
-        <div className="hk-header__meta">
+        <div className="hk-header__meta hk-header__meta--lg">
           <span className="hk-header__dot" />
           <span>
-            נתונים עדכניים: <span dir="ltr">{updatedRange}</span>
+            נתונים עדכניים החל מ <span dir="ltr">1.1.25</span> ומעודכן עד ל{" "}
+            <strong dir="ltr">{yesterdayDate}</strong>
           </span>
         </div>
       </div>

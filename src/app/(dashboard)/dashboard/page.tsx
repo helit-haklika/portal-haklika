@@ -24,14 +24,14 @@ import { Footer } from "@/components/dashboard/Footer";
 import { EmptyState } from "@/components/shared/EmptyState";
 import type { DashboardData } from "@/types";
 
-function getUpdatedRange(): string {
+function getYesterdayDate(): string {
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(today.getDate() - 1);
   const d = yesterday.getDate();
   const m = yesterday.getMonth() + 1;
   const y = String(yesterday.getFullYear()).slice(-2);
-  return `1/1/25 – ${d}/${m}/${y}`;
+  return `${d}.${m}.${y}`;
 }
 
 function getPurchaseLinks() {
@@ -131,13 +131,13 @@ export default async function DashboardPage() {
     (s, t) => s + t.priceAfterDiscount,
     0,
   );
-  const updatedRange = getUpdatedRange();
+  const yesterdayDate = getYesterdayDate();
   const purchaseLinks = getPurchaseLinks();
 
   if (!hasPunchCardData && !hasSessionData) {
     return (
       <div>
-        <Header name={customer.name} updatedRange={updatedRange} />
+        <Header name={customer.name} yesterdayDate={yesterdayDate} />
         <EmptyState
           title="עוד אין לכם פעילות באזור האישי"
           subtitle="ברגע שתרכשו את הכרטיסייה הראשונה או תפתחו ססיה, הנתונים יופיעו כאן."
@@ -152,7 +152,7 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <Header name={customer.name} updatedRange={updatedRange} />
+      <Header name={customer.name} yesterdayDate={yesterdayDate} />
 
       {hasPunchCardData && (
         <section className="hk-section hk-section--tight">

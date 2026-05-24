@@ -1,9 +1,29 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # פורטל הקליקה — הנחיות לקלוד קוד
 
 ## סקירה
 
-פורטל קריאה בלבד ל-177 לקוחות של הקליקה (השכרת חדרים בקליניקות).
+פורטל קריאה בלבד ל-177 לקוחות של הקליקה (בית למטפלים since 2018).
 כל לקוח רואה רק את הנתונים שלו: יתרת שעות, היסטוריית רכישות, bookings, ססיות פעילות, תשלומים.
+
+---
+
+## פקודות
+
+| פעולה             | פקודה           |
+| ----------------- | --------------- |
+| שרת פיתוח         | `npm run dev`   |
+| Build לפרודקשן    | `npm run build` |
+| הרצת build מקומית | `npm start`     |
+| Lint              | `npm run lint`  |
+
+- **אין test suite** מוגדר. אין `npm test`. בדיקות נעשות ידנית בדפדפן/דרך deployment ב-Vercel.
+- **פריסה אוטומטית**: `git push` ל-`main` → Vercel בונה ופורס אוטומטית.
+- **ספריית package**: `npm` (לא pnpm/yarn).
+- Next.js **16** עם React **19** ו-Tailwind **v4** (לא v3).
 
 ---
 

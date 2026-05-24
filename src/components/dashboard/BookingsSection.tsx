@@ -63,6 +63,7 @@ export function BookingsSection({ bookings }: Props) {
                   <span className="hk-num" dir="ltr">
                     {b.startTime}-{b.endTime}
                   </span>
+                  <div className="hk-row__room-mobile">{b.roomName}</div>
                 </td>
                 <td className="hk-table__td-room">{b.roomName}</td>
                 <td className="hk-table__td-num hk-num">
