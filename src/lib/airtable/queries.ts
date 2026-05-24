@@ -106,9 +106,11 @@ export async function fetchPunchCardPayments(
   return records.map((r) => ({
     id: r.id,
     date: formatDate(r.fields["תאריך תשלום"]),
+    isoDate: r.fields["תאריך תשלום"] ?? "",
     dayOfWeek: getDayOfWeek(r.fields["תאריך תשלום"]),
     hours: r.fields["שעות כרטיסיה שנרכשו"] ?? 0,
     amountPaid: formatCurrency(r.fields["סכום שולם"]),
+    balanceAfter: 0,
     invoiceUrl: r.fields["קישור לחשבונית"],
   }));
 }
@@ -123,7 +125,6 @@ export async function fetchBookings(customerId: string): Promise<Booking[]> {
       "שעת התחלה מפורמט",
       "שעת סיום מפורמט",
       "משך בשעות",
-      "ייתרת שעות לאחר שימוש",
       "בחודש הנוכחי?",
       "flddbuSSDRPL50dlT",
     ],
@@ -131,6 +132,7 @@ export async function fetchBookings(customerId: string): Promise<Booking[]> {
   return records.map((r) => ({
     id: r.id,
     date: formatDate(r.fields["תאריך"]),
+    isoDate: r.fields["תאריך"] ?? "",
     dayOfWeek: getDayOfWeek(r.fields["תאריך"]),
     roomName: r.fields["שם חדר (from חדר)"]?.[0] ?? "",
     startTime: convertUtcTimeToIL(
@@ -139,7 +141,7 @@ export async function fetchBookings(customerId: string): Promise<Booking[]> {
     ),
     endTime: convertUtcTimeToIL(r.fields["שעת סיום מפורמט"], r.fields["תאריך"]),
     durationHours: r.fields["משך בשעות"] ?? 0,
-    balanceAfter: r.fields["ייתרת שעות לאחר שימוש"] ?? 0,
+    balanceAfter: 0,
     isCurrentMonth: r.fields["בחודש הנוכחי?"] ?? false,
   }));
 }

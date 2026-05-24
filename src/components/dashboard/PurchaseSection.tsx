@@ -22,6 +22,7 @@ export function PurchaseSection({ payments }: Props) {
     יום: p.dayOfWeek,
     שעות: p.hours,
     סכום: p.amountPaid,
+    "יתרה לאחר רכישה": p.balanceAfter,
   }));
 
   return (
@@ -43,6 +44,7 @@ export function PurchaseSection({ payments }: Props) {
               <th className="hk-table__th-desc">תיאור</th>
               <th className="hk-table__th-num">שעות</th>
               <th className="hk-table__th-num">סכום</th>
+              <th className="hk-table__th-num">יתרה לאחר רכישה</th>
               <th className="hk-table__th-invoice">חשבונית</th>
             </tr>
           </thead>
@@ -56,6 +58,7 @@ export function PurchaseSection({ payments }: Props) {
                 <td className="hk-table__td-desc">כרטיסיית {p.hours} שעות</td>
                 <td className="hk-table__td-num hk-num">{p.hours}</td>
                 <td className="hk-table__td-num hk-num">{p.amountPaid}</td>
+                <td className="hk-table__td-num hk-num">{p.balanceAfter}</td>
                 <td className="hk-table__td-invoice">
                   {p.invoiceUrl && (
                     <a

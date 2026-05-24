@@ -23,6 +23,7 @@ import { SessionPaymentsSection } from "@/components/dashboard/SessionPaymentsSe
 import { Footer } from "@/components/dashboard/Footer";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { logError } from "@/lib/logs";
+import { computeRunningBalances } from "@/lib/balance/running-balance";
 import type { DashboardData } from "@/types";
 
 function getYesterdayDate(): string {
@@ -108,14 +109,13 @@ export default async function DashboardPage() {
     );
   }
 
-  const {
-    customer,
-    punchCardPayments,
-    bookings,
-    activeSessions,
-    sessionTransactions,
-    sessionPayments,
-  } = data;
+  const { customer, activeSessions, sessionTransactions, sessionPayments } =
+    data;
+  const { bookings, purchases: punchCardPayments } = computeRunningBalances(
+    data.bookings,
+    data.punchCardPayments,
+    data.customer.balance,
+  );
   const hasPunchCardData = punchCardPayments.length > 0 || bookings.length > 0;
   const hasActiveSessions = activeSessions.length > 0;
   const hasSessionTransactions =

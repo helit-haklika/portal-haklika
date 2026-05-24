@@ -32,7 +32,6 @@ export interface BookingFields {
   "שעת התחלה מפורמט"?: string;
   "שעת סיום מפורמט"?: string;
   "משך בשעות"?: number;
-  "ייתרת שעות לאחר שימוש"?: number;
   "בחודש הנוכחי?"?: boolean;
 }
 

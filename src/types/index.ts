@@ -11,15 +11,18 @@ export interface Customer {
 export interface PunchCardPayment {
   id: string;
   date: string;
+  isoDate: string;
   dayOfWeek: string;
   hours: number;
   amountPaid: string;
+  balanceAfter: number;
   invoiceUrl?: string;
 }
 
 export interface Booking {
   id: string;
   date: string;
+  isoDate: string;
   dayOfWeek: string;
   roomName: string;
   startTime: string;
