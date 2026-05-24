@@ -116,8 +116,8 @@ export async function fetchBookings(customerId: string): Promise<Booking[]> {
     sort: [{ field: "תאריך", direction: "desc" }],
     fields: [
       "תאריך",
-      "שעת התחלה",
-      "שעת סיום",
+      "fld3M7bYSsHvSncRD",
+      "fldq1K9gbUtJcsKPr",
       "משך בשעות",
       "ייתרת שעות לאחר שימוש",
       "בחודש הנוכחי?",
