@@ -1,15 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LogoutIcon } from "@/components/shared/Icons";
 
 interface HeaderProps {
   name: string;
   yesterdayDate: string;
+  isAdmin?: boolean;
 }
 
-export function Header({ name, yesterdayDate }: HeaderProps) {
+export function Header({ name, yesterdayDate, isAdmin }: HeaderProps) {
   const router = useRouter();
 
   async function handleLogout() {
@@ -38,13 +40,33 @@ export function Header({ name, yesterdayDate }: HeaderProps) {
           </span>
         </div>
       </div>
-      <button
-        className="hk-iconbtn"
-        aria-label="התנתקות"
-        onClick={handleLogout}
-      >
-        <LogoutIcon />
-      </button>
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        {isAdmin && (
+          <Link
+            href="/admin"
+            className="hk-iconbtn"
+            style={{
+              width: "auto",
+              height: "auto",
+              padding: "6px 12px",
+              fontSize: 13,
+              fontWeight: 600,
+              background: "var(--primary)",
+              color: "white",
+              textDecoration: "none",
+            }}
+          >
+            אדמין
+          </Link>
+        )}
+        <button
+          className="hk-iconbtn"
+          aria-label="התנתקות"
+          onClick={handleLogout}
+        >
+          <LogoutIcon />
+        </button>
+      </div>
     </header>
   );
 }

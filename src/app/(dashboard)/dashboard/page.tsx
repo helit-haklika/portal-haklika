@@ -139,7 +139,11 @@ export default async function DashboardPage() {
   if (!hasPunchCardData && !hasSessionData) {
     return (
       <div>
-        <Header name={customer.name} yesterdayDate={yesterdayDate} />
+        <Header
+          name={customer.name}
+          yesterdayDate={yesterdayDate}
+          isAdmin={session.isAdmin}
+        />
         <EmptyState
           title="עוד אין לכם פעילות באזור האישי"
           subtitle="ברגע שתרכשו את הכרטיסייה הראשונה או תפתחו ססיה, הנתונים יופיעו כאן."
@@ -154,7 +158,11 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <Header name={customer.name} yesterdayDate={yesterdayDate} />
+      <Header
+        name={customer.name}
+        yesterdayDate={yesterdayDate}
+        isAdmin={session.isAdmin}
+      />
 
       {hasPunchCardData && (
         <section className="hk-section hk-section--tight">
