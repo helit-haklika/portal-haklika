@@ -5,5 +5,6 @@ import LoginForm from "./LoginForm";
 export default async function LoginPage() {
   const session = await getCurrentSession();
   if (session) redirect("/dashboard");
-  return <LoginForm />;
+  const whatsappNumber = process.env.HAKLIKA_WHATSAPP_NUMBER ?? "";
+  return <LoginForm whatsappNumber={whatsappNumber} />;
 }

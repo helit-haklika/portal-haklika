@@ -4,7 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-export default function LoginForm() {
+export default function LoginForm({
+  whatsappNumber,
+}: {
+  whatsappNumber: string;
+}) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -82,7 +86,7 @@ export default function LoginForm() {
       <div className="hk-auth__help">
         לא זוכרים את האימייל שאיתו נרשמתם?{" "}
         <a
-          href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? ""}`}
+          href={`https://wa.me/${whatsappNumber}`}
           target="_blank"
           rel="noopener noreferrer"
         >
