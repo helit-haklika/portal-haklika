@@ -969,6 +969,11 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+.hk-brand-tagline {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
 .hk-auth__head {
   margin-bottom: 28px;
 }

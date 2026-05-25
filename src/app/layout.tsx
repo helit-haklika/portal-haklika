@@ -10,8 +10,15 @@ const heebo = Heebo({
 });
 
 export const metadata: Metadata = {
-  title: "אזור אישי · הקליקה",
-  description: "אזור אישי לניהול שעות ותשלומים",
+  title: "אזור אישי - הקליקה",
+  description: "קרדיט כרטיסיה, חשבוניות וbooking",
+  openGraph: {
+    title: "אזור אישי - הקליקה",
+    description: "קרדיט כרטיסיה, חשבוניות וbooking",
+    type: "website",
+    locale: "he_IL",
+    siteName: "הקליקה",
+  },
 };
 
 export default function RootLayout({

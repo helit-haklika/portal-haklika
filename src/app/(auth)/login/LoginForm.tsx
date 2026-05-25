@@ -51,7 +51,8 @@ export default function LoginForm({
           className="hk-logo"
           priority
         />
-        <div className="hk-brand-name">אזור אישי</div>
+        <div className="hk-brand-name">אזור אישי - הקליקה</div>
+        <div className="hk-brand-tagline">קרדיט כרטיסיה, חשבוניות וbooking</div>
       </div>
       <div className="hk-auth__head">
         <div className="hk-auth__title">ברוכים הבאים</div>
