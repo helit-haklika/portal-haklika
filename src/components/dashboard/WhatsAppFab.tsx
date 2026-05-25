@@ -5,11 +5,8 @@ interface Props {
   customerName: string;
 }
 
-export function WhatsAppFab({ phoneNumber, customerName }: Props) {
-  const message = encodeURIComponent(
-    `שלום, אני ${customerName} ויש לי שאלה לגבי האזור האישי שלי`,
-  );
-  const href = `https://wa.me/${phoneNumber}?text=${message}`;
+export function WhatsAppFab({ phoneNumber }: Props) {
+  const href = `https://wa.me/${phoneNumber}`;
   return (
     <a
       className="hk-fab"
