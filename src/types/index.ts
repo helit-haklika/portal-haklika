@@ -65,6 +65,9 @@ export interface DashboardData {
 
 export interface JWTPayload {
   customerId: string;
+  // Cached Supabase UUID for the customer. Optional for backwards-compat
+  // with pre-migration JWTs - if missing, queries fall back to airtable_id lookup.
+  supabaseId?: string;
   email: string;
   isAdmin?: boolean;
   exp: number;
