@@ -87,7 +87,8 @@ function CheckEmailContent() {
         </div>
         <div className="hk-auth__title">בדקו את תיבת הדואר</div>
         <div className="hk-auth__sub" style={{ maxWidth: 300 }}>
-          אם הכתובת רשומה במערכת, שלחנו לכם לינק כניסה. הוא יישאר תקף ל-15 דקות.
+          אם הכתובת רשומה במערכת, שלחנו לכם לינק כניסה. שמרו את המייל - הקישור
+          יישאר תקף לכניסות הבאות.
         </div>
         {email && (
           <div className="hk-check__email-box">
