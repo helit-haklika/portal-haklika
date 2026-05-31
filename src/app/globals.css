@@ -744,6 +744,90 @@
   }
 }
 
+/* Mobile: stacked tables render each row as a self-contained card so every
+   field is visible without horizontal scrolling. Scoped to .hk-table--stack
+   (portal sections); other tables keep the scroll fallback above. */
+@media (max-width: 639px) {
+  .hk-table--stack,
+  .hk-table--stack tbody,
+  .hk-table--stack tr,
+  .hk-table--stack td {
+    display: block;
+    width: 100%;
+  }
+  .hk-table--stack thead {
+    display: none;
+  }
+  .hk-table--stack tr {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    padding: 2px 14px;
+    margin-bottom: 10px;
+  }
+  .hk-table--stack tbody tr:last-child {
+    margin-bottom: 0;
+  }
+  .hk-table--stack td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: auto;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    text-align: start;
+    white-space: normal;
+    font-size: 14px;
+  }
+  .hk-table--stack td:last-child {
+    border-bottom: none;
+  }
+  /* Field label (from data-label) on one side, value on the other */
+  .hk-table--stack td::before {
+    content: attr(data-label);
+    flex-shrink: 0;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink-muted);
+  }
+  /* Hide the invoice row entirely when there is no invoice link */
+  .hk-table--stack .hk-table__td-invoice:empty {
+    display: none;
+  }
+  /* Date/day cell is the card header: no label, parts inline, emphasized */
+  .hk-table--stack .hk-table__td-day {
+    justify-content: flex-start;
+    align-items: baseline;
+    gap: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-strong);
+  }
+  .hk-table--stack .hk-table__td-day::before {
+    display: none;
+  }
+  .hk-table--stack .hk-table__td-day .hk-row__date {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .hk-table--stack .hk-table__td-day .hk-row__dow {
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+  .hk-table--stack .hk-table__td-num {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .hk-table--stack .hk-table__td-room {
+    min-width: 0;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+
 /* ── Big stat panel ─────────────────────────────── */
 .hk-bigstat {
   background: linear-gradient(
@@ -1344,5 +1428,465 @@
 
   .hk-row__main {
     font-size: 14px;
+  }
+}
+
+/* ============== Admin app ============== */
+.hk-admin {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.hk-admin-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.hk-admin-brand {
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.hk-admin-links {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.hk-admin-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.hk-admin-links a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hk-admin-user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.hk-admin-user span {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hk-admin-user a {
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.hk-admin-main {
+  flex: 1;
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hk-admin-h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: var(--ink);
+}
+
+.hk-admin-sub {
+  font-size: 14px;
+  color: var(--ink-muted);
+  margin-bottom: 24px;
+}
+
+/* Toolbar (search + filters) */
+.hk-admin-toolbar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.hk-admin-toolbar input,
+.hk-admin-toolbar select {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  max-width: 220px;
+}
+
+.hk-admin-toolbar input {
+  flex: 1;
+  min-width: 220px;
+}
+
+/* Data table */
+.hk-table-wrap {
+  background: var(--surface);
+  border-radius: 12px;
+  overflow-x: auto;
+  max-width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.hk-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hk-table thead {
+  background: #f9fafb;
+}
+
+.hk-table th {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hk-table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--ink);
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.hk-table tbody tr {
+  transition: background 0.12s;
+}
+
+.hk-table tbody tr:hover {
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.hk-table a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.hk-table a:hover {
+  text-decoration: underline;
+}
+
+/* Status pills */
+.hk-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hk-pill--active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.hk-pill--inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.hk-pill--new {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.hk-pill--pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.hk-pill--neutral {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.hk-pill--danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Customer detail */
+.hk-customer-header {
+  background: var(--surface);
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.hk-customer-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.hk-customer-header .hk-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.hk-customer-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hk-customer-tabs a {
+  padding: 10px 16px;
+  text-decoration: none;
+  color: var(--ink-muted);
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.hk-customer-tabs a:hover {
+  color: var(--ink);
+}
+
+.hk-customer-tabs a[aria-current="page"] {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.hk-tab-content {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* KPI grid for customer overview */
+.hk-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hk-kpi-card {
+  background: var(--surface);
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.hk-kpi-card .label {
+  font-size: 12px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.hk-kpi-card .value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.hk-kpi-card .value--danger {
+  color: var(--danger);
+}
+
+/* Field list (customer details tab) */
+.hk-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.hk-fields dt {
+  font-size: 12px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.hk-fields dd {
+  font-size: 14px;
+  color: var(--ink);
+  margin: 0;
+  word-break: break-word;
+}
+
+.hk-fields dd.empty {
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .hk-admin-nav {
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+  .hk-admin-main {
+    padding: 12px;
+  }
+  .hk-table {
+    font-size: 13px;
+  }
+  .hk-table th,
+  .hk-table td {
+    padding: 8px 10px;
+  }
+}
+
+/* Calendar week grid */
+.hk-week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.hk-week-day {
+  background: var(--surface);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+}
+
+.hk-week-day.is-today {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.hk-week-day-header {
+  padding: 10px 12px;
+  background: #f9fafb;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hk-week-day-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  flex: 1;
+}
+
+.hk-week-day-date {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.hk-week-day-count {
+  background: var(--primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  min-width: 22px;
+  text-align: center;
+}
+
+.hk-week-day.is-today .hk-week-day-count {
+  background: var(--danger);
+}
+
+.hk-week-day-events {
+  flex: 1;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.hk-week-day-empty {
+  color: var(--ink-muted);
+  font-size: 12px;
+  text-align: center;
+  padding: 16px 0;
+}
+
+.hk-week-event {
+  display: block;
+  padding: 6px 8px;
+  background: #f3f4f6;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.12s;
+  border-inline-start: 3px solid var(--primary);
+}
+
+.hk-week-event:hover {
+  background: #e5e7eb;
+}
+
+.hk-week-event-time {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.hk-week-event-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hk-week-event-room {
+  font-size: 11px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1024px) {
+  .hk-week-grid {
+    grid-template-columns: repeat(7, minmax(140px, 1fr));
+    overflow-x: auto;
   }
 }

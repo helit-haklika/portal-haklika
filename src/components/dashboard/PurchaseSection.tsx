@@ -37,7 +37,7 @@ export function PurchaseSection({ payments }: Props) {
           data={csvData}
           csvFilename="רכישות-כרטיסיות.csv"
         />
-        <table className="hk-table">
+        <table className="hk-table hk-table--stack">
           <thead>
             <tr>
               <th className="hk-table__th-day">תאריך</th>
@@ -55,11 +55,22 @@ export function PurchaseSection({ payments }: Props) {
                   <div className="hk-row__date hk-num">{p.date}</div>
                   <div className="hk-row__dow">{p.dayOfWeek}</div>
                 </td>
-                <td className="hk-table__td-desc">כרטיסיית {p.hours} שעות</td>
-                <td className="hk-table__td-num hk-num">{p.hours}</td>
-                <td className="hk-table__td-num hk-num">{p.amountPaid}</td>
-                <td className="hk-table__td-num hk-num">{p.balanceAfter}</td>
-                <td className="hk-table__td-invoice">
+                <td className="hk-table__td-desc" data-label="תיאור">
+                  כרטיסיית {p.hours} שעות
+                </td>
+                <td className="hk-table__td-num hk-num" data-label="שעות">
+                  {p.hours}
+                </td>
+                <td className="hk-table__td-num hk-num" data-label="סכום">
+                  {p.amountPaid}
+                </td>
+                <td
+                  className="hk-table__td-num hk-num"
+                  data-label="יתרה לאחר רכישה"
+                >
+                  {p.balanceAfter}
+                </td>
+                <td className="hk-table__td-invoice" data-label="חשבונית">
                   {p.invoiceUrl && (
                     <a
                       className="hk-row__invoice"

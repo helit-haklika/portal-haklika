@@ -22,7 +22,7 @@ export function ActiveSessionsSection({ sessions }: Props) {
         <div className="hk-section__count">{sessions.length} פעילות</div>
       </div>
       <div className="hk-list">
-        <table className="hk-table">
+        <table className="hk-table hk-table--stack">
           <thead>
             <tr>
               <th className="hk-table__th-day">יום</th>
@@ -39,16 +39,18 @@ export function ActiveSessionsSection({ sessions }: Props) {
                   <div className="hk-row__date">{s.dayOfWeek}</div>
                   <div className="hk-row__dow">שבועי</div>
                 </td>
-                <td className="hk-table__td-time">
+                <td className="hk-table__td-time" data-label="שעות">
                   <span className="hk-num" dir="ltr">
                     {s.startTime}-{s.endTime}
                   </span>
                 </td>
-                <td className="hk-table__td-room">{s.roomName}</td>
-                <td className="hk-table__td-num hk-num">
+                <td className="hk-table__td-room" data-label="חדר">
+                  {s.roomName}
+                </td>
+                <td className="hk-table__td-num hk-num" data-label="מחיר בסיס">
                   {s.basePriceBeforeDiscount}
                 </td>
-                <td className="hk-table__td-status">
+                <td className="hk-table__td-status" data-label="סטטוס">
                   <span className="hk-pill hk-pill--success">פעיל</span>
                 </td>
               </tr>
