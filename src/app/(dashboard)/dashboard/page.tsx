@@ -8,7 +8,7 @@ import {
   fetchActiveSessions,
   fetchSessionTransactions,
   fetchSessionPayments,
-} from "@/lib/airtable/queries";
+} from "@/lib/data";
 import { Header } from "@/components/dashboard/Header";
 import {
   KpiHero,
@@ -47,6 +47,7 @@ function getPurchaseLinks() {
 
 async function fetchDashboardData(
   customerId: string,
+  supabaseId?: string,
 ): Promise<DashboardData | null> {
   const cached = await getCachedDashboard(customerId);
   if (cached) {
@@ -55,7 +56,7 @@ async function fetchDashboardData(
     } catch {}
   }
 
-  const customer = await fetchCustomer(customerId);
+  const customer = await fetchCustomer(customerId, supabaseId);
   if (!customer) return null;
 
   const [
@@ -65,11 +66,11 @@ async function fetchDashboardData(
     sessionTransactions,
     sessionPayments,
   ] = await Promise.all([
-    fetchPunchCardPayments(customerId),
-    fetchBookings(customerId),
-    fetchActiveSessions(customerId),
-    fetchSessionTransactions(customerId),
-    fetchSessionPayments(customerId),
+    fetchPunchCardPayments(customerId, supabaseId),
+    fetchBookings(customerId, supabaseId),
+    fetchActiveSessions(customerId, supabaseId),
+    fetchSessionTransactions(customerId, supabaseId),
+    fetchSessionPayments(customerId, supabaseId),
   ]);
 
   const data: DashboardData = {
@@ -91,7 +92,7 @@ export default async function DashboardPage() {
 
   let data: DashboardData | null = null;
   try {
-    data = await fetchDashboardData(session.customerId);
+    data = await fetchDashboardData(session.customerId, session.supabaseId);
   } catch (err) {
     console.error("Dashboard fetch error:", err);
     await logError("dashboard", err, { customerId: session.customerId });

@@ -1,0 +1,50 @@
+/* Haklika customer portal — design system
+   RTL, mobile-first. All sizes assume ~390px viewport.
+   Font: Heebo loaded in layout.tsx via next/font/google */
+
+:root {
+  /* Surface & Background */
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --surface-2: #f4f2ec;
+  --border: #ece8df;
+  --border-strong: #d8d3c5;
+
+  /* Ink (Text) */
+  --ink: #1b1b1b;
+  --ink-soft: #3a3a3a;
+  --ink-muted: #6b6b6b;
+  --ink-faint: #a8a49c;
+
+  /* Brand & Semantic */
+  --primary: #1b1b1b;
+  --primary-ink: #0f0f0f;
+  --primary-soft: #efe7da;
+  --primary-tint: #f5efe6;
+  --success: #2e5a38;
+  --warning: #b86a1f;
+  --danger: #b84a3e;
+  --danger-soft: #f0bfc0;
+  --whatsapp: #25d366;
+
+  /* Lustra pastels */
+  --lustra-peach: #f5ddb8;
+  --lustra-blue: #c8d4f0;
+  --lustra-lilac: #e6d4f0;
+  --lustra-rose: #f0cfc0;
+  --lustra-fuchsia: #e8b8dc;
+  --lustra-coral: #f0bfc0;
+  --lustra-mint: #cfe4d6;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(28, 26, 18, 0.05);
+  --shadow-md: 0 6px 24px rgba(28, 26, 18, 0.08);
+  --shadow-lg: 0 16px 48px rgba(28, 26, 18, 0.14);
+  --shadow-glow: 0 0 0 4px rgba(232, 184, 220, 0.18);
+
+  /* Radii */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+}

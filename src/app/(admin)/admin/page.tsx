@@ -1,315 +1,174 @@
 import Link from "next/link";
 import {
-  readLogs,
-  readMetrics,
-  type LoginEntry,
-  type RequestLinkEntry,
-  type ErrorEntry,
-} from "@/lib/logs";
+  getDashboardKpis,
+  getNegativeBalanceCustomers,
+} from "@/lib/admin/queries";
 
-type Range = "1" | "7" | "30";
-
-function parseRange(value: string | undefined): Range {
-  if (value === "1" || value === "7" || value === "30") return value;
-  return "7";
+function formatCurrency(amount: number): string {
+  return `₪${amount.toLocaleString("he-IL")}`;
 }
 
-function formatTs(ts: number): string {
-  return new Intl.DateTimeFormat("he-IL", {
-    timeZone: "Asia/Jerusalem",
-    day: "2-digit",
-    month: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).format(new Date(ts));
-}
-
-const OUTCOME_LABELS: Record<RequestLinkEntry["outcome"], string> = {
-  sent: "נשלח",
-  "not-found": "לא נמצא",
-  inactive: "לקוח לא פעיל",
-  "rate-limited": "חסום זמנית",
-  error: "שגיאה",
-};
-
-export default async function AdminPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ range?: string }>;
-}) {
-  const params = await searchParams;
-  const range = parseRange(params.range);
-  const days = parseInt(range, 10);
-
-  const [metrics, logins, requests, errors] = await Promise.all([
-    readMetrics(days),
-    readLogs<LoginEntry>("log:login", days, 50),
-    readLogs<RequestLinkEntry>("log:request", days, 50),
-    readLogs<ErrorEntry>("log:error", days, 50),
+export default async function AdminDashboard() {
+  const [kpis, negative] = await Promise.all([
+    getDashboardKpis(),
+    getNegativeBalanceCustomers(10),
   ]);
+
+  const monthLabel = new Date().toLocaleDateString("he-IL", {
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <div>
-      <header className="hk-header" style={{ paddingBlock: 16 }}>
-        <div className="hk-header__title">
-          <h1 className="hk-header__brand">אדמין הקליקה</h1>
-          <div className="hk-header__meta">
-            <span>
-              נתונים מ-
-              {days === 1
-                ? "היום"
-                : days === 7
-                  ? "השבוע האחרון"
-                  : "30 הימים האחרונים"}
-            </span>
-          </div>
-        </div>
-        <nav style={{ display: "flex", gap: 8 }}>
-          {(["1", "7", "30"] as Range[]).map((r) => (
-            <Link
-              key={r}
-              href={`/admin?range=${r}`}
-              className="hk-iconbtn"
-              style={{
-                fontSize: 13,
-                padding: "6px 12px",
-                width: "auto",
-                height: "auto",
-                background: r === range ? "var(--primary)" : undefined,
-                color: r === range ? "white" : undefined,
-              }}
-            >
-              {r === "1" ? "היום" : `${r} ימים`}
-            </Link>
-          ))}
-        </nav>
-      </header>
+      <h1 className="hk-admin-h1">דשבורד</h1>
+      <p className="hk-admin-sub">תמונת מצב כללית • {monthLabel}</p>
 
-      <section className="hk-section">
-        <div
-          className="hk-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: 12,
-          }}
-        >
-          <MetricCard label="כניסות" value={metrics.loginsTotal} />
-          <MetricCard label="לקוחות ייחודיים" value={metrics.activeCustomers} />
-          <MetricCard
-            label="שגיאות"
-            value={errors.length}
-            danger={errors.length > 0}
-          />
-          <MetricCard
-            label="בקשות שכשלו"
-            value={requests.filter((r) => r.outcome !== "sent").length}
-            danger={requests.some((r) => r.outcome === "error")}
-          />
-        </div>
-      </section>
+      <h3
+        style={{
+          marginBottom: 10,
+          fontSize: 14,
+          color: "var(--ink-muted)",
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.04em",
+        }}
+      >
+        לקוחות
+      </h3>
+      <div className="hk-kpi-grid">
+        <KpiCard
+          label="סה״כ לקוחות"
+          value={String(kpis.totalCustomers)}
+          href="/admin/customers"
+        />
+        <KpiCard
+          label="פעילים"
+          value={String(kpis.activeCustomers)}
+          href={`/admin/customers?status=${encodeURIComponent("פעיל")}`}
+        />
+        <KpiCard
+          label="לא פעילים"
+          value={String(kpis.inactiveCustomers)}
+          href={`/admin/customers?status=${encodeURIComponent("לא פעיל")}`}
+        />
+        <KpiCard label="חדשים החודש" value={String(kpis.newThisMonth)} />
+      </div>
 
-      <section className="hk-section">
-        <div className="hk-section__head">
-          <div>
-            <div className="hk-section__title">כניסות אחרונות</div>
-            <div className="hk-section__subtitle">{logins.length} רשומות</div>
-          </div>
-        </div>
-        <div className="hk-list">
-          {logins.length === 0 ? (
-            <div style={{ padding: 16, color: "var(--ink-muted)" }}>
-              אין כניסות בטווח זה
-            </div>
-          ) : (
+      <h3
+        style={{
+          marginTop: 24,
+          marginBottom: 10,
+          fontSize: 14,
+          color: "var(--ink-muted)",
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.04em",
+        }}
+      >
+        פעילות חודשית
+      </h3>
+      <div className="hk-kpi-grid">
+        <KpiCard
+          label="הכנסות החודש"
+          value={formatCurrency(kpis.monthRevenue)}
+        />
+        <KpiCard label="שימושים החודש" value={String(kpis.bookingsThisMonth)} />
+        <KpiCard
+          label="ססיות פעילות"
+          value={String(kpis.activeSessionsCount)}
+        />
+      </div>
+
+      <h3
+        style={{
+          marginTop: 24,
+          marginBottom: 10,
+          fontSize: 14,
+          color: "var(--ink-muted)",
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.04em",
+        }}
+      >
+        טיפול נדרש
+      </h3>
+      <div className="hk-kpi-grid">
+        <KpiCard
+          label="יתרה במינוס"
+          value={String(kpis.negativeBalanceCount)}
+          danger={kpis.negativeBalanceCount > 0}
+        />
+        <KpiCard label="משימות פתוחות" value={String(kpis.pendingTasksCount)} />
+        <KpiCard label="לידים פתוחים" value={String(kpis.openLeadsCount)} />
+      </div>
+
+      {negative.length > 0 && (
+        <>
+          <h3 style={{ marginTop: 32, marginBottom: 12, fontSize: 16 }}>
+            לקוחות ביתרה שלילית
+          </h3>
+          <div className="hk-table-wrap">
             <table className="hk-table">
               <thead>
                 <tr>
-                  <th className="hk-table__th-time">זמן</th>
-                  <th>שם</th>
-                  <th>אימייל</th>
+                  <th scope="col">שם</th>
+                  <th scope="col">יתרת שעות</th>
                 </tr>
               </thead>
               <tbody>
-                {logins.map((l, i) => (
-                  <tr key={i}>
-                    <td className="hk-table__td-time hk-num" dir="ltr">
-                      {formatTs(l.ts)}
-                    </td>
-                    <td>{l.name || (l.isAdmin ? "אדמין" : "—")}</td>
-                    <td
-                      dir="ltr"
-                      style={{
-                        textAlign: "right",
-                        fontSize: 12.5,
-                        color: "var(--ink-muted)",
-                      }}
-                    >
-                      {l.email}
-                    </td>
-                  </tr>
-                ))}
+                {negative.map((c) => {
+                  const name =
+                    [c.first_name, c.last_name]
+                      .filter(Boolean)
+                      .join(" ")
+                      .trim() || "(ללא שם)";
+                  return (
+                    <tr key={c.id}>
+                      <td>
+                        <Link href={`/admin/customers/${c.id}`}>{name}</Link>
+                      </td>
+                      <td
+                        className="hk-num"
+                        style={{ color: "var(--danger)", fontWeight: 600 }}
+                      >
+                        {c.balance_hours.toFixed(2)}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
-          )}
-        </div>
-      </section>
-
-      <section className="hk-section">
-        <div className="hk-section__head">
-          <div>
-            <div className="hk-section__title">בקשות לינק</div>
-            <div className="hk-section__subtitle">{requests.length} רשומות</div>
           </div>
-        </div>
-        <div className="hk-list">
-          {requests.length === 0 ? (
-            <div style={{ padding: 16, color: "var(--ink-muted)" }}>
-              אין בקשות בטווח זה
-            </div>
-          ) : (
-            <table className="hk-table">
-              <thead>
-                <tr>
-                  <th className="hk-table__th-time">זמן</th>
-                  <th>אימייל</th>
-                  <th>סטטוס</th>
-                  <th>סיבה</th>
-                </tr>
-              </thead>
-              <tbody>
-                {requests.map((r, i) => (
-                  <tr
-                    key={i}
-                    style={{
-                      background:
-                        r.outcome === "error"
-                          ? "rgba(184,74,62,0.06)"
-                          : undefined,
-                    }}
-                  >
-                    <td className="hk-table__td-time hk-num" dir="ltr">
-                      {formatTs(r.ts)}
-                    </td>
-                    <td
-                      dir="ltr"
-                      style={{ textAlign: "right", fontSize: 12.5 }}
-                    >
-                      {r.email}
-                    </td>
-                    <td
-                      style={{
-                        fontWeight: r.outcome !== "sent" ? 600 : 400,
-                        color:
-                          r.outcome === "sent"
-                            ? "var(--primary)"
-                            : r.outcome === "error"
-                              ? "var(--danger)"
-                              : "var(--ink-muted)",
-                      }}
-                    >
-                      {OUTCOME_LABELS[r.outcome]}
-                    </td>
-                    <td style={{ fontSize: 12, color: "var(--ink-muted)" }}>
-                      {r.reason ?? ""}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </section>
-
-      <section className="hk-section">
-        <div className="hk-section__head">
-          <div>
-            <div className="hk-section__title">שגיאות מערכת</div>
-            <div className="hk-section__subtitle">{errors.length} רשומות</div>
-          </div>
-        </div>
-        <div className="hk-list">
-          {errors.length === 0 ? (
-            <div style={{ padding: 16, color: "var(--ink-muted)" }}>
-              אין שגיאות בטווח זה ✓
-            </div>
-          ) : (
-            <table className="hk-table">
-              <thead>
-                <tr>
-                  <th className="hk-table__th-time">זמן</th>
-                  <th>מקור</th>
-                  <th>הודעה</th>
-                </tr>
-              </thead>
-              <tbody>
-                {errors.map((e, i) => (
-                  <tr key={i}>
-                    <td className="hk-table__td-time hk-num" dir="ltr">
-                      {formatTs(e.ts)}
-                    </td>
-                    <td style={{ fontWeight: 600 }}>{e.source}</td>
-                    <td
-                      style={{
-                        fontSize: 12,
-                        fontFamily: "monospace",
-                        direction: "ltr",
-                        textAlign: "right",
-                      }}
-                    >
-                      {e.message}
-                      {e.context && Object.keys(e.context).length > 0 && (
-                        <div
-                          style={{ marginTop: 4, color: "var(--ink-muted)" }}
-                        >
-                          {JSON.stringify(e.context)}
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </section>
+        </>
+      )}
     </div>
   );
 }
 
-function MetricCard({
+function KpiCard({
   label,
   value,
   danger,
+  href,
 }: {
   label: string;
-  value: number;
+  value: string;
   danger?: boolean;
+  href?: string;
 }) {
-  return (
-    <div
-      className="hk-kpi"
-      style={{
-        padding: 16,
-        background: "var(--surface)",
-        borderRadius: 16,
-        border: "1px solid var(--border)",
-      }}
-    >
-      <div style={{ fontSize: 12, color: "var(--ink-muted)", marginBottom: 4 }}>
-        {label}
-      </div>
-      <div
-        className="hk-num"
-        style={{
-          fontSize: 32,
-          fontWeight: 700,
-          color: danger ? "var(--danger)" : "var(--ink)",
-        }}
-      >
-        {value}
-      </div>
+  const inner = (
+    <div className="hk-kpi-card" style={href ? { cursor: "pointer" } : {}}>
+      <div className="label">{label}</div>
+      <div className={`value ${danger ? "value--danger" : ""}`}>{value}</div>
     </div>
   );
+  if (href) {
+    return (
+      <Link href={href} style={{ textDecoration: "none" }}>
+        {inner}
+      </Link>
+    );
+  }
+  return inner;
 }

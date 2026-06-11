@@ -1,20 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@/lib/cache/kv";
-import { listRecords } from "@/lib/airtable/client";
+import { findCustomerByEmail } from "@/lib/data";
 import { createMagicToken } from "@/lib/auth/magic-link";
 import { isAdminEmail } from "@/lib/auth/admin";
 import { logRequestLink, logError } from "@/lib/logs";
-import type { CustomerFields } from "@/lib/airtable/types";
 
 const RATE_LIMIT_KEY = (ip: string) => `ratelimit:login:${ip}`;
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW = 15 * 60;
 
-const CUSTOMERS_TABLE = "tblIUoXFMdWuFldvr";
-
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_EMAIL_LENGTH = 254;
 
+// NOTE: trusting x-real-ip / x-forwarded-for is safe ONLY behind Vercel's
+// proxy, which overwrites these headers. If this app is ever self-hosted,
+// a client can spoof them and bypass the rate limit - switch to a header
+// set by the actual edge (e.g. x-vercel-forwarded-for) or the socket IP.
 function getClientIp(req: NextRequest): string {
   const realIp = req.headers.get("x-real-ip");
   if (realIp) return realIp;
@@ -63,7 +64,6 @@ export async function POST(req: NextRequest) {
   }
 
   const normalizedEmail = email.trim().toLowerCase();
-  const escapedEmail = normalizedEmail.replace(/'/g, "\\'");
 
   // Always return 200 to not reveal whether email exists
   const successResponse = NextResponse.json({ ok: true });
@@ -71,13 +71,11 @@ export async function POST(req: NextRequest) {
   const isAdmin = isAdminEmail(normalizedEmail);
 
   try {
-    const records = await listRecords<CustomerFields>(CUSTOMERS_TABLE, {
-      filterByFormula: `OR(LOWER({אימייל})='${escapedEmail}', LOWER({אימייל נוסף})='${escapedEmail}')`,
-      maxRecords: 10,
-    });
+    const records = await findCustomerByEmail(normalizedEmail);
 
     let customerId: string | null = null;
     let customerName = "";
+    let supabaseId: string | undefined;
 
     if (records.length === 0) {
       if (!isAdmin) {
@@ -91,8 +89,7 @@ export async function POST(req: NextRequest) {
       customerId = `admin:${normalizedEmail}`;
       customerName = "אדמין";
     } else {
-      const customer =
-        records.find((r) => r.fields["סטטוס לקוח"] !== "לא פעיל") ?? null;
+      const customer = records.find((r) => r.isActive) ?? null;
 
       if (!customer) {
         if (!isAdmin) {
@@ -108,8 +105,8 @@ export async function POST(req: NextRequest) {
         customerName = "אדמין";
       } else {
         customerId = customer.id;
-        customerName =
-          customer.fields["שם פרטי"] || customer.fields["שם לקוח"] || "";
+        customerName = customer.name;
+        supabaseId = customer.supabaseId;
       }
     }
 
@@ -117,8 +114,16 @@ export async function POST(req: NextRequest) {
       customerId,
       normalizedEmail,
       customerName,
+      supabaseId,
     );
     const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+    // SECURITY WARNING (hak-7): the token travels in the query string, so it
+    // lands in browser history, Vercel request logs, and the Make.com
+    // execution history (the webhook payload below includes the full link).
+    // Combined with the permanent reusable token (rule 7 in CLAUDE.md), every
+    // stored copy of this URL is a long-lived credential. Action for Uri:
+    // verify the Make scenario does not retain execution history with
+    // `magic_link`, or shorten its retention.
     const magicLink = `${appUrl}/api/auth/verify?token=${token}`;
 
     const webhookUrl = process.env.MAKE_EMAIL_WEBHOOK_URL;

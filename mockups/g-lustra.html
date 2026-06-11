@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>פורטל הקליקה - סקיצה G · Lustra Luxury</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #f5efe6;
+        --bg-soft: #efe7da;
+        --surface: #ffffff;
+        --ink: #1b1b1b;
+        --ink-muted: #6b6b6b;
+        --line: #e8e0d2;
+        --black-chip: #0f0f0f;
+        --peach: #f5ddb8;
+        --blue: #c8d4f0;
+        --lilac: #e6d4f0;
+        --rose: #f0cfc0;
+        --fuchsia: #e8b8dc;
+        --coral: #f0bfc0;
+        --mint: #cfe4d6;
+        --danger-bg: #f0bfc0;
+      }
+
+      html,
+      body {
+        background: #2a241a;
+        font-family: "Heebo", system-ui, sans-serif;
+        color: var(--ink);
+        font-feature-settings:
+          "tnum" 1,
+          "ss01" 1;
+        min-height: 100vh;
+        line-height: 1.45;
+      }
+
+      .page-intro {
+        max-width: 1900px;
+        margin: 0 auto;
+        padding: 36px 24px 12px;
+        color: #d4c8b4;
+        font-size: 13px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+      .page-intro strong {
+        color: #f5efe6;
+        font-weight: 700;
+      }
+
+      .preview-wrap {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        max-width: 1900px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      .preview-label {
+        font-size: 12px;
+        color: #a89b7e;
+        margin-bottom: 12px;
+        text-align: center;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .preview-mobile {
+        width: 375px;
+        background: var(--bg);
+        border-radius: 36px;
+        overflow: hidden;
+        box-shadow:
+          0 30px 80px rgba(0, 0, 0, 0.35),
+          0 0 0 10px #1a1611,
+          0 0 0 11px #0a0807;
+      }
+      .preview-desktop {
+        width: 1320px;
+        background: var(--bg);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow:
+          0 30px 80px rgba(0, 0, 0, 0.35),
+          0 0 0 1px rgba(255, 255, 255, 0.06);
+      }
+      @media (max-width: 1500px) {
+        .preview-desktop {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
+      /* ============ Dashboard ============ */
+      .doc {
+        padding: 22px;
+        position: relative;
+      }
+      .doc.mobile {
+        padding: 14px;
+      }
+
+      /* Header */
+      .header {
+        background: var(--bg-soft);
+        border-radius: 24px;
+        padding: 12px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .mobile .header {
+        padding: 10px 14px;
+        border-radius: 20px;
+        margin-bottom: 14px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 17px;
+        letter-spacing: -0.01em;
+      }
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--black-chip);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 14px;
+      }
+      .mobile .brand {
+        font-size: 15px;
+      }
+      .mobile .brand-mark {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+      }
+
+      .user-chip {
+        margin-inline-start: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--surface);
+        border-radius: 100px;
+        padding: 4px 14px 4px 4px;
+        border: 1px solid var(--line);
+      }
+      .user-chip .name {
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .user-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #c89490, #e8b8dc);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 12px;
+      }
+      .logout-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+      }
+      .logout-btn svg {
+        width: 15px;
+        height: 15px;
+        stroke: var(--ink);
+        stroke-width: 1.6;
+        fill: none;
+      }
+      .mobile .logout-btn {
+        width: 32px;
+        height: 32px;
+      }
+
+      /* Greeting */
+      .greet {
+        margin-bottom: 18px;
+        padding: 0 4px;
+      }
+      .greet h1 {
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .greet p {
+        font-size: 13px;
+        color: var(--ink-muted);
+        margin-top: 2px;
+      }
+      .mobile .greet h1 {
+        font-size: 20px;
+      }
+
+      /* KPI grid */
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      .mobile .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .kpi {
+        border-radius: 22px;
+        padding: 20px;
+        position: relative;
+        min-height: 140px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .mobile .kpi {
+        padding: 14px;
+        min-height: 116px;
+        border-radius: 18px;
+      }
+      .kpi-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.65);
+      }
+      .mobile .kpi-label {
+        font-size: 11px;
+      }
+      .kpi-icon {
+        position: absolute;
+        top: 18px;
+        inset-inline-end: 18px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--black-chip);
+        display: grid;
+        place-items: center;
+      }
+      .kpi-icon svg {
+        width: 14px;
+        height: 14px;
+        stroke: #fff;
+        stroke-width: 1.7;
+        fill: none;
+      }
+      .mobile .kpi-icon {
+        width: 26px;
+        height: 26px;
+        top: 12px;
+        inset-inline-end: 12px;
+      }
+      .mobile .kpi-icon svg {
+        width: 12px;
+        height: 12px;
+      }
+      .kpi-value {
+        font-size: 36px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+      .kpi-value small {
+        font-size: 16px;
+        font-weight: 700;
+        margin-inline-start: 3px;
+      }
+      .mobile .kpi-value {
+        font-size: 26px;
+      }
+      .mobile .kpi-value small {
+        font-size: 12px;
+      }
+      .kpi-foot {
+        font-size: 11px;
+        color: rgba(0, 0, 0, 0.6);
+      }
+      .kpi-foot b {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mobile .kpi-foot {
+        font-size: 10px;
+      }
+
+      .kpi.peach {
+        background: var(--peach);
+      }
+      .kpi.blue {
+        background: var(--blue);
+      }
+      .kpi.lilac {
+        background: var(--lilac);
+      }
+      .kpi.fuchsia {
+        background: var(--fuchsia);
+      }
+      .kpi.coral {
+        background: var(--coral);
+      }
+
+      /* Sections */
+      .section {
+        background: var(--bg-soft);
+        border-radius: 24px;
+        padding: 22px;
+        margin-bottom: 18px;
+      }
+      .mobile .section {
+        padding: 16px;
+        border-radius: 20px;
+        margin-bottom: 14px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .chip {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--black-chip);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+      .chip svg {
+        width: 15px;
+        height: 15px;
+        stroke: #fff;
+        stroke-width: 1.7;
+        fill: none;
+      }
+      .mobile .chip {
+        width: 30px;
+        height: 30px;
+      }
+      .mobile .chip svg {
+        width: 13px;
+        height: 13px;
+      }
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        flex: 1;
+      }
+      .mobile .section-title {
+        font-size: 14px;
+      }
+      .section-count {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink-muted);
+        background: var(--surface);
+        border-radius: 100px;
+        padding: 4px 10px;
+      }
+
+      /* List rows */
+      .row {
+        background: var(--surface);
+        border-radius: 18px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .row:last-child {
+        margin-bottom: 0;
+      }
+      .mobile .row {
+        padding: 12px 14px;
+        border-radius: 16px;
+      }
+      .row-main {
+        flex: 1;
+        min-width: 0;
+      }
+      .row-title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+      .row-sub {
+        font-size: 11px;
+        color: var(--ink-muted);
+      }
+      .row-right {
+        text-align: end;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .row-right .meta {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--ink-muted);
+        margin-top: 2px;
+      }
+      .mobile .row-title {
+        font-size: 13px;
+      }
+
+      .status-tag {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 100px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        white-space: nowrap;
+      }
+      .status-tag::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+      .tag-active {
+        background: var(--mint);
+        color: #2e5a38;
+      }
+      .tag-paid {
+        background: var(--peach);
+        color: #6b4a1f;
+      }
+      .tag-upcoming {
+        background: var(--lilac);
+        color: #523074;
+      }
+      .tag-used {
+        background: var(--bg-soft);
+        color: var(--ink-muted);
+      }
+
+      /* Purchase row with progress */
+      .pkg-row {
+        background: var(--surface);
+        border-radius: 18px;
+        padding: 14px 16px;
+        margin-bottom: 8px;
+      }
+      .pkg-row:last-child {
+        margin-bottom: 0;
+      }
+      .pkg-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .pkg-title {
+        font-size: 14px;
+        font-weight: 600;
+        flex: 1;
+      }
+      .pkg-pct {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink-muted);
+      }
+      .pkg-bar {
+        height: 8px;
+        background: var(--bg-soft);
+        border-radius: 100px;
+        overflow: hidden;
+      }
+      .pkg-fill {
+        height: 100%;
+        border-radius: 100px;
+      }
+      .fill-lilac {
+        background: linear-gradient(90deg, #c4a8e0, #e6d4f0);
+      }
+      .fill-peach {
+        background: linear-gradient(90deg, #d4a574, #f5ddb8);
+      }
+      .fill-fuchsia {
+        background: linear-gradient(90deg, #c98ab6, #e8b8dc);
+      }
+      .pkg-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        color: var(--ink-muted);
+        margin-top: 6px;
+      }
+      .pkg-meta b {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      /* Recurring payment card */
+      .recurring {
+        background: linear-gradient(135deg, var(--lilac), var(--blue));
+        border-radius: 22px;
+        padding: 22px;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .mobile .recurring {
+        padding: 16px;
+        border-radius: 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .recurring-info {
+        flex: 1;
+      }
+      .recurring-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.65);
+        margin-bottom: 4px;
+      }
+      .recurring-value {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .recurring-foot {
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.6);
+        margin-top: 2px;
+      }
+      .recurring-foot b {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .recurring-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--black-chip);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+      .recurring-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke: #fff;
+        stroke-width: 1.7;
+        fill: none;
+      }
+
+      /* Two-col bottom (active sessions + session payments) */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .mobile .two-col {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .two-col .section {
+        margin-bottom: 0;
+      }
+
+      /* WhatsApp FAB */
+      .fab {
+        position: absolute;
+        bottom: 22px;
+        inset-inline-start: 22px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #25d366;
+        display: grid;
+        place-items: center;
+        box-shadow: 0 10px 30px rgba(37, 211, 102, 0.45);
+        cursor: pointer;
+      }
+      .fab svg {
+        width: 26px;
+        height: 26px;
+        stroke: #fff;
+        stroke-width: 2;
+        fill: none;
+      }
+      .mobile .fab {
+        width: 52px;
+        height: 52px;
+        bottom: 16px;
+        inset-inline-start: 16px;
+      }
+      .mobile .fab svg {
+        width: 23px;
+        height: 23px;
+      }
+
+      .page-foot {
+        text-align: center;
+        color: #a89b7e;
+        font-size: 12px;
+        padding: 30px 24px 50px;
+      }
+      .page-foot a {
+        color: #d4c8b4;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-intro">
+      <strong>סקיצה G · Lustra Luxury Pastel</strong> · השראה: דשבורד Lustra
+      Luxury Jewellery (Behance). פלטה פסטלית · אייקונים בעיגולים שחורים · פינות
+      מעוגלות. תוכן ומבנה לפי הפורטל הקיים (KPIs · רכישות · bookings · ססיות ·
+      תשלומי ססיה).
+    </div>
+
+    <div class="preview-wrap">
+      <!-- ====== MOBILE ====== -->
+      <div>
+        <div class="preview-label">מובייל · 375px</div>
+        <div class="preview-mobile">
+          <div class="doc mobile">
+            <header class="header">
+              <div class="brand">
+                <div class="brand-mark">ה</div>
+                <span>הקליקה</span>
+              </div>
+              <button class="logout-btn" aria-label="יציאה">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M14 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-2"
+                  />
+                  <path d="m17 16 4-4-4-4M21 12H10" />
+                </svg>
+              </button>
+            </header>
+
+            <div class="greet">
+              <h1>שלום שירה</h1>
+              <p>הינה הסיכום שלך · מאי 2026</p>
+            </div>
+
+            <div class="kpi-grid">
+              <div class="kpi peach">
+                <span class="kpi-label">יתרת שעות</span>
+                <div class="kpi-icon">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 2" />
+                  </svg>
+                </div>
+                <div class="kpi-value">12.5<small>ש'</small></div>
+                <div class="kpi-foot"><b>−2.5</b> מהחודש שעבר</div>
+              </div>
+              <div class="kpi blue">
+                <span class="kpi-label">השתמשתי החודש</span>
+                <div class="kpi-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M3 12h4l3-8 4 16 3-8h4" />
+                  </svg>
+                </div>
+                <div class="kpi-value">8.5<small>ש'</small></div>
+                <div class="kpi-foot"><b>17</b> bookings החודש</div>
+              </div>
+              <div class="kpi lilac">
+                <span class="kpi-label">ססיות פעילות</span>
+                <div class="kpi-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 2 4 6v6a8 8 0 0 0 8 8 8 8 0 0 0 8-8V6z" />
+                  </svg>
+                </div>
+                <div class="kpi-value">2</div>
+                <div class="kpi-foot">עד <b>30.6.26</b></div>
+              </div>
+              <div class="kpi fuchsia">
+                <span class="kpi-label">Bookings השבוע</span>
+                <div class="kpi-icon">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="16" rx="2" />
+                    <path d="M3 9h18M8 3v4M16 3v4" />
+                  </svg>
+                </div>
+                <div class="kpi-value">3</div>
+                <div class="kpi-foot">הקרוב · <b>ב' 10:00</b></div>
+              </div>
+            </div>
+
+            <div class="recurring">
+              <div class="recurring-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 4v6h-6M3 20v-6h6" />
+                  <path
+                    d="M4 10a8 8 0 0 1 14-3l3 3M20 14a8 8 0 0 1-14 3l-3-3"
+                  />
+                </svg>
+              </div>
+              <div class="recurring-info">
+                <div class="recurring-label">תשלום חוזר חודשי</div>
+                <div class="recurring-value">₪450</div>
+                <div class="recurring-foot">חיוב הבא · <b>1.6.26</b></div>
+              </div>
+            </div>
+
+            <section class="section">
+              <div class="section-head">
+                <div class="chip">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="6" width="18" height="14" rx="2" />
+                    <path d="M3 10h18M8 6V4M16 6V4" />
+                  </svg>
+                </div>
+                <div class="section-title">היסטוריית רכישות</div>
+                <span class="section-count">3</span>
+              </div>
+              <div class="pkg-row">
+                <div class="pkg-head">
+                  <div class="pkg-title">כרטיסיה 10 שעות</div>
+                  <span class="pkg-pct">15%</span>
+                </div>
+                <div class="pkg-bar">
+                  <div class="pkg-fill fill-lilac" style="width: 15%"></div>
+                </div>
+                <div class="pkg-meta">
+                  <span>3.5.26 · <b>₪900</b></span
+                  ><span>12 ימים נותרו</span>
+                </div>
+              </div>
+              <div class="pkg-row">
+                <div class="pkg-head">
+                  <div class="pkg-title">כרטיסיה 20 שעות</div>
+                  <span class="pkg-pct">100%</span>
+                </div>
+                <div class="pkg-bar">
+                  <div class="pkg-fill fill-peach" style="width: 100%"></div>
+                </div>
+                <div class="pkg-meta">
+                  <span>1.3.26 · <b>₪1,700</b></span
+                  ><span>נסגר 30.4.26</span>
+                </div>
+              </div>
+              <div class="pkg-row">
+                <div class="pkg-head">
+                  <div class="pkg-title">כרטיסיה 10 שעות</div>
+                  <span class="pkg-pct">100%</span>
+                </div>
+                <div class="pkg-bar">
+                  <div class="pkg-fill fill-fuchsia" style="width: 100%"></div>
+                </div>
+                <div class="pkg-meta">
+                  <span>12.1.26 · <b>₪900</b></span
+                  ><span>נסגר 28.2.26</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div class="chip">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="16" rx="2" />
+                    <path d="M3 9h18M8 3v4M16 3v4" />
+                  </svg>
+                </div>
+                <div class="section-title">Bookings השבוע</div>
+                <span class="section-count">3</span>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">חדר טיפולים 2</div>
+                  <div class="row-sub">יום ב' 18.5 · 10:00-11:00</div>
+                </div>
+                <span class="status-tag tag-upcoming">קרוב</span>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">חדר טיפולים 1</div>
+                  <div class="row-sub">יום ד' 20.5 · 14:00-15:00</div>
+                </div>
+                <span class="status-tag tag-active">השבוע</span>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">חדר טיפולים 3</div>
+                  <div class="row-sub">יום ו' 22.5 · 09:00-10:30</div>
+                </div>
+                <span class="status-tag tag-active">השבוע</span>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div class="chip">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 2 4 6v6a8 8 0 0 0 8 8 8 8 0 0 0 8-8V6z" />
+                  </svg>
+                </div>
+                <div class="section-title">ססיות פעילות</div>
+                <span class="section-count">2</span>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">ססיה #S-2026-05</div>
+                  <div class="row-sub">נפתחה 1.5.26 · נסגרת 30.6.26</div>
+                </div>
+                <span class="status-tag tag-active">פעיל</span>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">ססיה #S-2026-04</div>
+                  <div class="row-sub">נפתחה 1.4.26 · נסגרת 31.5.26</div>
+                </div>
+                <span class="status-tag tag-active">פעיל</span>
+              </div>
+            </section>
+
+            <section class="section" style="margin-bottom: 90px">
+              <div class="section-head">
+                <div class="chip">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="6" width="18" height="12" rx="2" />
+                    <path d="M3 10h18" />
+                  </svg>
+                </div>
+                <div class="section-title">תשלומי ססיה</div>
+                <span class="section-count">2</span>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">תשלום מאי</div>
+                  <div class="row-sub">2.5.26 · אשראי</div>
+                </div>
+                <div class="row-right">
+                  ₪450
+                  <div class="meta">
+                    <span class="status-tag tag-paid">שולם</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">תשלום אפריל</div>
+                  <div class="row-sub">2.4.26 · אשראי</div>
+                </div>
+                <div class="row-right">
+                  ₪450
+                  <div class="meta">
+                    <span class="status-tag tag-paid">שולם</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <button class="fab" aria-label="ווטסאפ">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 21l1.5-5A9 9 0 1 1 8 19.5L3 21z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== DESKTOP ====== -->
+      <div>
+        <div class="preview-label">דסקטופ · 1320px</div>
+        <div class="preview-desktop">
+          <div class="doc">
+            <header class="header">
+              <div class="brand">
+                <div class="brand-mark">ה</div>
+                <span>הקליקה</span>
+              </div>
+              <div class="user-chip">
+                <span class="name">שירה כהן</span>
+                <div class="user-avatar">ש</div>
+              </div>
+              <button class="logout-btn" aria-label="יציאה">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M14 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-2"
+                  />
+                  <path d="m17 16 4-4-4-4M21 12H10" />
+                </svg>
+              </button>
+            </header>
+
+            <div class="greet">
+              <h1>שלום שירה</h1>
+              <p>הינה הסיכום שלך · מאי 2026</p>
+            </div>
+
+            <div class="kpi-grid">
+              <div class="kpi peach">
+                <span class="kpi-label">יתרת שעות</span>
+                <div class="kpi-icon">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 2" />
+                  </svg>
+                </div>
+                <div class="kpi-value">12.5<small> שעות</small></div>
+                <div class="kpi-foot"><b>−2.5</b> מהחודש שעבר</div>
+              </div>
+              <div class="kpi blue">
+                <span class="kpi-label">כמה השתמשתי החודש? (כרטיסיות)</span>
+                <div class="kpi-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M3 12h4l3-8 4 16 3-8h4" />
+                  </svg>
+                </div>
+                <div class="kpi-value">8.5<small> שעות</small></div>
+                <div class="kpi-foot"><b>17</b> bookings החודש</div>
+              </div>
+              <div class="kpi lilac">
+                <span class="kpi-label">ססיות פעילות</span>
+                <div class="kpi-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 2 4 6v6a8 8 0 0 0 8 8 8 8 0 0 0 8-8V6z" />
+                  </svg>
+                </div>
+                <div class="kpi-value">2</div>
+                <div class="kpi-foot">הקרובה נסגרת ב-<b>30.6.26</b></div>
+              </div>
+              <div class="kpi fuchsia">
+                <span class="kpi-label">Bookings השבוע</span>
+                <div class="kpi-icon">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="16" rx="2" />
+                    <path d="M3 9h18M8 3v4M16 3v4" />
+                  </svg>
+                </div>
+                <div class="kpi-value">3</div>
+                <div class="kpi-foot">הקרוב · <b>יום ב' 10:00</b></div>
+              </div>
+            </div>
+
+            <div class="recurring">
+              <div class="recurring-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 4v6h-6M3 20v-6h6" />
+                  <path
+                    d="M4 10a8 8 0 0 1 14-3l3 3M20 14a8 8 0 0 1-14 3l-3-3"
+                  />
+                </svg>
+              </div>
+              <div class="recurring-info">
+                <div class="recurring-label">תשלום חוזר חודשי</div>
+                <div class="recurring-value">₪450 / חודש</div>
+                <div class="recurring-foot">
+                  חיוב הבא · <b>1.6.26</b> · אשראי בסיומה 4242
+                </div>
+              </div>
+            </div>
+
+            <section class="section">
+              <div class="section-head">
+                <div class="chip">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="6" width="18" height="14" rx="2" />
+                    <path d="M3 10h18M8 6V4M16 6V4" />
+                  </svg>
+                </div>
+                <div class="section-title">היסטוריית רכישות כרטיסיות</div>
+                <span class="section-count">3 רכישות</span>
+              </div>
+              <div class="pkg-row">
+                <div class="pkg-head">
+                  <div class="pkg-title">כרטיסיה 10 שעות</div>
+                  <span class="pkg-pct">15% נוצל</span>
+                </div>
+                <div class="pkg-bar">
+                  <div class="pkg-fill fill-lilac" style="width: 15%"></div>
+                </div>
+                <div class="pkg-meta">
+                  <span>נרכש 3.5.26 · <b>₪900</b></span
+                  ><span>פעיל · 12 ימים נותרו</span>
+                </div>
+              </div>
+              <div class="pkg-row">
+                <div class="pkg-head">
+                  <div class="pkg-title">כרטיסיה 20 שעות</div>
+                  <span class="pkg-pct">100% נוצל</span>
+                </div>
+                <div class="pkg-bar">
+                  <div class="pkg-fill fill-peach" style="width: 100%"></div>
+                </div>
+                <div class="pkg-meta">
+                  <span>נרכש 1.3.26 · <b>₪1,700</b></span
+                  ><span>נסגר 30.4.26</span>
+                </div>
+              </div>
+              <div class="pkg-row">
+                <div class="pkg-head">
+                  <div class="pkg-title">כרטיסיה 10 שעות</div>
+                  <span class="pkg-pct">100% נוצל</span>
+                </div>
+                <div class="pkg-bar">
+                  <div class="pkg-fill fill-fuchsia" style="width: 100%"></div>
+                </div>
+                <div class="pkg-meta">
+                  <span>נרכש 12.1.26 · <b>₪900</b></span
+                  ><span>נסגר 28.2.26</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div class="chip">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="16" rx="2" />
+                    <path d="M3 9h18M8 3v4M16 3v4" />
+                  </svg>
+                </div>
+                <div class="section-title">Bookings השבוע</div>
+                <span class="section-count">3 השבוע</span>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">חדר טיפולים 2 · 60 דקות</div>
+                  <div class="row-sub">יום ב' 18.5.26 · 10:00-11:00</div>
+                </div>
+                <span class="status-tag tag-upcoming">קרוב</span>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">חדר טיפולים 1 · 60 דקות</div>
+                  <div class="row-sub">יום ד' 20.5.26 · 14:00-15:00</div>
+                </div>
+                <span class="status-tag tag-active">השבוע</span>
+              </div>
+              <div class="row">
+                <div class="row-main">
+                  <div class="row-title">חדר טיפולים 3 · 90 דקות</div>
+                  <div class="row-sub">יום ו' 22.5.26 · 09:00-10:30</div>
+                </div>
+                <span class="status-tag tag-active">השבוע</span>
+              </div>
+            </section>
+
+            <div class="two-col">
+              <section class="section">
+                <div class="section-head">
+                  <div class="chip">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 2 4 6v6a8 8 0 0 0 8 8 8 8 0 0 0 8-8V6z" />
+                    </svg>
+                  </div>
+                  <div class="section-title">ססיות פעילות</div>
+                  <span class="section-count">2</span>
+                </div>
+                <div class="row">
+                  <div class="row-main">
+                    <div class="row-title">ססיה #S-2026-05</div>
+                    <div class="row-sub">נפתחה 1.5.26 · נסגרת 30.6.26</div>
+                  </div>
+                  <span class="status-tag tag-active">פעיל</span>
+                </div>
+                <div class="row">
+                  <div class="row-main">
+                    <div class="row-title">ססיה #S-2026-04</div>
+                    <div class="row-sub">נפתחה 1.4.26 · נסגרת 31.5.26</div>
+                  </div>
+                  <span class="status-tag tag-active">פעיל</span>
+                </div>
+              </section>
+
+              <section class="section">
+                <div class="section-head">
+                  <div class="chip">
+                    <svg viewBox="0 0 24 24">
+                      <rect x="3" y="6" width="18" height="12" rx="2" />
+                      <path d="M3 10h18" />
+                    </svg>
+                  </div>
+                  <div class="section-title">תשלומי ססיה</div>
+                  <span class="section-count">2 תשלומים</span>
+                </div>
+                <div class="row">
+                  <div class="row-main">
+                    <div class="row-title">תשלום מאי 2026</div>
+                    <div class="row-sub">2.5.26 · אשראי 4242</div>
+                  </div>
+                  <div class="row-right">
+                    ₪450
+                    <div class="meta">
+                      <span class="status-tag tag-paid">שולם</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="row-main">
+                    <div class="row-title">תשלום אפריל 2026</div>
+                    <div class="row-sub">2.4.26 · אשראי 4242</div>
+                  </div>
+                  <div class="row-right">
+                    ₪450
+                    <div class="meta">
+                      <span class="status-tag tag-paid">שולם</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <button class="fab" aria-label="ווטסאפ">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 21l1.5-5A9 9 0 1 1 8 19.5L3 21z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-foot">
+      Lustra Luxury Pastel · Heebo · בחזרה אל
+      <a href="index.html">גלריית הסקיצות</a>
+    </div>
+  </body>
+</html>

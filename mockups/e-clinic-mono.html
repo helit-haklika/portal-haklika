@@ -1,0 +1,1721 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>// HAKLIKA / CLINIC MONO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Heebo:wght@300;400;700&display=swap"
+    />
+    <style>
+      /* ============================================================
+     CLINIC MONO  //  brutalist clinical terminal
+     palette  //  bone, ink, vermilion
+     ============================================================ */
+
+      :root {
+        --bone: #ece9e2;
+        --ink: #0a0907;
+        --soft: #3a3833;
+        --muted: #737065;
+        --accent: #e54827;
+        --bord: #0a0907;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        background: var(--bone);
+        color: var(--ink);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 1.45;
+        font-variant-numeric: tabular-nums slashed-zero;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        padding: 32px 24px 96px;
+      }
+
+      /* heebo only on hebrew strings */
+      .he {
+        font-family: "Heebo", system-ui, sans-serif;
+        font-weight: 300;
+        letter-spacing: 0.02em;
+      }
+      .he-b {
+        font-family: "Heebo", system-ui, sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      /* ascii divider rule */
+      .rule {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        overflow: hidden;
+        white-space: nowrap;
+        user-select: none;
+      }
+      .rule-vermilion {
+        color: var(--accent);
+      }
+
+      /* page-load wipe */
+      @keyframes wipe {
+        from {
+          clip-path: inset(0 100% 0 0);
+        }
+        to {
+          clip-path: inset(0 0 0 0);
+        }
+      }
+      .section {
+        animation: wipe 50ms steps(8) both;
+      }
+
+      /* ============================================================
+     page chrome  //  side-by-side frames
+     ============================================================ */
+
+      .page-head {
+        max-width: 1640px;
+        margin: 0 auto 40px;
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 16px;
+      }
+      .page-head h1 {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .page-head h1 .slash {
+        color: var(--accent);
+      }
+      .page-head p {
+        margin-top: 6px;
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .frames {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 48px;
+        max-width: 1640px;
+        margin: 0 auto;
+        align-items: start;
+      }
+      @media (max-width: 1280px) {
+        .frames {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .frame {
+        position: relative;
+      }
+      .frame-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-bottom: 10px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid var(--ink);
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+      .frame-label .meta {
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      /* ============================================================
+     desktop frame  //  1440 scaled to fit
+     ============================================================ */
+
+      .desktop-wrap {
+        width: 100%;
+        border: 2px solid var(--ink);
+        background: var(--bone);
+        overflow: hidden;
+      }
+      .desktop-inner {
+        width: 1440px;
+        transform-origin: top right;
+        transform: scale(calc((100vw - 530px) / 1440));
+        /* fallback: visual scale via wrapper width math */
+      }
+      /* prefer a stable scale on wide layouts */
+      @media (min-width: 1680px) {
+        .desktop-inner {
+          transform: scale(0.78);
+        }
+      }
+      @media (min-width: 1280px) and (max-width: 1679px) {
+        .desktop-inner {
+          transform: scale(0.62);
+        }
+      }
+      @media (max-width: 1279px) {
+        .desktop-inner {
+          transform: scale(0.58);
+        }
+      }
+      .desktop-shell {
+        height: 0;
+      }
+      /* compute height after scale via padding hack — use fixed bounded heights below */
+      .desktop-bound {
+        height: 1640px; /* native rendered height before scale */
+      }
+      .desktop-wrap {
+        /* container reserves vertical room based on scaled content */
+      }
+
+      /* ============================================================
+     ATOMS  //  brutalist primitives
+     ============================================================ */
+
+      .topbar {
+        background: var(--ink);
+        color: var(--bone);
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding: 0 24px;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--ink);
+      }
+      .topbar .brand {
+        font-weight: 700;
+        letter-spacing: 0.18em;
+      }
+      .topbar .slash {
+        color: var(--accent);
+        padding: 0 10px;
+      }
+      .topbar .name-he {
+        font-family: "Heebo", sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: none;
+        font-size: 13px;
+      }
+      .topbar .ts {
+        color: #b6b1a4;
+      }
+      .topbar .chips {
+        margin-right: auto;
+        display: flex;
+        gap: 10px;
+      }
+      .chip {
+        border: 1px solid var(--bone);
+        padding: 4px 8px;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+      }
+      .chip.active {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .nav {
+        border-bottom: 1px solid var(--ink);
+        display: flex;
+        gap: 0;
+        padding: 0 24px;
+        background: var(--bone);
+      }
+      .nav a {
+        display: inline-block;
+        padding: 14px 22px;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink);
+        text-decoration: none;
+        border-left: 1px solid var(--ink);
+        position: relative;
+      }
+      .nav a:first-child {
+        border-right: 1px solid var(--ink);
+      }
+      .nav a.on {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .nav a.on::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        height: 2px;
+        background: var(--accent);
+      }
+      .nav .ix {
+        color: var(--muted);
+        margin-left: 6px;
+      }
+      .nav a.on .ix {
+        color: var(--accent);
+      }
+
+      .container {
+        padding: 28px 24px;
+      }
+
+      .sec-label {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink);
+        margin: 0 0 14px;
+        font-weight: 500;
+      }
+      .sec-label .dim {
+        color: var(--muted);
+      }
+      .sec-label .ax {
+        color: var(--accent);
+      }
+
+      /* KPI terminal card */
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        border: 2px solid var(--ink);
+        background: var(--bone);
+      }
+      .kpi {
+        padding: 24px 22px 18px;
+        border-left: 1px solid var(--ink);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        min-height: 196px;
+      }
+      .kpi:first-child {
+        border-left: none;
+      }
+      .kpi-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .kpi-head .ix {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .kpi-label-he {
+        font-family: "Heebo", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.04em;
+        color: var(--soft);
+        margin-top: -4px;
+      }
+      .kpi-num {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 300;
+        font-size: 56px;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        line-height: 1;
+        margin-top: auto;
+      }
+      .kpi-num.hero {
+        color: var(--accent);
+        letter-spacing: 0.04em;
+        font-weight: 500;
+      }
+      .kpi-num .unit {
+        font-size: 14px;
+        letter-spacing: 0.18em;
+        color: var(--muted);
+        font-weight: 400;
+        margin-right: 8px;
+      }
+      .kpi-foot {
+        border-top: 1px solid var(--ink);
+        padding-top: 10px;
+        margin-top: 4px;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: var(--muted);
+        text-transform: uppercase;
+        display: flex;
+        justify-content: space-between;
+      }
+      .kpi-foot .delta {
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      /* table */
+      .tbl {
+        width: 100%;
+        border-collapse: collapse;
+        border: 2px solid var(--ink);
+        background: var(--bone);
+        font-size: 12px;
+      }
+      .tbl thead th {
+        text-align: right;
+        padding: 10px 14px;
+        border-bottom: 2px solid var(--ink);
+        font-weight: 500;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .tbl thead th:not(:first-child) {
+        border-right: 1px solid var(--ink);
+      }
+      .tbl tbody td {
+        padding: 11px 14px;
+        border-bottom: 1px solid var(--ink);
+        vertical-align: middle;
+      }
+      .tbl tbody td:not(:first-child) {
+        border-right: 1px solid var(--ink);
+      }
+      .tbl tbody tr:last-child td {
+        border-bottom: none;
+      }
+      .tbl tbody tr {
+        border-right: 2px solid transparent;
+      }
+      .tbl tbody tr:hover {
+        border-right-color: var(--accent);
+      }
+      .tbl tbody tr:hover td {
+        background: transparent;
+      }
+      .tbl .num {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 500;
+      }
+      .tbl .mono-sm {
+        font-size: 11px;
+        letter-spacing: 0.06em;
+      }
+      .tbl .he-cell {
+        font-family: "Heebo", sans-serif;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+      }
+
+      /* status pills */
+      .pill {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        border: 1px solid var(--ink);
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .pill.ok {
+        border-color: var(--ink);
+        color: var(--ink);
+      }
+      .pill.live {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .pill.dim {
+        color: var(--muted);
+        border-color: var(--muted);
+      }
+
+      /* session line */
+      .sess {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 18px;
+        border: 2px solid var(--ink);
+        border-bottom: none;
+        font-size: 12px;
+      }
+      .sess:last-child {
+        border-bottom: 2px solid var(--ink);
+      }
+      .sess .pill {
+        flex-shrink: 0;
+      }
+      .sess .ttl {
+        font-family: "Heebo", sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        font-size: 14px;
+      }
+      .sess .meta {
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .sess .sep {
+        color: var(--ink);
+        padding: 0 4px;
+      }
+      .sess .price {
+        margin-right: auto;
+        font-weight: 500;
+        font-size: 13px;
+        letter-spacing: 0.04em;
+      }
+      .sess .price .unit {
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 0.18em;
+      }
+
+      .gap {
+        height: 32px;
+      }
+      .gap-sm {
+        height: 18px;
+      }
+
+      /* footer */
+      .foot {
+        margin-top: 28px;
+        border-top: 2px solid var(--ink);
+        padding-top: 14px;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .foot .ax {
+        color: var(--accent);
+      }
+
+      /* ============================================================
+     MOBILE FRAME  //  375
+     ============================================================ */
+
+      .mobile-wrap {
+        width: 375px;
+        border: 2px solid var(--ink);
+        background: var(--bone);
+        margin-left: auto;
+        position: relative;
+        overflow: hidden;
+      }
+      @media (max-width: 1279px) {
+        .mobile-wrap {
+          margin: 0 auto;
+        }
+      }
+
+      .m-topbar {
+        background: var(--ink);
+        color: var(--bone);
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .m-topbar .row1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .m-topbar .brand {
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        font-size: 11px;
+      }
+      .m-topbar .burger {
+        border: 1px solid var(--bone);
+        padding: 2px 8px;
+        font-size: 12px;
+        line-height: 1;
+      }
+      .m-topbar .row2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #b6b1a4;
+      }
+      .m-topbar .row2 .name-he {
+        font-family: "Heebo", sans-serif;
+        font-weight: 700;
+        text-transform: none;
+        color: var(--bone);
+        font-size: 12px;
+        letter-spacing: 0.02em;
+      }
+      .m-topbar .row3 {
+        display: flex;
+        gap: 6px;
+      }
+      .m-topbar .row3 .chip {
+        padding: 2px 6px;
+        font-size: 9px;
+      }
+
+      .m-nav {
+        display: flex;
+        border-bottom: 1px solid var(--ink);
+      }
+      .m-nav a {
+        flex: 1;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: var(--ink);
+        text-decoration: none;
+        border-left: 1px solid var(--ink);
+        position: relative;
+      }
+      .m-nav a:first-child {
+        border-right: 1px solid var(--ink);
+      }
+      .m-nav a.on {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .m-nav a.on::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        height: 2px;
+        background: var(--accent);
+      }
+
+      .m-body {
+        padding: 18px 14px 80px;
+      }
+
+      .m-sec {
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        margin: 22px 0 10px;
+        color: var(--ink);
+        font-weight: 500;
+      }
+      .m-sec .dim {
+        color: var(--muted);
+      }
+      .m-sec:first-child {
+        margin-top: 0;
+      }
+
+      .m-kpi {
+        border: 2px solid var(--ink);
+        padding: 18px 16px 14px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .m-kpi-head {
+        display: flex;
+        justify-content: space-between;
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .m-kpi-head .ix {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .m-kpi-label-he {
+        font-family: "Heebo", sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        color: var(--soft);
+        margin-top: -2px;
+      }
+      .m-kpi-num {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 300;
+        font-size: 38px;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        line-height: 1;
+      }
+      .m-kpi-num.hero {
+        color: var(--accent);
+        letter-spacing: 0.04em;
+        font-weight: 500;
+      }
+      .m-kpi-num .unit {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        color: var(--muted);
+        margin-right: 6px;
+      }
+      .m-kpi-foot {
+        border-top: 1px solid var(--ink);
+        padding-top: 8px;
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+      }
+      .m-kpi-foot .delta {
+        color: var(--ink);
+      }
+
+      /* mobile row-cards (table replacement) */
+      .m-row {
+        border: 1px solid var(--ink);
+        border-bottom: none;
+        padding: 12px 14px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 4px 12px;
+        font-size: 11px;
+      }
+      .m-row:last-of-type {
+        border-bottom: 1px solid var(--ink);
+      }
+      .m-row .k {
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .m-row .v {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 500;
+        text-align: left;
+        letter-spacing: 0.02em;
+      }
+      .m-row .v.he {
+        font-family: "Heebo", sans-serif;
+        font-weight: 400;
+        text-align: left;
+      }
+      .m-row .head {
+        grid-column: 1 / -1;
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: 8px;
+        margin-bottom: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .m-row .head .date {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        font-size: 12px;
+      }
+      .m-row .head .type {
+        font-family: "Heebo", sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.02em;
+      }
+
+      /* mobile session */
+      .m-sess {
+        border: 1px solid var(--ink);
+        border-bottom: none;
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .m-sess:last-of-type {
+        border-bottom: 1px solid var(--ink);
+      }
+      .m-sess .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .m-sess .ttl {
+        font-family: "Heebo", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+      }
+      .m-sess .meta {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .m-sess .meta .sep {
+        color: var(--ink);
+        padding: 0 3px;
+      }
+      .m-sess .price {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+      }
+
+      /* mobile bottom strip */
+      .m-strip {
+        position: sticky;
+        bottom: 0;
+        background: var(--ink);
+        color: var(--accent);
+        padding: 12px 14px;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        border-top: 2px solid var(--accent);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .m-strip .dim {
+        color: #b6b1a4;
+      }
+
+      /* mobile menu overlay (static for mockup) */
+      .m-menu {
+        position: absolute;
+        top: 78px;
+        right: 0;
+        width: 200px;
+        background: var(--bone);
+        border: 2px solid var(--ink);
+        border-right: none;
+        z-index: 5;
+        display: none; /* hidden by default — flip on .open if desired */
+      }
+      .m-menu.open {
+        display: block;
+      }
+      .m-menu .h {
+        background: var(--ink);
+        color: var(--bone);
+        padding: 8px 12px;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .m-menu a {
+        display: block;
+        padding: 10px 14px;
+        border-top: 1px solid var(--ink);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink);
+        text-decoration: none;
+      }
+      .m-menu a.on {
+        color: var(--accent);
+      }
+
+      .m-foot {
+        margin-top: 18px;
+        padding-top: 10px;
+        border-top: 2px solid var(--ink);
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .m-foot .ax {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+    <header class="page-head">
+      <h1>
+        // HAKLIKA <span class="slash">/</span> CLINIC MONO
+        <span class="slash">//</span> MOCKUP E
+      </h1>
+      <p>
+        brutalist clinical terminal &nbsp;//&nbsp; mobile 375 &nbsp;+&nbsp;
+        desktop 1440 &nbsp;//&nbsp; static preview
+      </p>
+    </header>
+
+    <div class="frames">
+      <!-- ============================================================
+         DESKTOP FRAME  // 1440
+         ============================================================ -->
+      <div class="frame">
+        <div class="frame-label">
+          <span>// DESKTOP <span style="color: var(--accent)">1440</span></span>
+          <span class="meta"
+            >VIEWPORT 1440 × native &nbsp;//&nbsp; scaled to fit</span
+          >
+        </div>
+
+        <div class="desktop-wrap">
+          <div class="desktop-inner">
+            <!-- TOPBAR -->
+            <div class="topbar section" style="animation-delay: 0ms">
+              <span class="brand">HAKLIKA</span>
+              <span class="slash">/</span>
+              <span>ACCOUNT</span>
+              <span class="slash">//</span>
+              <span class="name-he">רחל כהן</span>
+              <span class="slash">//</span>
+              <span class="ts">14/05/26 &nbsp; 09:32</span>
+              <div class="chips">
+                <span class="chip">CACHE: 60s</span>
+                <span class="chip">UID: C-00417</span>
+                <span class="chip active">STATUS: ACTIVE</span>
+              </div>
+            </div>
+
+            <!-- NAV -->
+            <nav class="nav section" style="animation-delay: 60ms">
+              <a class="on" href="#"><span class="ix">[01]</span> OVERVIEW</a>
+              <a href="#"><span class="ix">[02]</span> BOOKINGS</a>
+              <a href="#"><span class="ix">[03]</span> PAYMENTS</a>
+              <a href="#"><span class="ix">[04]</span> SESSIONS</a>
+              <a
+                href="#"
+                style="
+                  margin-right: auto;
+                  border-left: none;
+                  border-right: 1px solid var(--ink);
+                  color: var(--muted);
+                "
+                ><span class="ix">[ESC]</span> LOGOUT</a
+              >
+            </nav>
+
+            <div class="container">
+              <!-- SECTION 01 -->
+              <div class="section" style="animation-delay: 120ms">
+                <div class="sec-label">
+                  // SECTION 01 <span class="dim">—</span> BALANCE
+                  <span class="dim">/ READ-ONLY</span>
+                </div>
+                <div class="kpi-grid">
+                  <div class="kpi">
+                    <div class="kpi-head">
+                      <span
+                        ><span class="ix">[01]</span> &nbsp; HOURS
+                        REMAINING</span
+                      >
+                      <span>HRS</span>
+                    </div>
+                    <div class="kpi-label-he">יתרת שעות בכרטיסייה</div>
+                    <div class="kpi-num hero">
+                      +&nbsp;1&nbsp;4&nbsp;.&nbsp;0&nbsp;0
+                    </div>
+                    <div class="kpi-foot">
+                      <span class="delta">// Δ +2 FROM LAST MO</span>
+                      <span>UPD 14/05 09:31</span>
+                    </div>
+                  </div>
+
+                  <div class="kpi">
+                    <div class="kpi-head">
+                      <span
+                        ><span class="ix">[02]</span> &nbsp; USED THIS
+                        MONTH</span
+                      >
+                      <span>HRS</span>
+                    </div>
+                    <div class="kpi-label-he">השתמשתי החודש</div>
+                    <div class="kpi-num">
+                      08.00 <span class="unit">/ 22.00</span>
+                    </div>
+                    <div class="kpi-foot">
+                      <span class="delta">// 36% OF QUOTA</span>
+                      <span>WINDOW 01–14/05</span>
+                    </div>
+                  </div>
+
+                  <div class="kpi">
+                    <div class="kpi-head">
+                      <span
+                        ><span class="ix">[03]</span> &nbsp; RECURRING
+                        DEBIT</span
+                      >
+                      <span>ILS</span>
+                    </div>
+                    <div class="kpi-label-he">תשלום חודשי קבוע</div>
+                    <div class="kpi-num">
+                      ₪&nbsp;1,240<span class="unit">/MO</span>
+                    </div>
+                    <div class="kpi-foot">
+                      <span class="delta">// NEXT 01/06/26</span>
+                      <span>METHOD VISA •0417</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="gap"></div>
+
+              <!-- ASCII RULE  // the vermilion one -->
+              <div
+                class="rule rule-vermilion section"
+                style="animation-delay: 160ms"
+              >
+                ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+              </div>
+
+              <div class="gap-sm"></div>
+
+              <!-- SECTION 02  // BOOKINGS -->
+              <div class="section" style="animation-delay: 200ms">
+                <div class="sec-label">
+                  // SECTION 02 <span class="dim">—</span> BOOKINGS LOG
+                  <span class="dim">/ 12 RECORDS / SORT: DESC</span>
+                </div>
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th style="width: 90px">// DATE</th>
+                      <th style="width: 80px">TIME</th>
+                      <th style="width: 80px">ROOM</th>
+                      <th>TYPE</th>
+                      <th style="width: 80px">HRS</th>
+                      <th style="width: 110px">STATUS</th>
+                      <th style="width: 100px">REF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="num">12/05/26</td>
+                      <td class="num">16:00</td>
+                      <td class="num mono-sm">RM-05</td>
+                      <td class="he-cell">ייעוץ זוגי</td>
+                      <td class="num">1.50</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1142</td>
+                    </tr>
+                    <tr>
+                      <td class="num">11/05/26</td>
+                      <td class="num">10:00</td>
+                      <td class="num mono-sm">RM-02</td>
+                      <td class="he-cell">טיפול CBT</td>
+                      <td class="num">1.00</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1138</td>
+                    </tr>
+                    <tr>
+                      <td class="num">08/05/26</td>
+                      <td class="num">18:00</td>
+                      <td class="num mono-sm">RM-07</td>
+                      <td class="he-cell">קבוצת תמיכה</td>
+                      <td class="num">2.00</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1131</td>
+                    </tr>
+                    <tr>
+                      <td class="num">05/05/26</td>
+                      <td class="num">16:00</td>
+                      <td class="num mono-sm">RM-05</td>
+                      <td class="he-cell">ייעוץ זוגי</td>
+                      <td class="num">1.50</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1124</td>
+                    </tr>
+                    <tr>
+                      <td class="num">04/05/26</td>
+                      <td class="num">10:00</td>
+                      <td class="num mono-sm">RM-02</td>
+                      <td class="he-cell">טיפול CBT</td>
+                      <td class="num">1.00</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1120</td>
+                    </tr>
+                    <tr>
+                      <td class="num">28/04/26</td>
+                      <td class="num">09:00</td>
+                      <td class="num mono-sm">RM-01</td>
+                      <td class="he-cell">הערכה אבחונית</td>
+                      <td class="num">2.00</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1108</td>
+                    </tr>
+                    <tr>
+                      <td class="num">21/04/26</td>
+                      <td class="num">14:00</td>
+                      <td class="num mono-sm">RM-03</td>
+                      <td class="he-cell">ייעוץ אישי</td>
+                      <td class="num">1.00</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1099</td>
+                    </tr>
+                    <tr>
+                      <td class="num">14/04/26</td>
+                      <td class="num">16:00</td>
+                      <td class="num mono-sm">RM-05</td>
+                      <td class="he-cell">ייעוץ זוגי</td>
+                      <td class="num">1.50</td>
+                      <td><span class="pill dim">CANCELLED</span></td>
+                      <td class="num mono-sm">BK-1088</td>
+                    </tr>
+                    <tr>
+                      <td class="num">07/04/26</td>
+                      <td class="num">10:00</td>
+                      <td class="num mono-sm">RM-02</td>
+                      <td class="he-cell">טיפול CBT</td>
+                      <td class="num">1.00</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1077</td>
+                    </tr>
+                    <tr>
+                      <td class="num">24/03/26</td>
+                      <td class="num">11:00</td>
+                      <td class="num mono-sm">RM-04</td>
+                      <td class="he-cell">טיפול קצר</td>
+                      <td class="num">1.00</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1054</td>
+                    </tr>
+                    <tr>
+                      <td class="num">10/03/26</td>
+                      <td class="num">15:00</td>
+                      <td class="num mono-sm">RM-06</td>
+                      <td class="he-cell">ייעוץ אישי</td>
+                      <td class="num">1.00</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-1031</td>
+                    </tr>
+                    <tr>
+                      <td class="num">02/02/26</td>
+                      <td class="num">09:00</td>
+                      <td class="num mono-sm">RM-01</td>
+                      <td class="he-cell">הערכה אבחונית</td>
+                      <td class="num">2.00</td>
+                      <td><span class="pill ok">CONFIRMED</span></td>
+                      <td class="num mono-sm">BK-0987</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="gap"></div>
+
+              <!-- ASCII rule -->
+              <div class="rule section" style="animation-delay: 240ms">
+                ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+              </div>
+
+              <div class="gap-sm"></div>
+
+              <!-- SECTION 03  // PAYMENTS -->
+              <div class="section" style="animation-delay: 280ms">
+                <div class="sec-label">
+                  // SECTION 03 <span class="dim">—</span> PAYMENTS
+                  <span class="dim">/ PUNCH-CARD PURCHASES / 8 RECORDS</span>
+                </div>
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th style="width: 100px">// DATE</th>
+                      <th>METHOD</th>
+                      <th>PACKAGE</th>
+                      <th style="width: 120px">AMOUNT</th>
+                      <th style="width: 100px">STATUS</th>
+                      <th style="width: 120px">INVOICE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="num">01/05/26</td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="he-cell">כרטיסייה 4 שעות</td>
+                      <td class="num">₪ &nbsp; 1,640</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">INV-2026-0418</td>
+                    </tr>
+                    <tr>
+                      <td class="num">01/04/26</td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="he-cell">כרטיסייה 4 שעות</td>
+                      <td class="num">₪ &nbsp; 1,640</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">INV-2026-0312</td>
+                    </tr>
+                    <tr>
+                      <td class="num">01/03/26</td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="he-cell">כרטיסייה 6 שעות</td>
+                      <td class="num">₪ &nbsp; 2,460</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">INV-2026-0218</td>
+                    </tr>
+                    <tr>
+                      <td class="num">01/02/26</td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="he-cell">כרטיסייה 2 שעות</td>
+                      <td class="num">₪ &nbsp; &nbsp; 820</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">INV-2026-0144</td>
+                    </tr>
+                    <tr>
+                      <td class="num">15/01/26</td>
+                      <td class="num mono-sm">העברה בנקאית</td>
+                      <td class="he-cell">כרטיסייה 1 שעה</td>
+                      <td class="num">₪ &nbsp; &nbsp; 410</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">INV-2026-0091</td>
+                    </tr>
+                    <tr>
+                      <td class="num">01/01/26</td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="he-cell">כרטיסייה 4 שעות</td>
+                      <td class="num">₪ &nbsp; 1,640</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">INV-2026-0007</td>
+                    </tr>
+                    <tr>
+                      <td class="num">20/12/25</td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="he-cell">כרטיסייה 1 שעה</td>
+                      <td class="num">₪ &nbsp; &nbsp; 410</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">INV-2025-1188</td>
+                    </tr>
+                    <tr>
+                      <td class="num">02/12/25</td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="he-cell">כרטיסייה 1 שעה</td>
+                      <td class="num">₪ &nbsp; &nbsp; 410</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">INV-2025-1101</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="gap"></div>
+
+              <!-- SECTION 04  // ACTIVE SESSIONS -->
+              <div class="section" style="animation-delay: 320ms">
+                <div class="sec-label">
+                  // SECTION 04 <span class="dim">—</span> ACTIVE SESSIONS
+                  <span class="dim">/ 3 RUNNING / RECURRING</span>
+                </div>
+
+                <div class="sess">
+                  <span class="pill live">[ACTIVE]</span>
+                  <span class="ttl">ייעוץ זוגי שבועי</span>
+                  <span class="sep">//</span>
+                  <span class="meta">יום ב' &nbsp;·&nbsp; 16:00</span>
+                  <span class="sep">//</span>
+                  <span class="meta">RM-05</span>
+                  <span class="sep">//</span>
+                  <span class="meta">SES-441 &nbsp;·&nbsp; SINCE 14/01/26</span>
+                  <span class="price"
+                    >₪&nbsp;410<span class="unit">&nbsp;/ SESS</span></span
+                  >
+                </div>
+
+                <div class="sess">
+                  <span class="pill live">[ACTIVE]</span>
+                  <span class="ttl">טיפול CBT</span>
+                  <span class="sep">//</span>
+                  <span class="meta">יום ד' &nbsp;·&nbsp; 10:00</span>
+                  <span class="sep">//</span>
+                  <span class="meta">RM-02</span>
+                  <span class="sep">//</span>
+                  <span class="meta">SES-456 &nbsp;·&nbsp; SINCE 04/02/26</span>
+                  <span class="price"
+                    >₪&nbsp;380<span class="unit">&nbsp;/ SESS</span></span
+                  >
+                </div>
+
+                <div class="sess">
+                  <span class="pill live">[ACTIVE]</span>
+                  <span class="ttl">קבוצת תמיכה</span>
+                  <span class="sep">//</span>
+                  <span class="meta">יום ה' &nbsp;·&nbsp; 18:00</span>
+                  <span class="sep">//</span>
+                  <span class="meta">RM-07</span>
+                  <span class="sep">//</span>
+                  <span class="meta">SES-472 &nbsp;·&nbsp; SINCE 18/03/26</span>
+                  <span class="price"
+                    >₪&nbsp;320<span class="unit">&nbsp;/ SESS</span></span
+                  >
+                </div>
+              </div>
+
+              <div class="gap"></div>
+
+              <!-- SECTION 05  // SESSION PAYMENTS -->
+              <div class="section" style="animation-delay: 360ms">
+                <div class="sec-label">
+                  // SECTION 05 <span class="dim">—</span> SESSION PAYMENTS
+                  <span class="dim">/ 4 RECORDS</span>
+                </div>
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th style="width: 100px">// DATE</th>
+                      <th>SESSION</th>
+                      <th style="width: 120px">METHOD</th>
+                      <th style="width: 120px">AMOUNT</th>
+                      <th style="width: 100px">STATUS</th>
+                      <th style="width: 120px">REF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="num">12/05/26</td>
+                      <td class="he-cell">
+                        ייעוץ זוגי שבועי &nbsp;<span
+                          style="
+                            color: var(--muted);
+                            font-family: &quot;JetBrains Mono&quot;;
+                            font-size: 10px;
+                            letter-spacing: 0.1em;
+                          "
+                          >SES-441</span
+                        >
+                      </td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="num">₪ &nbsp; &nbsp; 410</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">TX-44182</td>
+                    </tr>
+                    <tr>
+                      <td class="num">11/05/26</td>
+                      <td class="he-cell">
+                        טיפול CBT &nbsp;<span
+                          style="
+                            color: var(--muted);
+                            font-family: &quot;JetBrains Mono&quot;;
+                            font-size: 10px;
+                            letter-spacing: 0.1em;
+                          "
+                          >SES-456</span
+                        >
+                      </td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="num">₪ &nbsp; &nbsp; 380</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">TX-44170</td>
+                    </tr>
+                    <tr>
+                      <td class="num">08/05/26</td>
+                      <td class="he-cell">
+                        קבוצת תמיכה &nbsp;<span
+                          style="
+                            color: var(--muted);
+                            font-family: &quot;JetBrains Mono&quot;;
+                            font-size: 10px;
+                            letter-spacing: 0.1em;
+                          "
+                          >SES-472</span
+                        >
+                      </td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="num">₪ &nbsp; &nbsp; 320</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">TX-44144</td>
+                    </tr>
+                    <tr>
+                      <td class="num">05/05/26</td>
+                      <td class="he-cell">
+                        ייעוץ זוגי שבועי &nbsp;<span
+                          style="
+                            color: var(--muted);
+                            font-family: &quot;JetBrains Mono&quot;;
+                            font-size: 10px;
+                            letter-spacing: 0.1em;
+                          "
+                          >SES-441</span
+                        >
+                      </td>
+                      <td class="num mono-sm">VISA •0417</td>
+                      <td class="num">₪ &nbsp; &nbsp; 410</td>
+                      <td><span class="pill ok">PAID</span></td>
+                      <td class="num mono-sm">TX-44091</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- FOOTER -->
+              <div class="foot section" style="animation-delay: 400ms">
+                <span>// END OF RECORD</span>
+                <span>TOTAL PAID YTD <span class="ax">₪ 8,940</span></span>
+                <span>GENERATED 14/05/26 &nbsp; 09:32:14</span>
+                <span>HAKLIKA / PORTAL v1.0.0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+         MOBILE FRAME // 375
+         ============================================================ -->
+      <div class="frame">
+        <div class="frame-label">
+          <span>// MOBILE <span style="color: var(--accent)">375</span></span>
+          <span class="meta">native scale</span>
+        </div>
+
+        <div class="mobile-wrap">
+          <!-- TOPBAR -->
+          <div class="m-topbar section" style="animation-delay: 0ms">
+            <div class="row1">
+              <span class="brand"
+                >HAKLIKA
+                <span style="color: var(--accent)">/</span> ACCOUNT</span
+              >
+              <span class="burger">≡</span>
+            </div>
+            <div class="row2">
+              <span class="name-he">רחל כהן</span>
+              <span>14/05/26 &nbsp; 09:32</span>
+            </div>
+            <div class="row3">
+              <span class="chip">CACHE: 60s</span>
+              <span
+                class="chip"
+                style="border-color: var(--accent); color: var(--accent)"
+                >ACTIVE</span
+              >
+            </div>
+          </div>
+
+          <!-- NAV -->
+          <nav class="m-nav section" style="animation-delay: 40ms">
+            <a class="on" href="#">[01] OV</a>
+            <a href="#">[02] BK</a>
+            <a href="#">[03] PY</a>
+            <a href="#">[04] SS</a>
+          </nav>
+
+          <div class="m-body">
+            <!-- SECTION 01 -->
+            <div class="m-sec section" style="animation-delay: 80ms">
+              // 01 <span class="dim">—</span> BALANCE
+            </div>
+
+            <div class="m-kpi section" style="animation-delay: 100ms">
+              <div class="m-kpi-head">
+                <span>[01] HOURS REMAINING</span><span>HRS</span>
+              </div>
+              <div class="m-kpi-label-he">יתרת שעות בכרטיסייה</div>
+              <div class="m-kpi-num hero">
+                +&nbsp;1&nbsp;4&nbsp;.&nbsp;0&nbsp;0
+              </div>
+              <div class="m-kpi-foot">
+                <span class="delta">// Δ +2 FROM LAST MO</span>
+                <span>UPD 09:31</span>
+              </div>
+            </div>
+
+            <div class="m-kpi section" style="animation-delay: 130ms">
+              <div class="m-kpi-head">
+                <span>[02] USED THIS MONTH</span><span>HRS</span>
+              </div>
+              <div class="m-kpi-label-he">השתמשתי החודש</div>
+              <div class="m-kpi-num">
+                08.00 <span class="unit">/ 22.00</span>
+              </div>
+              <div class="m-kpi-foot">
+                <span class="delta">// 36% OF QUOTA</span>
+                <span>01–14/05</span>
+              </div>
+            </div>
+
+            <div class="m-kpi section" style="animation-delay: 160ms">
+              <div class="m-kpi-head">
+                <span>[03] RECURRING DEBIT</span><span>ILS</span>
+              </div>
+              <div class="m-kpi-label-he">תשלום חודשי קבוע</div>
+              <div class="m-kpi-num">
+                ₪&nbsp;1,240<span class="unit">/MO</span>
+              </div>
+              <div class="m-kpi-foot">
+                <span class="delta">// NEXT 01/06/26</span>
+                <span>VISA •0417</span>
+              </div>
+            </div>
+
+            <!-- ASCII rule -->
+            <div
+              class="rule rule-vermilion section"
+              style="animation-delay: 190ms; margin-top: 18px; font-size: 11px"
+            >
+              ══════════════════════════════════════
+            </div>
+
+            <!-- BOOKINGS -->
+            <div class="m-sec section" style="animation-delay: 220ms">
+              // 02 <span class="dim">—</span> BOOKINGS
+              <span class="dim">/ 12</span>
+            </div>
+
+            <div class="m-row section" style="animation-delay: 240ms">
+              <div class="head">
+                <span class="date">12/05/26 · 16:00</span
+                ><span class="type">ייעוץ זוגי</span>
+              </div>
+              <span class="k">ROOM</span><span class="v">RM-05</span>
+              <span class="k">HRS</span><span class="v">1.50</span>
+              <span class="k">STATUS</span><span class="v">CONFIRMED</span>
+              <span class="k">REF</span><span class="v">BK-1142</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">11/05/26 · 10:00</span
+                ><span class="type">טיפול CBT</span>
+              </div>
+              <span class="k">ROOM</span><span class="v">RM-02</span>
+              <span class="k">HRS</span><span class="v">1.00</span>
+              <span class="k">STATUS</span><span class="v">CONFIRMED</span>
+              <span class="k">REF</span><span class="v">BK-1138</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">08/05/26 · 18:00</span
+                ><span class="type">קבוצת תמיכה</span>
+              </div>
+              <span class="k">ROOM</span><span class="v">RM-07</span>
+              <span class="k">HRS</span><span class="v">2.00</span>
+              <span class="k">STATUS</span><span class="v">CONFIRMED</span>
+              <span class="k">REF</span><span class="v">BK-1131</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">05/05/26 · 16:00</span
+                ><span class="type">ייעוץ זוגי</span>
+              </div>
+              <span class="k">ROOM</span><span class="v">RM-05</span>
+              <span class="k">HRS</span><span class="v">1.50</span>
+              <span class="k">STATUS</span><span class="v">CONFIRMED</span>
+              <span class="k">REF</span><span class="v">BK-1124</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">04/05/26 · 10:00</span
+                ><span class="type">טיפול CBT</span>
+              </div>
+              <span class="k">ROOM</span><span class="v">RM-02</span>
+              <span class="k">HRS</span><span class="v">1.00</span>
+              <span class="k">STATUS</span><span class="v">CONFIRMED</span>
+              <span class="k">REF</span><span class="v">BK-1120</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">14/04/26 · 16:00</span
+                ><span class="type">ייעוץ זוגי</span>
+              </div>
+              <span class="k">ROOM</span><span class="v">RM-05</span>
+              <span class="k">HRS</span><span class="v">1.50</span>
+              <span class="k">STATUS</span
+              ><span class="v" style="color: var(--muted)">CANCELLED</span>
+              <span class="k">REF</span><span class="v">BK-1088</span>
+            </div>
+
+            <!-- PAYMENTS -->
+            <div class="m-sec">
+              // 03 <span class="dim">—</span> PAYMENTS
+              <span class="dim">/ 8</span>
+            </div>
+
+            <div class="m-row">
+              <div class="head">
+                <span class="date">01/05/26</span
+                ><span class="type">כרטיסייה 4 שעות</span>
+              </div>
+              <span class="k">METHOD</span><span class="v">VISA •0417</span>
+              <span class="k">AMOUNT</span><span class="v">₪ 1,640</span>
+              <span class="k">STATUS</span><span class="v">PAID</span>
+              <span class="k">INV</span><span class="v">INV-2026-0418</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">01/04/26</span
+                ><span class="type">כרטיסייה 4 שעות</span>
+              </div>
+              <span class="k">METHOD</span><span class="v">VISA •0417</span>
+              <span class="k">AMOUNT</span><span class="v">₪ 1,640</span>
+              <span class="k">STATUS</span><span class="v">PAID</span>
+              <span class="k">INV</span><span class="v">INV-2026-0312</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">01/03/26</span
+                ><span class="type">כרטיסייה 6 שעות</span>
+              </div>
+              <span class="k">METHOD</span><span class="v">VISA •0417</span>
+              <span class="k">AMOUNT</span><span class="v">₪ 2,460</span>
+              <span class="k">STATUS</span><span class="v">PAID</span>
+              <span class="k">INV</span><span class="v">INV-2026-0218</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">01/02/26</span
+                ><span class="type">כרטיסייה 2 שעות</span>
+              </div>
+              <span class="k">METHOD</span><span class="v">VISA •0417</span>
+              <span class="k">AMOUNT</span><span class="v">₪ &nbsp;820</span>
+              <span class="k">STATUS</span><span class="v">PAID</span>
+              <span class="k">INV</span><span class="v">INV-2026-0144</span>
+            </div>
+
+            <!-- SESSIONS -->
+            <div class="m-sec">
+              // 04 <span class="dim">—</span> ACTIVE SESSIONS
+              <span class="dim">/ 3</span>
+            </div>
+
+            <div class="m-sess">
+              <div class="top">
+                <span class="pill live">[ACTIVE]</span>
+                <span class="price">₪ 410</span>
+              </div>
+              <span class="ttl">ייעוץ זוגי שבועי</span>
+              <span class="meta"
+                >יום ב' <span class="sep">·</span> 16:00
+                <span class="sep">//</span> RM-05
+                <span class="sep">//</span> SES-441</span
+              >
+            </div>
+
+            <div class="m-sess">
+              <div class="top">
+                <span class="pill live">[ACTIVE]</span>
+                <span class="price">₪ 380</span>
+              </div>
+              <span class="ttl">טיפול CBT</span>
+              <span class="meta"
+                >יום ד' <span class="sep">·</span> 10:00
+                <span class="sep">//</span> RM-02
+                <span class="sep">//</span> SES-456</span
+              >
+            </div>
+
+            <div class="m-sess">
+              <div class="top">
+                <span class="pill live">[ACTIVE]</span>
+                <span class="price">₪ 320</span>
+              </div>
+              <span class="ttl">קבוצת תמיכה</span>
+              <span class="meta"
+                >יום ה' <span class="sep">·</span> 18:00
+                <span class="sep">//</span> RM-07
+                <span class="sep">//</span> SES-472</span
+              >
+            </div>
+
+            <!-- SESSION PAYMENTS -->
+            <div class="m-sec">
+              // 05 <span class="dim">—</span> SESS. PAYMENTS
+              <span class="dim">/ 4</span>
+            </div>
+
+            <div class="m-row">
+              <div class="head">
+                <span class="date">12/05/26</span
+                ><span class="type">ייעוץ זוגי</span>
+              </div>
+              <span class="k">SESSION</span><span class="v">SES-441</span>
+              <span class="k">AMOUNT</span><span class="v">₪ 410</span>
+              <span class="k">STATUS</span><span class="v">PAID</span>
+              <span class="k">REF</span><span class="v">TX-44182</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">11/05/26</span
+                ><span class="type">טיפול CBT</span>
+              </div>
+              <span class="k">SESSION</span><span class="v">SES-456</span>
+              <span class="k">AMOUNT</span><span class="v">₪ 380</span>
+              <span class="k">STATUS</span><span class="v">PAID</span>
+              <span class="k">REF</span><span class="v">TX-44170</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">08/05/26</span
+                ><span class="type">קבוצת תמיכה</span>
+              </div>
+              <span class="k">SESSION</span><span class="v">SES-472</span>
+              <span class="k">AMOUNT</span><span class="v">₪ 320</span>
+              <span class="k">STATUS</span><span class="v">PAID</span>
+              <span class="k">REF</span><span class="v">TX-44144</span>
+            </div>
+            <div class="m-row">
+              <div class="head">
+                <span class="date">05/05/26</span
+                ><span class="type">ייעוץ זוגי</span>
+              </div>
+              <span class="k">SESSION</span><span class="v">SES-441</span>
+              <span class="k">AMOUNT</span><span class="v">₪ 410</span>
+              <span class="k">STATUS</span><span class="v">PAID</span>
+              <span class="k">REF</span><span class="v">TX-44091</span>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="m-foot">
+              <div>// END OF RECORD</div>
+              <div>TOTAL YTD <span class="ax">₪ 8,940</span></div>
+              <div>GEN 14/05/26 &nbsp; 09:32:14</div>
+              <div>HAKLIKA / PORTAL v1.0.0</div>
+            </div>
+          </div>
+
+          <!-- STICKY BOTTOM STRIP -->
+          <div class="m-strip">
+            <span>[14.00 HRS REMAINING]</span>
+            <span class="dim">// LIVE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

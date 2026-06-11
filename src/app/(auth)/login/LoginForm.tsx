@@ -77,9 +77,14 @@ export default function LoginForm({
             disabled={loading}
           />
         </div>
-        {error && (
-          <div className="text-[var(--danger)] text-sm mb-4 px-1">{error}</div>
-        )}
+        {/* aria-live: screen readers announce the error when it appears */}
+        <div role="alert" aria-live="polite">
+          {error && (
+            <div className="text-[var(--danger)] text-sm mb-4 px-1">
+              {error}
+            </div>
+          )}
+        </div>
         <button className="hk-btn" type="submit" disabled={loading}>
           {loading ? "שולחים..." : "שלחו לי לינק כניסה"}
         </button>

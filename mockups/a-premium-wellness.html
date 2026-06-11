@@ -1,0 +1,2256 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>הקליקה - Premium Wellness Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #faf6ed;
+        --bg-warm: #f5efe0;
+        --surface: #ffffff;
+        --surface-2: #fefdf6;
+        --primary: #1f4842;
+        --primary-ink: #0e2925;
+        --primary-soft: #e9efed;
+        --accent: #d4a574;
+        --accent-soft: #f1e4d0;
+        --ink: #1c1a12;
+        --ink-muted: #706c60;
+        --line: #e8e2d2;
+        --success: #4a7c59;
+        --danger: #b84a3e;
+        --radius-sm: 12px;
+        --radius: 20px;
+        --radius-lg: 28px;
+        --shadow-sm:
+          0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(31, 72, 66, 0.04);
+        --shadow:
+          0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(31, 72, 66, 0.06);
+        --shadow-lg:
+          0 2px 6px rgba(0, 0, 0, 0.04), 0 18px 48px rgba(31, 72, 66, 0.1);
+        --font-display: "Frank Ruhl Libre", "Heebo", Georgia, serif;
+        --font-body: "Heebo", system-ui, -apple-system, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: #ebe5d5;
+        color: var(--ink);
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+        font-feature-settings:
+          "tnum" 1,
+          "ss01" 1;
+      }
+      body {
+        padding: 32px 24px 64px;
+        min-height: 100vh;
+      }
+
+      /* PREVIEW WRAPPER ----------------------------------------- */
+      .preview-wrap {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 48px;
+        align-items: flex-start;
+        justify-content: center;
+        max-width: 1900px;
+        margin: 0 auto;
+      }
+      .preview-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .preview-label {
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.04em;
+        color: #3a3a35;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.6);
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* Mobile frame */
+      .preview-mobile {
+        width: 375px;
+        height: 812px;
+        background: var(--bg);
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow:
+          var(--shadow-lg),
+          0 0 0 10px #1c1a12,
+          0 0 0 11px #2a261c;
+        position: relative;
+      }
+      .preview-mobile .device-scroll {
+        height: 100%;
+        overflow-y: auto;
+        scrollbar-width: none;
+      }
+      .preview-mobile .device-scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Desktop frame - scale down to fit */
+      .preview-desktop-wrap {
+        width: 1080px;
+        height: 760px;
+        background: var(--bg);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+      }
+      .preview-desktop {
+        width: 1440px;
+        height: 1013px;
+        transform: scale(0.75);
+        transform-origin: top right;
+        background: var(--bg);
+      }
+
+      /* SVG noise filter - subtle texture */
+      .grain {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.5;
+        mix-blend-mode: multiply;
+      }
+
+      /* MOBILE STYLES ============================================ */
+      .m-header {
+        position: sticky;
+        top: 0;
+        background: rgba(250, 246, 237, 0.85);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        padding: 14px 18px 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid rgba(232, 226, 210, 0.6);
+        z-index: 10;
+      }
+      .m-header .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .m-header .name {
+        flex: 1;
+        min-width: 0;
+      }
+      .m-header .name .hi {
+        font-size: 11px;
+        color: var(--ink-muted);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+      .m-header .name .who {
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: 15px;
+        color: var(--primary-ink);
+        line-height: 1.2;
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .m-header .pill {
+        background: var(--primary);
+        color: #fff;
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .m-content {
+        padding: 20px 18px 110px;
+      }
+
+      .hero-card {
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        padding: 24px 22px 22px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 18px;
+        border: 1px solid var(--line);
+      }
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), var(--primary) 60%);
+      }
+      .hero-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink-muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .hero-label svg {
+        width: 14px;
+        height: 14px;
+      }
+      .hero-num {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 56px;
+        line-height: 0.95;
+        color: var(--primary);
+        margin-top: 10px;
+        letter-spacing: -0.02em;
+      }
+      .hero-num .unit {
+        font-size: 22px;
+        font-weight: 500;
+        color: var(--primary-ink);
+        margin-right: 6px;
+        letter-spacing: 0;
+      }
+      .hero-sub {
+        font-size: 13px;
+        color: var(--ink-muted);
+        margin-top: 6px;
+      }
+      .hero-spark {
+        margin-top: 14px;
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+      }
+      .hero-spark svg {
+        flex: 1;
+        height: 42px;
+      }
+      .hero-trend {
+        font-size: 12px;
+        color: var(--success);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .mini-kpi {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 16px 14px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--line);
+      }
+      .mini-kpi .label {
+        font-size: 11px;
+        color: var(--ink-muted);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+      .mini-kpi .icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        background: var(--primary-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      .mini-kpi .icon.warm {
+        background: var(--accent-soft);
+      }
+      .mini-kpi .icon svg {
+        width: 16px;
+        height: 16px;
+        color: var(--primary);
+      }
+      .mini-kpi .icon.warm svg {
+        color: #9a6f3a;
+      }
+      .mini-kpi .val {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--primary-ink);
+        margin-top: 6px;
+        line-height: 1;
+      }
+      .mini-kpi .val .small {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink-muted);
+      }
+
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin: 6px 2px 12px;
+      }
+      .section-head h2 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--primary-ink);
+        letter-spacing: -0.01em;
+      }
+      .section-head .meta {
+        font-size: 11px;
+        color: var(--ink-muted);
+        font-weight: 500;
+      }
+
+      .card-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .row-card {
+        background: var(--surface);
+        border-radius: 18px;
+        padding: 14px 16px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        border: 1px solid var(--line);
+        position: relative;
+        min-height: 60px;
+      }
+      .row-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 18px;
+        width: 36px;
+        height: 2px;
+        background: var(--accent);
+        border-radius: 0 0 4px 4px;
+      }
+      .row-card .date {
+        text-align: center;
+        flex-shrink: 0;
+        width: 42px;
+      }
+      .row-card .date .d {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--primary-ink);
+        line-height: 1;
+      }
+      .row-card .date .day {
+        font-size: 10px;
+        color: var(--ink-muted);
+        font-weight: 600;
+        margin-top: 2px;
+        letter-spacing: 0.04em;
+      }
+      .row-card .room {
+        flex: 1;
+        min-width: 0;
+      }
+      .row-card .room .name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--primary-ink);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .row-card .room .time {
+        font-size: 11px;
+        color: var(--ink-muted);
+        margin-top: 3px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .row-card .room .time svg {
+        width: 11px;
+        height: 11px;
+      }
+      .row-card .hours {
+        flex-shrink: 0;
+        text-align: left;
+      }
+      .row-card .hours .n {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--primary);
+        line-height: 1;
+      }
+      .row-card .hours .u {
+        font-size: 10px;
+        color: var(--ink-muted);
+        font-weight: 500;
+        margin-top: 2px;
+      }
+      .row-card.pay .amount .n {
+        color: var(--primary);
+      }
+      .row-card.pay::before {
+        background: var(--primary);
+      }
+
+      .session-card {
+        background: var(--surface);
+        border-radius: 18px;
+        padding: 16px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .session-card .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 0 4px rgba(74, 124, 89, 0.15);
+        flex-shrink: 0;
+      }
+      .session-card .info {
+        flex: 1;
+      }
+      .session-card .info .t {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--primary-ink);
+      }
+      .session-card .info .s {
+        font-size: 11px;
+        color: var(--ink-muted);
+        margin-top: 3px;
+      }
+      .session-card .badge {
+        background: var(--primary-soft);
+        color: var(--primary);
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      /* Bottom nav mobile */
+      .m-bottomnav {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-top: 1px solid var(--line);
+        padding: 10px 18px calc(10px + env(safe-area-inset-bottom, 0)) 18px;
+        display: flex;
+        justify-content: space-around;
+        z-index: 20;
+      }
+      .m-bottomnav .tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 16px;
+        min-width: 64px;
+        min-height: 48px;
+        color: var(--ink-muted);
+        font-size: 11px;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 12px;
+        transition: all 0.2s;
+      }
+      .m-bottomnav .tab.active {
+        color: var(--primary);
+        background: var(--primary-soft);
+      }
+      .m-bottomnav .tab svg {
+        width: 20px;
+        height: 20px;
+      }
+      .m-bottomnav .tab .lbl {
+        font-weight: 600;
+      }
+
+      /* WhatsApp FAB mobile */
+      .fab {
+        position: absolute;
+        bottom: 88px;
+        left: 16px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #25d366;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow:
+          0 8px 24px rgba(37, 211, 102, 0.4),
+          0 2px 6px rgba(0, 0, 0, 0.1);
+        z-index: 15;
+      }
+      .fab svg {
+        width: 28px;
+        height: 28px;
+        color: #fff;
+      }
+
+      /* DESKTOP STYLES ============================================ */
+      .d-layout {
+        display: flex;
+        flex-direction: row-reverse;
+        min-height: 1013px;
+        background: var(--bg);
+      }
+
+      /* RTL: sidebar visually on LEFT means it's "after" in flow.
+     Using flex row-reverse, .d-sidebar comes second => visually LEFT */
+      .d-main {
+        flex: 1;
+        padding: 48px 56px 64px;
+      }
+      .d-sidebar {
+        width: 360px;
+        background: var(--surface);
+        border-left: 1px solid var(--line);
+        padding: 36px 32px;
+        position: sticky;
+        top: 0;
+        height: 1013px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .d-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--line);
+      }
+      .d-brand .logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .d-brand .name {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--primary-ink);
+      }
+      .d-brand .sub {
+        font-size: 11px;
+        color: var(--ink-muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-top: 2px;
+        font-weight: 600;
+      }
+
+      .d-customer {
+        padding: 6px 0 4px;
+      }
+      .d-customer .hi {
+        font-size: 12px;
+        color: var(--ink-muted);
+        font-weight: 500;
+        letter-spacing: 0.04em;
+      }
+      .d-customer .who {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--primary-ink);
+        margin-top: 4px;
+        letter-spacing: -0.01em;
+      }
+      .d-customer .since {
+        font-size: 11px;
+        color: var(--ink-muted);
+        margin-top: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .d-customer .since svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      .d-hero {
+        background: linear-gradient(
+          160deg,
+          #234f49 0%,
+          #1f4842 50%,
+          #173934 100%
+        );
+        border-radius: var(--radius-lg);
+        padding: 28px 26px 24px;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 12px 32px rgba(31, 72, 66, 0.2);
+      }
+      .d-hero::before {
+        content: "";
+        position: absolute;
+        top: -30px;
+        left: -30px;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(212, 165, 116, 0.18),
+          transparent 70%
+        );
+      }
+      .d-hero .lbl {
+        font-size: 11px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        position: relative;
+      }
+      .d-hero .lbl svg {
+        width: 14px;
+        height: 14px;
+        color: var(--accent);
+      }
+      .d-hero .num {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 72px;
+        line-height: 0.9;
+        margin-top: 14px;
+        letter-spacing: -0.03em;
+        position: relative;
+      }
+      .d-hero .num .unit {
+        font-size: 24px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.75);
+        margin-right: 8px;
+        letter-spacing: 0;
+      }
+      .d-hero .spark {
+        margin-top: 18px;
+        position: relative;
+      }
+      .d-hero .spark svg {
+        width: 100%;
+        height: 54px;
+      }
+      .d-hero .trend {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--accent);
+        font-weight: 600;
+        margin-top: 10px;
+        position: relative;
+      }
+      .d-hero .trend svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .d-mini-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .d-mini {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 16px 14px;
+      }
+      .d-mini .icn {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        background: var(--primary-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+      }
+      .d-mini .icn.warm {
+        background: var(--accent-soft);
+        color: #9a6f3a;
+      }
+      .d-mini .icn svg {
+        width: 15px;
+        height: 15px;
+      }
+      .d-mini .lbl {
+        font-size: 11px;
+        color: var(--ink-muted);
+        font-weight: 500;
+        margin-top: 10px;
+      }
+      .d-mini .val {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--primary-ink);
+        margin-top: 4px;
+        line-height: 1;
+      }
+      .d-mini .val .s {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink-muted);
+      }
+
+      .d-actions {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+      }
+      .d-action-title {
+        font-size: 11px;
+        color: var(--ink-muted);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .d-action {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        text-decoration: none;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+      .d-action:hover {
+        background: var(--primary-soft);
+        border-color: transparent;
+      }
+      .d-action .icn {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        border: 1px solid var(--line);
+      }
+      .d-action svg.icn-svg {
+        width: 15px;
+        height: 15px;
+      }
+      .d-action .ar {
+        margin-right: auto;
+        color: var(--ink-muted);
+      }
+      .d-action.wa {
+        background: #25d366;
+        color: #fff;
+        border-color: #25d366;
+        font-weight: 600;
+      }
+      .d-action.wa .icn {
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        color: #fff;
+      }
+      .d-action.wa .ar {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      /* Main content */
+      .d-page-head {
+        margin-bottom: 36px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+      .d-page-head .crumb {
+        font-size: 12px;
+        color: var(--ink-muted);
+        letter-spacing: 0.06em;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .d-page-head h1 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 38px;
+        color: var(--primary-ink);
+        margin-top: 8px;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .d-page-head .updated {
+        font-size: 12px;
+        color: var(--ink-muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .d-page-head .updated svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .d-section {
+        margin-bottom: 48px;
+      }
+      .d-section-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .d-section-head h2 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--primary-ink);
+        letter-spacing: -0.01em;
+      }
+      .d-section-head .meta {
+        font-size: 12px;
+        color: var(--ink-muted);
+      }
+      .d-section-head .meta strong {
+        color: var(--primary-ink);
+        font-weight: 600;
+      }
+
+      .d-table-wrap {
+        background: var(--surface);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+        overflow: hidden;
+      }
+      table.d-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      table.d-table thead th {
+        text-align: right;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink-muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 16px 20px;
+        background: var(--surface-2);
+        border-bottom: 1px solid var(--line);
+      }
+      table.d-table thead th:last-child {
+        text-align: left;
+      }
+      table.d-table tbody td {
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--line);
+        color: var(--ink);
+      }
+      table.d-table tbody tr:nth-child(even) td {
+        background: var(--surface-2);
+      }
+      table.d-table tbody tr:hover td {
+        background: rgba(31, 72, 66, 0.04);
+      }
+      table.d-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+      table.d-table .date-cell {
+        font-weight: 600;
+        color: var(--primary-ink);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      table.d-table .date-cell .day-chip {
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 7px;
+        border-radius: 6px;
+      }
+      table.d-table .room-cell {
+        font-weight: 500;
+      }
+      table.d-table .room-cell .desc {
+        font-size: 12px;
+        color: var(--ink-muted);
+        font-weight: 400;
+        margin-top: 2px;
+      }
+      table.d-table .time-cell {
+        color: var(--ink-muted);
+        font-size: 13px;
+      }
+      table.d-table .hours-cell {
+        text-align: left;
+        font-family: var(--font-display);
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 16px;
+      }
+      table.d-table .amount-cell {
+        text-align: left;
+        font-family: var(--font-display);
+        font-weight: 700;
+        color: var(--primary-ink);
+        font-size: 16px;
+      }
+      table.d-table .badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      table.d-table .badge.success {
+        background: rgba(74, 124, 89, 0.12);
+        color: var(--success);
+      }
+      table.d-table .badge.pkg {
+        background: var(--accent-soft);
+        color: #7a5523;
+      }
+
+      .d-sessions-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+      }
+      .d-session {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 20px;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+      }
+      .d-session::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 3px;
+        background: var(--success);
+      }
+      .d-session .head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .d-session .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 0 4px rgba(74, 124, 89, 0.15);
+      }
+      .d-session .stat {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--success);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .d-session .title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--primary-ink);
+        line-height: 1.2;
+        margin-bottom: 10px;
+      }
+      .d-session .meta-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--ink-muted);
+        margin-top: 6px;
+      }
+      .d-session .meta-row svg {
+        width: 13px;
+        height: 13px;
+        color: var(--primary);
+      }
+      .d-session .footer {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .d-session .footer .price {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--primary-ink);
+      }
+      .d-session .footer .freq {
+        font-size: 11px;
+        color: var(--ink-muted);
+        font-weight: 500;
+      }
+
+      /* SVG logo emblem */
+      .emblem {
+        stroke: #fff;
+        fill: none;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute">
+      <filter id="noise">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.85"
+          numOctaves="2"
+          stitchTiles="stitch"
+        />
+        <feColorMatrix
+          values="0 0 0 0 0.12  0 0 0 0 0.10  0 0 0 0 0.07  0 0 0 0.04 0"
+        />
+      </filter>
+    </svg>
+
+    <div class="preview-wrap">
+      <!-- DESKTOP COLUMN ===================================== -->
+      <div class="preview-col">
+        <div class="preview-label">🖥 1440px Desktop</div>
+        <div class="preview-desktop-wrap">
+          <div class="preview-desktop">
+            <div class="d-layout">
+              <!-- MAIN CONTENT (right in RTL) -->
+              <div class="d-main">
+                <div class="d-page-head">
+                  <div>
+                    <div class="crumb">סקירה</div>
+                    <h1>שלום, רחל</h1>
+                  </div>
+                  <div class="updated">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    עודכן: 14/5/26 · נתונים מ-1/1/25
+                  </div>
+                </div>
+
+                <!-- BOOKINGS TABLE -->
+                <div class="d-section">
+                  <div class="d-section-head">
+                    <h2>היסטוריית הזמנות</h2>
+                    <div class="meta">
+                      סה"כ <strong>12 הזמנות</strong> ב-30 הימים האחרונים
+                    </div>
+                  </div>
+                  <div class="d-table-wrap">
+                    <table class="d-table">
+                      <thead>
+                        <tr>
+                          <th style="width: 22%">תאריך</th>
+                          <th>חדר ושירות</th>
+                          <th style="width: 18%">שעות</th>
+                          <th style="width: 14%">סטטוס</th>
+                          <th style="width: 12%">שעות</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ד'</span> 14/5/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חדר 3 · תרפיה
+                              <div class="desc">סטודיו אור, קומה 2</div>
+                            </div>
+                          </td>
+                          <td class="time-cell">10:00 - 11:30</td>
+                          <td><span class="badge success">הושלם</span></td>
+                          <td class="hours-cell">1.5</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ג'</span> 13/5/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חדר 1 · ייעוץ
+                              <div class="desc">סטודיו אור, קומה 1</div>
+                            </div>
+                          </td>
+                          <td class="time-cell">14:00 - 15:00</td>
+                          <td><span class="badge success">הושלם</span></td>
+                          <td class="hours-cell">1.0</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ב'</span> 12/5/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חדר 5 · זוגיות
+                              <div class="desc">סטודיו אור, קומה 2</div>
+                            </div>
+                          </td>
+                          <td class="time-cell">16:00 - 18:00</td>
+                          <td><span class="badge success">הושלם</span></td>
+                          <td class="hours-cell">2.0</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">א'</span> 11/5/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חדר 2 · ייעוץ
+                              <div class="desc">סטודיו צפון</div>
+                            </div>
+                          </td>
+                          <td class="time-cell">09:00 - 10:00</td>
+                          <td><span class="badge success">הושלם</span></td>
+                          <td class="hours-cell">1.0</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ה'</span> 08/5/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חדר 3 · תרפיה
+                              <div class="desc">סטודיו אור, קומה 2</div>
+                            </div>
+                          </td>
+                          <td class="time-cell">11:00 - 12:30</td>
+                          <td><span class="badge success">הושלם</span></td>
+                          <td class="hours-cell">1.5</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ד'</span> 07/5/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חדר 4 · קבוצתי
+                              <div class="desc">סטודיו דרום</div>
+                            </div>
+                          </td>
+                          <td class="time-cell">18:00 - 20:00</td>
+                          <td><span class="badge success">הושלם</span></td>
+                          <td class="hours-cell">2.0</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ב'</span> 05/5/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חדר 1 · ייעוץ
+                              <div class="desc">סטודיו אור, קומה 1</div>
+                            </div>
+                          </td>
+                          <td class="time-cell">15:00 - 16:30</td>
+                          <td><span class="badge success">הושלם</span></td>
+                          <td class="hours-cell">1.5</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ה'</span> 01/5/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חדר 5 · זוגיות
+                              <div class="desc">סטודיו אור, קומה 2</div>
+                            </div>
+                          </td>
+                          <td class="time-cell">17:00 - 19:00</td>
+                          <td><span class="badge success">הושלם</span></td>
+                          <td class="hours-cell">2.0</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- PUNCH CARD PAYMENTS -->
+                <div class="d-section">
+                  <div class="d-section-head">
+                    <h2>תשלומי כרטיסיות</h2>
+                    <div class="meta">
+                      סה"כ <strong>8 רכישות</strong> · 80 שעות נרכשו
+                    </div>
+                  </div>
+                  <div class="d-table-wrap">
+                    <table class="d-table">
+                      <thead>
+                        <tr>
+                          <th style="width: 22%">תאריך</th>
+                          <th>תיאור חבילה</th>
+                          <th style="width: 18%">שעות</th>
+                          <th style="width: 14%">אמצעי תשלום</th>
+                          <th style="width: 14%">סכום</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ו'</span> 10/5/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חבילה 10 שעות
+                              <div class="desc">תוקף שנה</div>
+                            </div>
+                          </td>
+                          <td><span class="badge pkg">10 שעות</span></td>
+                          <td class="time-cell">אשראי</td>
+                          <td class="amount-cell">₪650</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ה'</span> 05/4/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חבילה 20 שעות
+                              <div class="desc">תוקף שנה</div>
+                            </div>
+                          </td>
+                          <td><span class="badge pkg">20 שעות</span></td>
+                          <td class="time-cell">העברה בנקאית</td>
+                          <td class="amount-cell">₪1,200</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ב'</span> 03/3/2026
+                            </div>
+                          </td>
+                          <td><div class="room-cell">חבילה 10 שעות</div></td>
+                          <td><span class="badge pkg">10 שעות</span></td>
+                          <td class="time-cell">אשראי</td>
+                          <td class="amount-cell">₪650</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ד'</span> 12/2/2026
+                            </div>
+                          </td>
+                          <td>
+                            <div class="room-cell">
+                              חבילה 5 שעות
+                              <div class="desc">חבילת התנסות</div>
+                            </div>
+                          </td>
+                          <td><span class="badge pkg">5 שעות</span></td>
+                          <td class="time-cell">אשראי</td>
+                          <td class="amount-cell">₪350</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ב'</span> 15/1/2026
+                            </div>
+                          </td>
+                          <td><div class="room-cell">חבילה 20 שעות</div></td>
+                          <td><span class="badge pkg">20 שעות</span></td>
+                          <td class="time-cell">העברה בנקאית</td>
+                          <td class="amount-cell">₪1,200</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="date-cell">
+                              <span class="day-chip">ה'</span> 18/12/2025
+                            </div>
+                          </td>
+                          <td><div class="room-cell">חבילה 10 שעות</div></td>
+                          <td><span class="badge pkg">10 שעות</span></td>
+                          <td class="time-cell">אשראי</td>
+                          <td class="amount-cell">₪650</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- ACTIVE SESSIONS -->
+                <div class="d-section">
+                  <div class="d-section-head">
+                    <h2>ססיות פעילות</h2>
+                    <div class="meta"><strong>3 ססיות</strong> פעילות כעת</div>
+                  </div>
+                  <div class="d-sessions-grid">
+                    <div class="d-session">
+                      <div class="head">
+                        <span class="dot"></span><span class="stat">פעיל</span>
+                      </div>
+                      <div class="title">ייעוץ זוגי שבועי</div>
+                      <div class="meta-row">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect x="3" y="4" width="18" height="18" rx="2" />
+                          <line x1="16" y1="2" x2="16" y2="6" />
+                          <line x1="8" y1="2" x2="8" y2="6" />
+                          <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                        יום ב' · 16:00
+                      </div>
+                      <div class="meta-row">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                          />
+                          <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        חדר 5 · סטודיו אור
+                      </div>
+                      <div class="footer">
+                        <span class="price">₪410</span
+                        ><span class="freq">לפגישה</span>
+                      </div>
+                    </div>
+                    <div class="d-session">
+                      <div class="head">
+                        <span class="dot"></span><span class="stat">פעיל</span>
+                      </div>
+                      <div class="title">טיפול אישי</div>
+                      <div class="meta-row">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect x="3" y="4" width="18" height="18" rx="2" />
+                          <line x1="16" y1="2" x2="16" y2="6" />
+                          <line x1="8" y1="2" x2="8" y2="6" />
+                          <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                        יום ד' · 10:00
+                      </div>
+                      <div class="meta-row">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                          />
+                          <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        חדר 3 · סטודיו אור
+                      </div>
+                      <div class="footer">
+                        <span class="price">₪320</span
+                        ><span class="freq">לפגישה</span>
+                      </div>
+                    </div>
+                    <div class="d-session">
+                      <div class="head">
+                        <span class="dot"></span><span class="stat">פעיל</span>
+                      </div>
+                      <div class="title">פגישת ייעוץ</div>
+                      <div class="meta-row">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect x="3" y="4" width="18" height="18" rx="2" />
+                          <line x1="16" y1="2" x2="16" y2="6" />
+                          <line x1="8" y1="2" x2="8" y2="6" />
+                          <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                        יום ה' · 14:00
+                      </div>
+                      <div class="meta-row">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                          />
+                          <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        חדר 1 · סטודיו אור
+                      </div>
+                      <div class="footer">
+                        <span class="price">₪280</span
+                        ><span class="freq">לפגישה</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SIDEBAR (visually LEFT in RTL) -->
+              <aside class="d-sidebar">
+                <div class="d-brand">
+                  <div class="logo">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      class="emblem"
+                    >
+                      <path d="M12 3v18M5 8.5l7 3.5 7-3.5M5 15.5l7-3.5 7 3.5" />
+                      <circle cx="12" cy="12" r="9" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="name">הקליקה</div>
+                    <div class="sub">Therapist Portal</div>
+                  </div>
+                </div>
+
+                <div class="d-customer">
+                  <div class="hi">לקוחה</div>
+                  <div class="who">דר' רחל כהן</div>
+                  <div class="since">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    לקוחה מ-1/1/25
+                  </div>
+                </div>
+
+                <div class="d-hero">
+                  <div class="lbl">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    יתרת שעות
+                  </div>
+                  <div class="num">+14<span class="unit">שעות</span></div>
+                  <div class="spark">
+                    <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="sg1" x1="0" y1="0" x2="0" y2="1">
+                          <stop
+                            offset="0%"
+                            stop-color="#d4a574"
+                            stop-opacity="0.4"
+                          />
+                          <stop
+                            offset="100%"
+                            stop-color="#d4a574"
+                            stop-opacity="0"
+                          />
+                        </linearGradient>
+                      </defs>
+                      <path
+                        d="M0,38 L40,32 L80,28 L120,22 L160,18 L200,10 L200,50 L0,50 Z"
+                        fill="url(#sg1)"
+                      />
+                      <path
+                        d="M0,38 L40,32 L80,28 L120,22 L160,18 L200,10"
+                        fill="none"
+                        stroke="#d4a574"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <circle cx="0" cy="38" r="2.5" fill="#d4a574" />
+                      <circle cx="40" cy="32" r="2.5" fill="#d4a574" />
+                      <circle cx="80" cy="28" r="2.5" fill="#d4a574" />
+                      <circle cx="120" cy="22" r="2.5" fill="#d4a574" />
+                      <circle cx="160" cy="18" r="2.5" fill="#d4a574" />
+                      <circle
+                        cx="200"
+                        cy="10"
+                        r="3.5"
+                        fill="#fff"
+                        stroke="#d4a574"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </div>
+                  <div class="trend">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                      <polyline points="17 6 23 6 23 12" />
+                    </svg>
+                    +3 שעות החודש
+                  </div>
+                </div>
+
+                <div class="d-mini-grid">
+                  <div class="d-mini">
+                    <div class="icn">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                    </div>
+                    <div class="lbl">השתמשתי החודש</div>
+                    <div class="val">8<span class="s"> שעות</span></div>
+                  </div>
+                  <div class="d-mini">
+                    <div class="icn warm">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="1" y="4" width="22" height="16" rx="2" />
+                        <line x1="1" y1="10" x2="23" y2="10" />
+                      </svg>
+                    </div>
+                    <div class="lbl">הוראת קבע</div>
+                    <div class="val">₪1,240<span class="s"></span></div>
+                  </div>
+                </div>
+
+                <div class="d-actions">
+                  <div class="d-action-title">פעולות מהירות</div>
+                  <a href="#" class="d-action">
+                    <span class="icn"
+                      ><svg
+                        class="icn-svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path
+                          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                        /></svg
+                    ></span>
+                    רכישת שעות נוספות
+                    <svg
+                      class="ar"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </a>
+                  <a href="#" class="d-action">
+                    <span class="icn"
+                      ><svg
+                        class="icn-svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" /></svg
+                    ></span>
+                    הזמנת חדר
+                    <svg
+                      class="ar"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </a>
+                  <a href="#" class="d-action">
+                    <span class="icn"
+                      ><svg
+                        class="icn-svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                        />
+                        <polyline points="14 2 14 8 20 8" /></svg
+                    ></span>
+                    הורדת חשבונית
+                    <svg
+                      class="ar"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </a>
+                  <a href="#" class="d-action wa">
+                    <span class="icn"
+                      ><svg
+                        class="icn-svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1s-.7.9-.8 1.1c-.2.2-.3.2-.5.1-1.6-.8-2.7-1.4-3.7-3.1-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3s-1 1-1 2.4 1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.2-.2-.2-.5-.4z"
+                        />
+                        <path
+                          d="M20.5 3.5C18.3 1.2 15.3 0 12 0 5.4 0 .1 5.4.1 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.4-8.3zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.5 15.6 2 13.8 2 12 2 6.5 6.5 2 12 2c2.7 0 5.2 1 7.1 2.9 1.9 1.9 2.9 4.4 2.9 7.1 0 5.5-4.5 9.8-10 9.8z"
+                        /></svg
+                    ></span>
+                    ווטסאפ הקליקה
+                    <svg
+                      class="ar"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </a>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOBILE COLUMN ======================================== -->
+      <div class="preview-col">
+        <div class="preview-label">📱 375px Mobile</div>
+        <div class="preview-mobile">
+          <div class="device-scroll">
+            <!-- Sticky header -->
+            <header class="m-header">
+              <div class="logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="emblem">
+                  <path d="M12 3v18M5 8.5l7 3.5 7-3.5M5 15.5l7-3.5 7 3.5" />
+                  <circle cx="12" cy="12" r="9" />
+                </svg>
+              </div>
+              <div class="name">
+                <div class="hi">שלום</div>
+                <div class="who">דר' רחל כהן</div>
+              </div>
+              <div class="pill">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                +14ש'
+              </div>
+            </header>
+
+            <div class="m-content">
+              <!-- Hero balance KPI -->
+              <div class="hero-card">
+                <div class="hero-label">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  יתרת שעות
+                </div>
+                <div class="hero-num">+14<span class="unit">שעות</span></div>
+                <div class="hero-sub">עודכן ב-14/5/26 · נתונים מ-1/1/25</div>
+                <div class="hero-spark">
+                  <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="sg2" x1="0" y1="0" x2="0" y2="1">
+                        <stop
+                          offset="0%"
+                          stop-color="#1f4842"
+                          stop-opacity="0.25"
+                        />
+                        <stop
+                          offset="100%"
+                          stop-color="#1f4842"
+                          stop-opacity="0"
+                        />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M0,38 L40,32 L80,28 L120,22 L160,18 L200,10 L200,50 L0,50 Z"
+                      fill="url(#sg2)"
+                    />
+                    <path
+                      d="M0,38 L40,32 L80,28 L120,22 L160,18 L200,10"
+                      fill="none"
+                      stroke="#1f4842"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <circle cx="0" cy="38" r="2.5" fill="#1f4842" />
+                    <circle cx="40" cy="32" r="2.5" fill="#1f4842" />
+                    <circle cx="80" cy="28" r="2.5" fill="#1f4842" />
+                    <circle cx="120" cy="22" r="2.5" fill="#1f4842" />
+                    <circle cx="160" cy="18" r="2.5" fill="#1f4842" />
+                    <circle
+                      cx="200"
+                      cy="10"
+                      r="3.5"
+                      fill="#fff"
+                      stroke="#1f4842"
+                      stroke-width="2"
+                    />
+                  </svg>
+                  <div class="hero-trend">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                      <polyline points="17 6 23 6 23 12" />
+                    </svg>
+                    +3ש'
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mini KPIs -->
+              <div class="mini-grid">
+                <div class="mini-kpi">
+                  <div class="icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="3" y="4" width="18" height="18" rx="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                  </div>
+                  <div class="label">השתמשתי החודש</div>
+                  <div class="val">8<span class="small"> שעות</span></div>
+                </div>
+                <div class="mini-kpi">
+                  <div class="icon warm">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="1" y="4" width="22" height="16" rx="2" />
+                      <line x1="1" y1="10" x2="23" y2="10" />
+                    </svg>
+                  </div>
+                  <div class="label">הוראת קבע</div>
+                  <div class="val">₪1,240</div>
+                </div>
+              </div>
+
+              <!-- Bookings as card list -->
+              <div class="section-head">
+                <h2>הזמנות אחרונות</h2>
+                <span class="meta">12 הזמנות</span>
+              </div>
+              <div class="card-list">
+                <div class="row-card">
+                  <div class="date">
+                    <div class="d">14/5</div>
+                    <div class="day">ד'</div>
+                  </div>
+                  <div class="room">
+                    <div class="name">חדר 3 · תרפיה</div>
+                    <div class="time">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      10:00 - 11:30
+                    </div>
+                  </div>
+                  <div class="hours">
+                    <div class="n">1.5</div>
+                    <div class="u">שעות</div>
+                  </div>
+                </div>
+                <div class="row-card">
+                  <div class="date">
+                    <div class="d">13/5</div>
+                    <div class="day">ג'</div>
+                  </div>
+                  <div class="room">
+                    <div class="name">חדר 1 · ייעוץ</div>
+                    <div class="time">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      14:00 - 15:00
+                    </div>
+                  </div>
+                  <div class="hours">
+                    <div class="n">1.0</div>
+                    <div class="u">שעה</div>
+                  </div>
+                </div>
+                <div class="row-card">
+                  <div class="date">
+                    <div class="d">12/5</div>
+                    <div class="day">ב'</div>
+                  </div>
+                  <div class="room">
+                    <div class="name">חדר 5 · זוגיות</div>
+                    <div class="time">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      16:00 - 18:00
+                    </div>
+                  </div>
+                  <div class="hours">
+                    <div class="n">2.0</div>
+                    <div class="u">שעות</div>
+                  </div>
+                </div>
+                <div class="row-card">
+                  <div class="date">
+                    <div class="d">11/5</div>
+                    <div class="day">א'</div>
+                  </div>
+                  <div class="room">
+                    <div class="name">חדר 2 · ייעוץ</div>
+                    <div class="time">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      09:00 - 10:00
+                    </div>
+                  </div>
+                  <div class="hours">
+                    <div class="n">1.0</div>
+                    <div class="u">שעה</div>
+                  </div>
+                </div>
+                <div class="row-card">
+                  <div class="date">
+                    <div class="d">8/5</div>
+                    <div class="day">ה'</div>
+                  </div>
+                  <div class="room">
+                    <div class="name">חדר 3 · תרפיה</div>
+                    <div class="time">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      11:00 - 12:30
+                    </div>
+                  </div>
+                  <div class="hours">
+                    <div class="n">1.5</div>
+                    <div class="u">שעות</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payments as card list -->
+              <div class="section-head">
+                <h2>תשלומי כרטיסיות</h2>
+                <span class="meta">8 רכישות</span>
+              </div>
+              <div class="card-list">
+                <div class="row-card pay">
+                  <div class="date">
+                    <div class="d">10/5</div>
+                    <div class="day">ו'</div>
+                  </div>
+                  <div class="room">
+                    <div class="name">חבילה 10 שעות</div>
+                    <div class="time">אשראי · תוקף שנה</div>
+                  </div>
+                  <div class="hours">
+                    <div class="n">₪650</div>
+                    <div class="u">שולם</div>
+                  </div>
+                </div>
+                <div class="row-card pay">
+                  <div class="date">
+                    <div class="d">5/4</div>
+                    <div class="day">ה'</div>
+                  </div>
+                  <div class="room">
+                    <div class="name">חבילה 20 שעות</div>
+                    <div class="time">העברה בנקאית</div>
+                  </div>
+                  <div class="hours">
+                    <div class="n">₪1,200</div>
+                    <div class="u">שולם</div>
+                  </div>
+                </div>
+                <div class="row-card pay">
+                  <div class="date">
+                    <div class="d">3/3</div>
+                    <div class="day">ב'</div>
+                  </div>
+                  <div class="room">
+                    <div class="name">חבילה 10 שעות</div>
+                    <div class="time">אשראי</div>
+                  </div>
+                  <div class="hours">
+                    <div class="n">₪650</div>
+                    <div class="u">שולם</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Active sessions -->
+              <div class="section-head">
+                <h2>ססיות פעילות</h2>
+                <span class="meta">3 פעילות</span>
+              </div>
+              <div class="card-list" style="margin-bottom: 16px">
+                <div class="session-card">
+                  <span class="dot"></span>
+                  <div class="info">
+                    <div class="t">ייעוץ זוגי שבועי</div>
+                    <div class="s">יום ב' · 16:00 · חדר 5</div>
+                  </div>
+                  <span class="badge">₪410</span>
+                </div>
+                <div class="session-card">
+                  <span class="dot"></span>
+                  <div class="info">
+                    <div class="t">טיפול אישי</div>
+                    <div class="s">יום ד' · 10:00 · חדר 3</div>
+                  </div>
+                  <span class="badge">₪320</span>
+                </div>
+                <div class="session-card">
+                  <span class="dot"></span>
+                  <div class="info">
+                    <div class="t">פגישת ייעוץ</div>
+                    <div class="s">יום ה' · 14:00 · חדר 1</div>
+                  </div>
+                  <span class="badge">₪280</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- WhatsApp FAB -->
+            <a href="#" class="fab" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1s-.7.9-.8 1.1c-.2.2-.3.2-.5.1-1.6-.8-2.7-1.4-3.7-3.1-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3s-1 1-1 2.4 1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.2-.2-.2-.5-.4z"
+                />
+                <path
+                  d="M20.5 3.5C18.3 1.2 15.3 0 12 0 5.4 0 .1 5.4.1 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.4-8.3zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.5 15.6 2 13.8 2 12 2 6.5 6.5 2 12 2c2.7 0 5.2 1 7.1 2.9 1.9 1.9 2.9 4.4 2.9 7.1 0 5.5-4.5 9.8-10 9.8z"
+                />
+              </svg>
+            </a>
+
+            <!-- Bottom nav -->
+            <nav class="m-bottomnav">
+              <a href="#" class="tab active">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+                <span class="lbl">סקירה</span>
+              </a>
+              <a href="#" class="tab">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="1" y="4" width="22" height="16" rx="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+                <span class="lbl">כרטיסיות</span>
+              </a>
+              <a href="#" class="tab">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                <span class="lbl">סשנים</span>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

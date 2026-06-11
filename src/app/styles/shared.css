@@ -1,0 +1,217 @@
+/* Shared: animations, skeletons, empty/error states, alerts, responsive */
+
+/* ── Entrance animations ────────────────────────── */
+@keyframes hk-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hk-header,
+.hk-section {
+  animation: hk-fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hk-section:nth-of-type(1) {
+  animation-delay: 0.05s;
+}
+.hk-section:nth-of-type(2) {
+  animation-delay: 0.12s;
+}
+.hk-section:nth-of-type(3) {
+  animation-delay: 0.19s;
+}
+.hk-section:nth-of-type(4) {
+  animation-delay: 0.26s;
+}
+.hk-section:nth-of-type(5) {
+  animation-delay: 0.33s;
+}
+.hk-section:nth-of-type(6) {
+  animation-delay: 0.4s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hk-header,
+  .hk-section {
+    animation: none;
+  }
+}
+
+/* ── Loading skeletons ──────────────────────────── */
+@keyframes hk-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.hk-skel {
+  background: linear-gradient(90deg, #ece5d6 0%, #f5f0e1 50%, #ece5d6 100%);
+  background-size: 200% 100%;
+  border-radius: 6px;
+  animation: hk-pulse 1.4s ease-in-out infinite;
+}
+
+/* ── Empty / error state ────────────────────────── */
+.hk-empty {
+  padding: 56px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.hk-empty__icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  color: var(--ink-muted);
+}
+.hk-empty__icon--danger {
+  background: var(--danger-soft);
+  border-color: #e9b7ac;
+  color: var(--danger);
+}
+.hk-empty__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.hk-empty__sub {
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+/* ── Alert banner (negative balance) ───────────── */
+.hk-alert {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  background: var(--danger-soft);
+  border: 1px solid #e9b7ac;
+  border-radius: 12px;
+  color: var(--danger);
+  font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.hk-alert__title {
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.hk-alert__sub {
+  opacity: 0.85;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+/* ── Error code box ─────────────────────────────── */
+.hk-error-code {
+  margin-top: 18px;
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-family: ui-monospace, monospace;
+  direction: ltr;
+}
+
+/* ── Responsive: tablet 640px+ ───────────────────── */
+@media (min-width: 640px) {
+  /* Center all major sections — background spans full width, content is capped */
+  .hk-header,
+  .hk-section,
+  .hk-footer {
+    padding-inline: max(28px, calc(50% - 380px));
+  }
+
+  .hk-section {
+    padding-block-start: 28px;
+  }
+  .hk-section--tight {
+    padding-block-start: 18px;
+  }
+
+  /* Header inner layout */
+  .hk-header__name {
+    font-size: 24px;
+  }
+
+  /* KPIs: 3 in a row when there are 3 (hero + 2 smalls) */
+  .hk-kpis--2 {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  .hk-kpis--2 .hk-kpi--hero {
+    grid-column: 1;
+  }
+  .hk-kpi--hero .hk-kpi__value {
+    font-size: 46px;
+  }
+
+  /* Footer links: 2 columns */
+  .hk-footer__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Auth: center as a narrow column */
+  .hk-auth {
+    padding-block: 64px;
+    padding-inline: max(24px, calc(50% - 200px));
+  }
+
+  .hk-auth__brand {
+    padding-top: 0;
+  }
+
+  .hk-auth__head {
+    text-align: center;
+  }
+}
+
+/* ── Responsive: desktop 1024px+ ─────────────────── */
+@media (min-width: 1024px) {
+  .hk-header,
+  .hk-section,
+  .hk-footer {
+    padding-inline: max(40px, calc(50% - 420px));
+  }
+
+  .hk-header__name {
+    font-size: 26px;
+  }
+
+  .hk-section {
+    padding-block-start: 32px;
+  }
+  .hk-section--tight {
+    padding-block-start: 22px;
+  }
+
+  .hk-kpi--hero .hk-kpi__value {
+    font-size: 50px;
+  }
+
+  .hk-row {
+    font-size: 14px;
+  }
+
+  .hk-row__main {
+    font-size: 14px;
+  }
+}

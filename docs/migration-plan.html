@@ -1,0 +1,1732 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>תוכנית מעבר - הקליקה</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f7f4ee;
+        --surface: #ffffff;
+        --primary: #2f5d54;
+        --primary-soft: #e8efed;
+        --danger: #b84a3e;
+        --warning: #d97706;
+        --ink: #1b2230;
+        --ink-muted: #5a6478;
+        --border: #e5e0d6;
+        --code-bg: #f3efe6;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          "Heebo",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-feature-settings:
+          "tnum" 1,
+          "ss01" 1;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.75;
+        font-size: 16px;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        max-width: 1400px;
+        margin: 0 auto;
+        min-height: 100vh;
+      }
+      aside.toc {
+        position: sticky;
+        top: 0;
+        align-self: start;
+        max-height: 100vh;
+        overflow-y: auto;
+        padding: 32px 24px;
+        background: var(--surface);
+        border-left: 1px solid var(--border);
+        font-size: 14px;
+      }
+      aside.toc h2 {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--ink-muted);
+        margin: 0 0 16px;
+        font-weight: 600;
+      }
+      aside.toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      aside.toc li {
+        margin: 6px 0;
+      }
+      aside.toc ul ul {
+        padding-right: 16px;
+        margin-top: 4px;
+      }
+      aside.toc a {
+        color: var(--ink-muted);
+        text-decoration: none;
+        display: block;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: all 0.15s;
+        line-height: 1.4;
+      }
+      aside.toc a:hover {
+        background: var(--primary-soft);
+        color: var(--primary);
+      }
+      main {
+        padding: 56px 64px 120px;
+        max-width: 920px;
+      }
+      h1 {
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--primary);
+        margin: 0 0 8px;
+        line-height: 1.2;
+      }
+      h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 48px 0 16px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--border);
+      }
+      h3 {
+        font-size: 21px;
+        font-weight: 600;
+        color: var(--primary);
+        margin: 36px 0 12px;
+      }
+      h4 {
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--ink);
+        margin: 24px 0 8px;
+      }
+      h5 {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ink-muted);
+        margin: 20px 0 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      ul,
+      ol {
+        padding-right: 24px;
+        margin: 0 0 16px;
+      }
+      li {
+        margin: 4px 0;
+      }
+      a {
+        color: var(--primary);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.15s;
+      }
+      a:hover {
+        border-bottom-color: var(--primary);
+      }
+      code {
+        font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
+        background: var(--code-bg);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 13px;
+        direction: ltr;
+        display: inline-block;
+      }
+      pre {
+        background: var(--code-bg);
+        padding: 16px 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        direction: ltr;
+        text-align: left;
+        border: 1px solid var(--border);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      pre code {
+        background: none;
+        padding: 0;
+      }
+      blockquote {
+        border-right: 4px solid var(--primary);
+        margin: 16px 0;
+        padding: 12px 20px;
+        background: var(--primary-soft);
+        border-radius: 8px;
+        color: var(--ink);
+      }
+      blockquote p {
+        margin: 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0 24px;
+        background: var(--surface);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        font-size: 14px;
+      }
+      thead {
+        background: var(--primary);
+        color: white;
+      }
+      th,
+      td {
+        padding: 10px 14px;
+        text-align: right;
+        border-bottom: 1px solid var(--border);
+      }
+      th {
+        font-weight: 600;
+      }
+      tbody tr:hover {
+        background: var(--primary-soft);
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+      hr {
+        border: none;
+        border-top: 2px dashed var(--border);
+        margin: 48px 0;
+      }
+      /* Banner for warning/danger */
+      .doc-meta {
+        color: var(--ink-muted);
+        font-size: 14px;
+        margin-bottom: 32px;
+      }
+      /* Anchor offset for fixed header */
+      h2,
+      h3,
+      h4 {
+        scroll-margin-top: 24px;
+      }
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        aside.toc {
+          position: relative;
+          max-height: none;
+          border-left: none;
+          border-bottom: 1px solid var(--border);
+        }
+        main {
+          padding: 32px 20px 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="toc">
+        <h2>תוכן עניינים</h2>
+        <div id="toc-placeholder"></div>
+      </aside>
+      <main>
+        <div id="content">
+          <h1 id="-airtable-supabase-admin-app">
+            תוכנית מעבר מ-Airtable ל-Supabase + Admin App
+          </h1>
+          <blockquote>
+            <p>
+              מסמך עבודה מקיף. עודכן לפי discovery עם Uri ב-25/5/2026 + סריקת
+              schema מלאה.
+            </p>
+          </blockquote>
+          <h2 id="_1">תוכן עניינים</h2>
+          <ol>
+            <li><a href="#רקע-ומטרות">רקע ומטרות</a></li>
+            <li>
+              <a href="#מודל-הנתונים-הקיים-airtable"
+                >מודל הנתונים הקיים (Airtable)</a
+              >
+            </li>
+            <li><a href="#תהליכי-עסק">תהליכי עסק</a></li>
+            <li><a href="#אוטומציות-קיימות">אוטומציות קיימות</a></li>
+            <li><a href="#ארכיטקטורה-מוצעת">ארכיטקטורה מוצעת</a></li>
+            <li>
+              <a href="#מודל-נתונים-חדש-supabase">מודל נתונים חדש (Supabase)</a>
+            </li>
+            <li><a href="#מודולים-ב-admin-app">מודולים ב-Admin App</a></li>
+            <li><a href="#שלבי-ביצוע">שלבי ביצוע</a></li>
+            <li><a href="#החלטות-שנקבעו">החלטות שנקבעו</a></li>
+            <li><a href="#שאלות-פתוחות">שאלות פתוחות</a></li>
+          </ol>
+          <hr />
+          <h2 id="_2">רקע ומטרות</h2>
+          <p>
+            <strong>העסק</strong>: הקליקה - השכרת חדרי טיפול ו-מנויי ססיה
+            למטפלים (פסיכולוגים, קליניאים, רופאים, מטפלים אלטרנטיביים). שני
+            מתחמים עיקריים (סוטין, יהודה הלוי) + עוד אופציות.
+          </p>
+          <p>
+            <strong>הצוות</strong>: הילית (בעלת העסק - עושה הכל) + אביגיל
+            (עוזרת, יותר בלידים ושוטף). אין חלוקת תפקידים נוקשה.
+          </p>
+          <p><strong>הלקוחות</strong>: 3 סוגים -</p>
+          <ol>
+            <li>
+              <strong>לקוחות ססיה/מנוי</strong>: משלמים סכום חודשי קבוע, מקבלים
+              משבצת קבועה בלוח (לדוגמה: כל שלישי 16:00-18:00 בחדר ספציפי)
+              להתחייבות של X חודשים
+            </li>
+            <li>
+              <strong>לקוחות כרטיסיה</strong>: רוכשים בנק שעות (5/10/50/100
+              שעות) ומזמינים pay-as-you-go דרך Skedda
+            </li>
+            <li><strong>משולב</strong>: גם וגם</li>
+          </ol>
+          <p>
+            <strong>כמות</strong>: 185 לקוחות פעילים והיסטוריים, 843 לידים, ~10K
+            שימושים (bookings).
+          </p>
+          <p><strong>הבעיה ב-Airtable היום</strong>:</p>
+          <ul>
+            <li>
+              איטי עם הכמות הנוכחית (5 קריאות מקבילות ב-portal לוקחות 2-5 שניות)
+            </li>
+            <li>formulas מסובכות לחישוב יתרת שעות</li>
+            <li>אין שליטה אמיתית על UX/workflows</li>
+            <li>rate limits מציקים</li>
+          </ul>
+          <p><strong>מטרה</strong>:</p>
+          <ol>
+            <li>
+              <strong>שלב 1</strong>: החלפת Airtable כ-DB ב-Supabase. הפורטל
+              הקיים ימשוך מ-Supabase.
+            </li>
+            <li>
+              <strong>שלב 2</strong>: Admin app חדש שמחליף לגמרי את Airtable
+              Interface, מותאם לתהליכי העבודה היומיומיים.
+            </li>
+            <li>
+              <strong>שלב 3 (עתידי)</strong>: החלפת Skedda במערכת booking
+              פנימית. <strong>לא בסקופ של פרויקט זה</strong>.
+            </li>
+          </ol>
+          <hr />
+          <h2 id="airtable">מודל הנתונים הקיים (Airtable)</h2>
+          <p>
+            <strong>Base ID</strong>: <code>apps4j9M93A1VwJSR</code> (הקליקה)
+            <strong>Schema מלא</strong>:
+            <code>docs/airtable-schema-raw.json</code> (91KB JSON)
+          </p>
+          <h3 id="18">18 טבלאות</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>טבלה</th>
+                <th>רשומות</th>
+                <th>שדות</th>
+                <th>תפקיד</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><code>לקוחות</code></td>
+                <td>185</td>
+                <td><strong>95</strong></td>
+                <td>
+                  כל המידע על לקוח: פרטים, סטטוס, יתרת שעות (formula), קישורים
+                  לכל הטבלאות האחרות
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><code>חדרים</code></td>
+                <td>57</td>
+                <td>9</td>
+                <td>רשימת חדרים (~30 פעילים + היסטוריים)</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><code>ססיות</code></td>
+                <td>118</td>
+                <td>24</td>
+                <td>מנויי ססיה: יום קבוע, שעה, חדר, מחיר</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><code>כרטיסיות</code></td>
+                <td><strong>0</strong></td>
+                <td>22</td>
+                <td>טבלה ריקה - הלוגיקה ב-<code>תשלומים</code> ישירות</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><code>שימושים</code> (bookings)</td>
+                <td><strong>10,576</strong></td>
+                <td>39</td>
+                <td>כל ה-bookings מ-Skedda + ידני</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><code>תשלומים</code></td>
+                <td>1,710</td>
+                <td>28</td>
+                <td>תשלומי כרטיסיות + ססיה + חוזים עתידיים</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td><code>ייבוא Skedda Raw</code></td>
+                <td><strong>10,648</strong></td>
+                <td>18</td>
+                <td>Buffer גולמי לפני שיוך</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td><code>לידים</code></td>
+                <td>843</td>
+                <td>35</td>
+                <td>צינור לידים מלא</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td><code>התראות ומשימות</code></td>
+                <td>433</td>
+                <td>7</td>
+                <td>משימות לצוות</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td><code>דוחות שימוש מסקדה</code></td>
+                <td>20</td>
+                <td>3</td>
+                <td>קבצי PDF/CSV מ-Skedda</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td><code>נוסחי הודעות</code></td>
+                <td>42</td>
+                <td>11</td>
+                <td>תבניות WhatsApp/מייל</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td><code>מתחמים</code></td>
+                <td>4</td>
+                <td>3</td>
+                <td>סוטין, יהודה הלוי, טשרנוביץ, אחר</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td><code>עסקאות ססיה</code></td>
+                <td>72</td>
+                <td>23</td>
+                <td>חוזי ססיה עם הוראת קבע + תאריכים</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td><code>תיעוד שיחות</code></td>
+                <td>142</td>
+                <td>13</td>
+                <td>Call log + הודעות מתוזמנות</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td><code>HAKLIKA TALK</code></td>
+                <td>12</td>
+                <td>30</td>
+                <td>לידים למטרה אחרת (dreamlab?) - יתאחד עם לידים</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td><code>dreamlab</code></td>
+                <td>3</td>
+                <td>6</td>
+                <td>פרויקט נפרד/מבוטל</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td><code>מחירון ססיות</code></td>
+                <td>23</td>
+                <td>2</td>
+                <td>טבלת מחירים לפי שעות</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td><code>מדרגות הנחה</code></td>
+                <td>2</td>
+                <td>2</td>
+                <td>1500+ ש"ח = 5% / 2500+ ש"ח = 10%</td>
+              </tr>
+            </tbody>
+          </table>
+          <p><strong>סה"כ</strong>: ~25K רשומות.</p>
+          <h3 id="-airtable-formula">
+            לוגיקת יתרת שעות (היום ב-Airtable formula)
+          </h3>
+          <div class="codehilite">
+            <pre><span></span><code>יתרה = SUM(שעות כרטיסיה שנרכשו from תשלומים where סוג=&#39;כרטיסיה&#39;)
+     - SUM(משך בשעות from שימושים where Booking Title=&#39;שעתי&#39;)
+     + קרדיט 2024 (עבר)
+</code></pre>
+          </div>
+
+          <p>
+            הכל מחושב ב-formula אחת בטבלת <code>לקוחות</code>. במעבר ל-Supabase:
+            זה יהיה Postgres view או generated column.
+          </p>
+          <hr />
+          <h2 id="_3">תהליכי עסק</h2>
+          <h3 id="a">A. תהליך קליטת לקוח חדש</h3>
+          <div class="codehilite">
+            <pre><span></span><code>ליד נכנס (קמפיין/אורגני/הפניה)
+    ↓ WhatsApp אוטומטי + רישום ב-Airtable
+שיחה/פגישה ראשונה (הילית/אביגיל)
+    ↓ אם רלוונטי
+טופס קליטת לקוח (Fillout)
+    ↓
+החלטה על מסלול (ססיה / כרטיסיה / משולב)
+    ↓
+הכנת חוזה (טופס פנימי HTML ב-Make → Fill Faster)
+    ↓
+שליחת חוזה ללקוח (אוטומטי)
+    ↓
+חוזה נחתם → עדכון Airtable + הודעת המשך
+    ↓
+הוראת קבע נשלחה לאישור (אם ססיה)
+    ↓
+לקוח פעיל ✅
+</code></pre>
+          </div>
+
+          <p>
+            <strong>Statuses</strong>: <code>חדש</code> →
+            <code>נשלח חוזה לחתימה</code> → <code>פעיל</code> →
+            <code>מושהה</code> → <code>לא פעיל</code>
+            <strong>Onboarding sub-statuses</strong>: <code>נשלח חוזה</code> →
+            <code>חוזה נחתם</code> → <code>התקבלו פרטי אשראי</code> →
+            <code>נשלחה הוראת קבע לאישור</code> → <code>פולאו אפ</code>
+          </p>
+          <h3 id="b">B. תהליך השכרה שעתית (כרטיסיה)</h3>
+          <div class="codehilite">
+            <pre><span></span><code>לקוח מתחבר ל-Skedda → רואה זמינות → מזמין → אישור מידי
+    ↓
+Skedda scraping (כל לילה) → Google Drive → Make webhook → Airtable
+    ↓
+שיוך אוטומטי ל-`שימושים` (לקוח, חדר, סטטוס)
+    ↓
+formula מעדכן יתרה
+    ↓ אם יתרה &lt; 0 או קרוב לסיום
+התראה לצוות / הודעה ללקוח
+</code></pre>
+          </div>
+
+          <h3 id="c">C. תהליך תשלום</h3>
+          <p>
+            <strong>מסלול 1 - תשלום בכרטיסיה (Grow → חשבונית ירוקה)</strong>:
+          </p>
+          <div class="codehilite">
+            <pre><span></span><code>לקוח קונה כרטיסיה דרך לינק (Grow)
+    ↓ Make
+תשלום עובר לחשבונית ירוקה → הפקת חשבונית
+    ↓ Make
+חשבונית ירוקה → Airtable (שיוך ללקוח, כמות שעות, פרטים)
+</code></pre>
+          </div>
+
+          <p><strong>מסלול 2 - הוראת קבע (ססיה)</strong>:</p>
+          <div class="codehilite">
+            <pre><span></span><code>חוזה חתום → תשלומים עתידיים מנופקים שנה קדימה (Make)
+    ↓ כל חודש
+חיוב אוטומטי דרך מערכת הסליקה
+    ↓
+תשלום נכנס לחשבונית ירוקה → Make → Airtable
+    ↓ אם איחור &gt; 32 שעות מהוראת קבע
+התראה לצוות
+</code></pre>
+          </div>
+
+          <h3 id="d">D. תהליך לידים</h3>
+          <div class="codehilite">
+            <pre><span></span><code>ליד נכנס (פייסבוק/אינסטגרם/אורגני/הפניה)
+    ↓ אוטומציה (Make + Fillout)
+Airtable טבלת לידים + WhatsApp אוטומטי
+    ↓
+8:00 ו-14:00 כל יום → קבוצת WhatsApp פנימית עם רשימת לידים פתוחים
+    ↓
+הילית/אביגיל מתקשרות/כותבות
+    ↓
+תיעוד שיחה → טבלת תיעוד שיחות
+    ↓ אם רלוונטי
+המרה ללקוח (תהליך A)
+</code></pre>
+          </div>
+
+          <hr />
+          <h2 id="_4">אוטומציות קיימות</h2>
+          <h3 id="-airtable">ב-Airtable (פנימיות)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>טריגר</th>
+                <th>תוצאה</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>A1</td>
+                <td>איחור בתשלום ססיה (&gt;32 שעות מהוראת קבע)</td>
+                <td>משימה ב-<code>התראות ומשימות</code></td>
+              </tr>
+              <tr>
+                <td>A2</td>
+                <td>יתרת שעות לקוח &lt; 0</td>
+                <td>משימה ב-<code>התראות ומשימות</code></td>
+              </tr>
+              <tr>
+                <td>A3</td>
+                <td>תזמון הודעה ב-<code>תיעוד שיחות</code> הגיע לזמן השליחה</td>
+                <td>webhook ל-Make → שליחת הודעה</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 id="-make">ב-Make</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>טריגר</th>
+                <th>תוצאה</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>M1</td>
+                <td>תשלום חדש (כרטיסיה/ססיה) או חוזה חתום</td>
+                <td>יצירת תשלומים עתידיים שנה קדימה ב-Airtable</td>
+              </tr>
+              <tr>
+                <td>M2</td>
+                <td>לקוח עבר ל-<code>לא פעיל</code> או רק כרטיסיות</td>
+                <td><strong>חסר!</strong> ביטול תשלומים עתידיים שנשארו</td>
+              </tr>
+              <tr>
+                <td>M3</td>
+                <td>תשלום ב-Grow</td>
+                <td>העברה לחשבונית ירוקה להפקת חשבונית</td>
+              </tr>
+              <tr>
+                <td>M4</td>
+                <td>תשלום חדש בחשבונית ירוקה</td>
+                <td>הכנסה ל-Airtable + שיוך ללקוח + עדכון שעות אם כרטיסיה</td>
+              </tr>
+              <tr>
+                <td>M5</td>
+                <td>כל לילה - Skedda scraping</td>
+                <td>הורדת דוח → Google Drive → webhook → Airtable</td>
+              </tr>
+              <tr>
+                <td>M6</td>
+                <td>כל בוקר</td>
+                <td>דיווח למנהלים על שימושים שנכנסו אתמול</td>
+              </tr>
+              <tr>
+                <td>M7</td>
+                <td>ליד חדש מקמפיין פייסבוק</td>
+                <td>רישום ב-Airtable + WhatsApp אוטומטי</td>
+              </tr>
+              <tr>
+                <td>M8</td>
+                <td>כל יום 8:00 ו-14:00</td>
+                <td>רשימת לידים פתוחים לקבוצת WhatsApp</td>
+              </tr>
+              <tr>
+                <td>M9</td>
+                <td>מילוי טופס Fillout (ליד/קליטה/עדכון)</td>
+                <td>רישום/עדכון ב-Airtable</td>
+              </tr>
+              <tr>
+                <td>M10</td>
+                <td>טופס פנימי להכנת חוזה (HTML ב-Make)</td>
+                <td>יצירת חוזה ב-Fill Faster + שליחה ללקוח</td>
+              </tr>
+              <tr>
+                <td>M11</td>
+                <td>חתימה על חוזה (Fill Faster)</td>
+                <td>עדכון Airtable + הודעות השלמת תהליך</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            <strong>סה"כ</strong>: לפחות 14 אוטומציות פעילות. כולן צריכות עדכון
+            או החלפה במעבר ל-Supabase.
+          </p>
+          <h3 id="-make-api-255">📊 סקירה מלאה מ-Make API (עודכן 25/5)</h3>
+          <p>
+            <strong
+              >60 scenarios סה"כ | 34 פעילים | 25 פעילים תלויים
+              ב-Airtable</strong
+            >
+          </p>
+          <p>
+            3 folders: לידים (7) | תפעול שוטף (18) | קליטת לקוחות (7) | ללא
+            folder (28)
+          </p>
+          <h4 id="custom-apps">Custom apps שזוהו</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>App ID</th>
+                <th>מה זה</th>
+                <th>בשימוש</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>app#greenapi-nuycxg</code></td>
+                <td><strong>Green API</strong> - WhatsApp לצוות</td>
+                <td>11 scenarios</td>
+              </tr>
+              <tr>
+                <td><code>app#my-app-b90mkx</code></td>
+                <td>
+                  <strong>Morning/חשבונית ירוקה</strong> - addclient,
+                  transactions, receivedpayment, documents
+                </td>
+                <td>6+ scenarios</td>
+              </tr>
+              <tr>
+                <td><code>app#shay-toolbox-l0v44z</code></td>
+                <td>
+                  <strong>Toolbox של שי</strong> - HolidaysChecker (שבתות וחגים)
+                </td>
+                <td>3 scenarios</td>
+              </tr>
+              <tr>
+                <td><code>app#testing-g3yhep</code></td>
+                <td>
+                  <strong>Utility</strong> - multipleSearchAndReplace
+                  (templates) + validateId (ת.ז.)
+                </td>
+                <td>5+ scenarios</td>
+              </tr>
+              <tr>
+                <td><code>manychat</code></td>
+                <td><strong>ManyChat</strong> - WhatsApp Business</td>
+                <td><strong>2 scenarios פעילים - כבר משולב חלקית!</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 id="active-scenarios">Active scenarios שלא הוזכרו בשיחה</h4>
+          <ul>
+            <li>
+              <code>4017983</code> (53 modules) - Skedda → Drive → Sheets →
+              Airtable (זה M5)
+            </li>
+            <li>
+              <code>4234755</code> - HAKLIKA TALK טפסים (Fillout + ManyChat) -
+              למיזם נפרד
+            </li>
+            <li>
+              <code>4236872</code> (31) -
+              <strong>טופס Wix → Airtable</strong> (lead intake נוסף)
+            </li>
+            <li>
+              <code>4035598</code> (30) - טופס Fillout מתעניינים (lead intake
+              נוסף)
+            </li>
+            <li>
+              <code>3520754</code> (17) -
+              <strong>backend של כפתור "שליחת הודעה" באירטייבל</strong> ⚠️ 5 DLQ
+            </li>
+            <li>
+              <code>5096782</code> -
+              <strong>הפורטל כבר שולח webhooks ל-Make!</strong> (שולח מייל
+              כשלקוח מתחבר)
+            </li>
+            <li>
+              <code>3832156</code> -
+              <strong>סטטוס לקוח משנה → מוחק תשלומים עתידיים</strong> - תיקון!
+              M2 לא חסר, הוא קיים.
+            </li>
+          </ul>
+          <h4 id="dead-letter-queue-">
+            🚨 כשלים פעילים (Dead Letter Queue) - לטיפול לפני מיגרציה
+          </h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th>DLQ items</th>
+                <th>חומרה</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>4943229</code> דפי תשלום grow</td>
+                <td><strong>18</strong></td>
+                <td>🔴 קריטי - תשלומים שלא נכנסו!</td>
+              </tr>
+              <tr>
+                <td><code>3520754</code> שליחת הודעות מותאמות</td>
+                <td>5</td>
+                <td>🟠 גבוה</td>
+              </tr>
+              <tr>
+                <td><code>4752228</code> טפסי קמפיין (עומרי פוקס)</td>
+                <td>4</td>
+                <td>🟠 גבוה</td>
+              </tr>
+              <tr>
+                <td>3 נוספים</td>
+                <td>1 כל אחד</td>
+                <td>🟡 נמוך</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 id="_5">📁 קבצים מקומיים</h4>
+          <ul>
+            <li>
+              <a href="make-scenarios-list.json"
+                >docs/make-scenarios-list.json</a
+              >
+              - רשימה בסיסית
+            </li>
+            <li>
+              <a href="make-scenarios-detailed.json"
+                >docs/make-scenarios-detailed.json</a
+              >
+              - פרטים מלאים
+            </li>
+            <li>
+              <a href="make-blueprints/">docs/make-blueprints/</a> - 60
+              blueprints (9 MB)
+            </li>
+            <li>
+              <a href="make-audit-report.md">docs/make-audit-report.md</a> - דוח
+              קריא
+            </li>
+          </ul>
+          <hr />
+          <h2 id="_6">ארכיטקטורה מוצעת</h2>
+          <div class="codehilite">
+            <pre><span></span><code>┌────────────────────────────────────────────────────────────┐
+│ External integrations                                       │
+│ • Skedda (scraping)                                         │
+│ • חשבונית ירוקה (תשלומים)                                   │
+│ • Grow (סליקה)                                             │
+│ • Fillout (טפסים ללקוחות)                                  │
+│ • ManyChat (WhatsApp Business - בעתיד)                     │
+│ • Green API (WhatsApp פנימי לצוות)                         │
+└────────────┬──────────────────────────────┬────────────────┘
+             │                              │
+             ▼                              ▼
+┌────────────────────────┐    ┌─────────────────────────────┐
+│ Make (orchestration)   │    │ Direct integration          │
+│ - 14 scenarios קיימים  │    │ (Supabase Edge Functions)   │
+│ - עדכונים שנדרשים      │    │ - webhooks מתשלומים         │
+└────────────┬───────────┘    └──────────────┬──────────────┘
+             │                                │
+             ▼                                ▼
+┌────────────────────────────────────────────────────────────┐
+│ Supabase                                                    │
+│ • Postgres (DB ראשי)                                        │
+│ • Auth (JWT + Google SSO ל-admin, magic links לפורטל)      │
+│ • Storage (PDFs, attachments)                              │
+│ • Edge Functions (webhooks, automations)                   │
+│ • pg_cron (תזכורות יומיות)                                 │
+│ • RLS policies                                              │
+└────────┬─────────────────────────────────┬─────────────────┘
+         │                                 │
+         ▼                                 ▼
+┌──────────────────┐              ┌──────────────────────────┐
+│ Portal (קיים)    │              │ Admin app (חדש)          │
+│ portal.haklika   │              │ admin.haklika            │
+│ Next.js + Supabase│              │ Next.js + Supabase       │
+│ קריאה בלבד       │              │ CRUD מלא + audit log     │
+│ ללקוחות הקליקה   │              │ להילית + אביגיל          │
+└──────────────────┘              └──────────────────────────┘
+</code></pre>
+          </div>
+
+          <p>
+            <strong>Monorepo</strong> עם Turborepo - שיתוף קוד (types, Supabase
+            client, design tokens) בין הפורטל וה-admin.
+          </p>
+          <hr />
+          <h2 id="supabase">מודל נתונים חדש (Supabase)</h2>
+          <h3 id="schema">Schema ראשי</h3>
+          <div class="codehilite">
+            <pre><span></span><code><span class="c1">-- ============== טבלאות ליבה ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">compounds</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">                        </span><span class="c1">-- סוטין, יהודה הלוי, ...</span>
+<span class="w">  </span><span class="n">whatsapp_group_url</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">rooms</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">compound_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">compounds</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">room_type</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                            </span><span class="c1">-- טיפול יחיד/קבוצות/אבחון</span>
+<span class="w">  </span><span class="n">address</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">is_active</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">true</span><span class="p">,</span>
+<span class="w">  </span><span class="n">default_pricing</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="c1">-- פרטים אישיים</span>
+<span class="w">  </span><span class="n">first_name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">last_name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">full_name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">GENERATED</span><span class="w"> </span><span class="n">ALWAYS</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="n">first_name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">last_name</span><span class="p">)</span><span class="w"> </span><span class="n">STORED</span><span class="p">,</span>
+<span class="w">  </span><span class="n">billing_name</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                         </span><span class="c1">-- שם לחשבונית</span>
+<span class="w">  </span><span class="n">phone</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">email</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">email_secondary</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">birth_date</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">  </span><span class="n">national_id</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                          </span><span class="c1">-- ת.ז.</span>
+<span class="w">  </span><span class="n">business_id</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                          </span><span class="c1">-- חפ/עמ</span>
+<span class="w">  </span><span class="n">home_address</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+
+<span class="w">  </span><span class="c1">-- מידע עסקי</span>
+<span class="w">  </span><span class="n">compound_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">compounds</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;חדש&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- חדש/נשלח חוזה/פעיל/מושהה/לא פעיל</span>
+<span class="w">  </span><span class="n">onboarding_status</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                    </span><span class="c1">-- נשלח חוזה/חוזה נחתם/...</span>
+<span class="w">  </span><span class="n">payment_type</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                         </span><span class="c1">-- כרטיסיות בלבד/ססיה בלבד/ססיה וכרטיסיה/חדר שלם</span>
+<span class="w">  </span><span class="n">standby_status</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                       </span><span class="c1">-- סטנד ביי</span>
+<span class="w">  </span><span class="n">standby_days</span><span class="w"> </span><span class="nb">text</span><span class="p">[],</span><span class="w">                       </span><span class="c1">-- ראשון/שני/...</span>
+
+<span class="w">  </span><span class="c1">-- צרכים וטיפול</span>
+<span class="w">  </span><span class="n">treatment_type</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                       </span><span class="c1">-- סוג טיפול</span>
+<span class="w">  </span><span class="n">treatment_duration</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                   </span><span class="c1">-- 60 דקות/50 דקות/...</span>
+<span class="w">  </span><span class="n">max_patients_in_room</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="n">service_uses</span><span class="w"> </span><span class="nb">text</span><span class="p">[],</span><span class="w">                       </span><span class="c1">-- שימושים מוצרים (מיטה/קבוצה/...)</span>
+
+<span class="w">  </span><span class="c1">-- חוזה</span>
+<span class="w">  </span><span class="n">start_date</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">  </span><span class="n">commitment_months</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span>
+<span class="w">  </span><span class="n">standing_order_start_date</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">  </span><span class="n">full_room_price</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span>
+<span class="w">  </span><span class="n">full_room_cleaning_price</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span>
+<span class="w">  </span><span class="n">full_room_furniture_price</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span>
+
+<span class="w">  </span><span class="c1">-- שיווק/מקור</span>
+<span class="w">  </span><span class="n">morning_client_id</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                    </span><span class="c1">-- ID במערכת Morning</span>
+
+<span class="w">  </span><span class="c1">-- שדות &quot;אודות&quot; (אופציונליים)</span>
+<span class="w">  </span><span class="n">about_me</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">website_url</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">instagram_url</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">facebook_url</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">other_url</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">avg_patient_age</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">patient_origin</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                       </span><span class="c1">-- מהאיזור/מחוץ לעיר/...</span>
+<span class="w">  </span><span class="n">wants_promotion</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                      </span><span class="c1">-- בטח/לא תודה/אולי</span>
+
+<span class="w">  </span><span class="c1">-- מטא</span>
+<span class="w">  </span><span class="n">has_received_key</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">false</span><span class="p">,</span>
+<span class="w">  </span><span class="n">no_overage_alerts</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">false</span><span class="p">,</span>
+<span class="w">  </span><span class="n">no_low_balance_alerts</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">false</span><span class="p">,</span>
+<span class="w">  </span><span class="n">internal_notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">customer_intake_summary</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">contract_prep_summary</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">legacy_credit_2024</span><span class="w"> </span><span class="nb">numeric</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">      </span><span class="c1">-- &quot;קרדיט 2024&quot; עבר</span>
+
+<span class="w">  </span><span class="c1">-- timestamps</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">updated_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">last_modified_by</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customer_contracts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">customer_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">customers</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">  </span><span class="n">file_url</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                             </span><span class="c1">-- Supabase Storage URL</span>
+<span class="w">  </span><span class="n">file_name</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">signed_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="p">,</span>
+<span class="w">  </span><span class="n">notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customer_photos</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">customer_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">customers</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span>
+<span class="w">  </span><span class="n">file_url</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============== ססיות (מנויים קבועים) ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sessions</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">customer_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">customers</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;פעיל&#39;</span><span class="p">,</span><span class="w">        </span><span class="c1">-- פעיל/לא פעיל</span>
+<span class="w">  </span><span class="n">start_date</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">  </span><span class="n">day_of_week</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                          </span><span class="c1">-- ראשון/שני/...</span>
+<span class="w">  </span><span class="n">start_time</span><span class="w"> </span><span class="k">time</span><span class="p">,</span>
+<span class="w">  </span><span class="n">end_time</span><span class="w"> </span><span class="k">time</span><span class="p">,</span>
+<span class="w">  </span><span class="n">room_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">rooms</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">hours_included</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w">                        </span><span class="c1">-- שעות כלולות בחודש</span>
+<span class="w">  </span><span class="n">price_before_discount</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span>
+<span class="w">  </span><span class="n">price_after_discount</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span>
+<span class="w">  </span><span class="n">pricing_subscription</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">session_transactions</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="c1">-- חוזי ססיה עם הוראת קבע</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">customer_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">customers</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;פעיל&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">start_date</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">  </span><span class="n">standing_order_start_date</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">  </span><span class="n">price_before_discount</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span>
+<span class="w">  </span><span class="n">price_after_discount</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span>
+<span class="w">  </span><span class="n">discount_percent</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span>
+<span class="w">  </span><span class="n">notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============== תשלומים ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">payments</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">customer_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">customers</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">payment_type</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">                </span><span class="c1">-- כרטיסיה/ססיה/קורס/סדנא/אחר</span>
+<span class="w">  </span><span class="n">payment_method</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                       </span><span class="c1">-- אשראי/מזומן/העברה/הוראת קבע</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;שולם&#39;</span><span class="p">,</span><span class="w">                 </span><span class="c1">-- שולם/ממתין/נכשל/בוטל/עתידי</span>
+<span class="w">  </span><span class="n">payment_date</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">reference_number</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                     </span><span class="c1">-- אסמכתא</span>
+<span class="w">  </span><span class="n">amount</span><span class="w"> </span><span class="nb">numeric</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">hours_purchased</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span><span class="w">                   </span><span class="c1">-- שעות כרטיסיה שנרכשו</span>
+<span class="w">  </span><span class="n">description_from_morning</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">invoice_url</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">invoice_file_url</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                     </span><span class="c1">-- Supabase Storage</span>
+<span class="w">  </span><span class="n">session_transaction_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">session_transactions</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">session_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">sessions</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">compound_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">compounds</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">is_future_projected</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="c1">-- תשלום עתידי (תחזית)</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============== Bookings (שימושים) ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">bookings</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">customer_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">customers</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">room_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">rooms</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">session_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">sessions</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">booking_title</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                        </span><span class="c1">-- ססיה/שעתי/סדנה/קורס/חד פעמי/paid</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;מתוכנן&#39;</span><span class="p">,</span><span class="w">               </span><span class="c1">-- מתוכנן/בוצע/מבוטל</span>
+<span class="w">  </span><span class="k">source</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                               </span><span class="c1">-- ידני/ייבוא שבועי/ייבוא היסטורי</span>
+<span class="w">  </span><span class="nb">date</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">start_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">end_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">duration_hours</span><span class="w"> </span><span class="nb">numeric</span><span class="w"> </span><span class="k">GENERATED</span><span class="w"> </span><span class="n">ALWAYS</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">EXTRACT</span><span class="p">(</span><span class="n">EPOCH</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="n">end_at</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_at</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3600</span><span class="p">.</span><span class="mi">0</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="n">STORED</span><span class="p">,</span>
+<span class="w">  </span><span class="n">revenue_per_use</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span><span class="w">                   </span><span class="c1">-- ההכנסה ממוצעת/בפועל</span>
+<span class="w">  </span><span class="n">source_import_id</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                     </span><span class="c1">-- ID מ-Skedda</span>
+<span class="w">  </span><span class="n">notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">bookings_date_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">bookings</span><span class="p">(</span><span class="nb">date</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">bookings_customer_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">bookings</span><span class="p">(</span><span class="n">customer_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">bookings_room_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">bookings</span><span class="p">(</span><span class="n">room_id</span><span class="p">);</span>
+
+<span class="c1">-- ============== Skedda Raw Buffer ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">skedda_raw_imports</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">external_id</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">  </span><span class="n">start_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="p">,</span>
+<span class="w">  </span><span class="n">end_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="p">,</span>
+<span class="w">  </span><span class="n">duration_minutes</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span>
+<span class="w">  </span><span class="n">activity_title</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">first_name</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">last_name</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">email</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">phone</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">room_name</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">price</span><span class="w"> </span><span class="nb">numeric</span><span class="p">,</span>
+<span class="w">  </span><span class="n">payment_status</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">processed</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">false</span><span class="p">,</span>
+<span class="w">  </span><span class="n">matched_booking_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">bookings</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">error_notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============== לידים ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">leads</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">category</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;main&#39;</span><span class="p">,</span><span class="w">              </span><span class="c1">-- main/dreamlab (איחוד עם HAKLIKA TALK)</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">phone</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">email</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;פניה חדשה&#39;</span><span class="p">,</span><span class="w">            </span><span class="c1">-- פניה חדשה/רלוונטי/לא רלוונטי/נסגר/...</span>
+<span class="w">  </span><span class="k">source</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                               </span><span class="c1">-- פייסבוק קמפיין/אינסטגרם/אורגני/...</span>
+<span class="w">  </span><span class="n">lead_source_type</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                     </span><span class="c1">-- קמפיין/אורגני/טלפון</span>
+<span class="w">  </span><span class="n">treatment_type</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">rental_type</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                          </span><span class="c1">-- ססיה קבועה/שעתית/חדר שלם/סדנא</span>
+<span class="w">  </span><span class="k">location</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                             </span><span class="c1">-- מיקום מועדף</span>
+<span class="w">  </span><span class="n">meeting_location</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                     </span><span class="c1">-- מיקום פגישה</span>
+<span class="w">  </span><span class="n">meeting_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="p">,</span>
+<span class="w">  </span><span class="n">follow_up_status</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">customer_notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                       </span><span class="c1">-- הערות שהליד נתן</span>
+<span class="w">  </span><span class="n">internal_notes</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                       </span><span class="c1">-- הערות צוות</span>
+<span class="w">  </span><span class="n">task_helit</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">task_avigail</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">converted_to_customer_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">customers</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">last_follow_up_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="p">,</span>
+<span class="w">  </span><span class="n">excel_import_date</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============== Message Templates ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">message_templates</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">title</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">body</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">category</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                             </span><span class="c1">-- לידים/שוטף/קליטת לקוחות</span>
+<span class="w">  </span><span class="n">description</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">image_url</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">template_number</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">updated_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============== Call Log + Scheduled Messages ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">call_logs</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">occurred_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">log_type</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">                    </span><span class="c1">-- שיחה טלפונית/הודעת וואטסאפ/תזמון הודעת וואטסאפ</span>
+<span class="w">  </span><span class="n">responsible</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                          </span><span class="c1">-- הילית/אביגיל</span>
+<span class="w">  </span><span class="n">customer_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">customers</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">lead_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">leads</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">description</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">scheduled_message_content</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">scheduled_send_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="p">,</span>
+<span class="w">  </span><span class="n">sent_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="p">,</span>
+<span class="w">  </span><span class="n">send_status</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                          </span><span class="c1">-- pending/sent/failed</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">call_logs_scheduled_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">call_logs</span><span class="p">(</span><span class="n">scheduled_send_at</span><span class="p">)</span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">send_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pending&#39;</span><span class="p">;</span>
+
+<span class="c1">-- ============== Tasks/Alerts ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tasks</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">customer_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">customers</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">lead_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">leads</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">title</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">description</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;לטיפול&#39;</span><span class="p">,</span><span class="w">               </span><span class="c1">-- לטיפול/בטיפול/בוצע/תקוע</span>
+<span class="w">  </span><span class="n">priority</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">due_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="p">,</span>
+<span class="w">  </span><span class="n">assigned_to</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="k">source</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w">                               </span><span class="c1">-- auto:balance-negative/auto:payment-late/manual</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">completed_at</span><span class="w"> </span><span class="n">timestamptz</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============== Pricing ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">session_pricing</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="c1">-- מחירון ססיות לפי כמות שעות</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">hours_per_month</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">price</span><span class="w"> </span><span class="nb">numeric</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">discount_tiers</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="c1">-- מדרגות הנחה: 1500+ ש&quot;ח = 5% / 2500+ ש&quot;ח = 10%</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">min_amount</span><span class="w"> </span><span class="nb">numeric</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">discount_percent</span><span class="w"> </span><span class="nb">numeric</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============== Audit Log ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">audit_log</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">bigserial</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="k">table_name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">record_id</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">action</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">                      </span><span class="c1">-- insert/update/delete</span>
+<span class="w">  </span><span class="n">changed_by</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">changed_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">before_data</span><span class="w"> </span><span class="n">jsonb</span><span class="p">,</span>
+<span class="w">  </span><span class="n">after_data</span><span class="w"> </span><span class="n">jsonb</span><span class="p">,</span>
+<span class="w">  </span><span class="n">changes</span><span class="w"> </span><span class="n">jsonb</span><span class="w">                              </span><span class="c1">-- diff מצומצם</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">audit_log_record_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">audit_log</span><span class="p">(</span><span class="k">table_name</span><span class="p">,</span><span class="w"> </span><span class="n">record_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">audit_log_user_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">audit_log</span><span class="p">(</span><span class="n">changed_by</span><span class="p">,</span><span class="w"> </span><span class="n">changed_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">);</span>
+
+<span class="c1">-- ============== Views לחישובים ==============</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">customer_balance</span><span class="w"> </span><span class="k">AS</span>
+<span class="k">SELECT</span>
+<span class="w">  </span><span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span>
+<span class="w">  </span><span class="k">c</span><span class="p">.</span><span class="n">legacy_credit_2024</span>
+<span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">hours_purchased</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span><span class="k">WHERE</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">payment_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;כרטיסיה&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;שולם&#39;</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">duration_hours</span><span class="p">)</span><span class="w"> </span><span class="n">FILTER</span><span class="w"> </span><span class="p">(</span><span class="k">WHERE</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">booking_title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;שעתי&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;מבוטל&#39;</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">  </span><span class="k">AS</span><span class="w"> </span><span class="n">balance_hours</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">c</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">payments</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">bookings</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">legacy_credit_2024</span><span class="p">;</span>
+</code></pre>
+          </div>
+
+          <h3 id="migration-mapping-airtable-supabase">
+            Migration mapping (Airtable → Supabase)
+          </h3>
+          <p>
+            ראה <code>docs/airtable-schema-raw.json</code> עבור field IDs. נכתב
+            migration script נפרד שמבצע:
+          </p>
+          <ol>
+            <li>דליית כל הטבלאות מ-Airtable API</li>
+            <li>המרה לפי mapping</li>
+            <li>
+              שמירת <code>airtable_id</code> במטא (לcross-reference במהלך מעבר)
+            </li>
+            <li>validation: counts + sums + balance per customer</li>
+          </ol>
+          <hr />
+          <h2 id="-admin-app">מודולים ב-Admin App</h2>
+          <h3 id="1">1. דאשבורד ראשי</h3>
+          <ul>
+            <li>
+              KPIs: לקוחות פעילים, הכנסות חודש נוכחי, ניצול חדרים, לידים פתוחים
+            </li>
+            <li>
+              התראות אקטיביות: לקוחות במינוס יתרה, איחורי תשלום, לידים ללא מענה
+              X ימים
+            </li>
+            <li>פעילות אחרונה (audit log אחרון)</li>
+            <li>גרפים: הכנסות לאורך זמן, ניצול חדרים</li>
+          </ul>
+          <h3 id="2">2. ניהול לקוחות ⭐ הורחב</h3>
+          <p><strong>List views (מרובות)</strong>:</p>
+          <ul>
+            <li>כל הלקוחות (table view default)</li>
+            <li>
+              <strong>Saved filters אישיים + שיתופיים</strong> (כמו Airtable
+              views) - כל משתמש יכול לשמור, אפשר לשתף עם הצוות
+            </li>
+            <li>
+              ברירות מחדל: לפי מתחם, לפי סטטוס, לפי סוג תשלומים, לפי onboarding
+              status
+            </li>
+            <li>
+              <strong>תצוגות עבודה (work alerts)</strong>: לקוחות במינוס יתרה ⚠️
+              / כרטיסיה עומדת להיגמר (&lt;3 שעות) / לקוחות שלא הופיעו X שבועות
+              (churn risk)
+            </li>
+            <li>
+              תצוגות נוספות: סטנד ביי לפי יום, ימי הולדת החודש, לקוחות חדשים,
+              שעזבו, ללא חוזה
+            </li>
+            <li>
+              <strong>Display formats</strong>: table / grid (cards עם תמונה) /
+              compact
+            </li>
+          </ul>
+          <p><strong>כרטיס לקוח - 12 tabs</strong>:</p>
+          <ol>
+            <li>
+              <strong>Overview / סקירה אישית</strong> ⭐ - KPIs: יתרה, ניצול
+              חודשי, LTV, ססיה הבאה, תשלום הבא
+            </li>
+            <li><strong>פרטים אישיים</strong> - כל השדות + תמונה + "אודות"</li>
+            <li><strong>חוזה</strong> - PDF + מחירים מותאמים</li>
+            <li><strong>ססיות</strong> - מנויים פעילים והיסטוריים</li>
+            <li><strong>תשלומים</strong> - היסטוריה + עתידיים + סטטיסטיקה</li>
+            <li><strong>Bookings</strong> - היסטוריית שימושים (CRUD מלא)</li>
+            <li>
+              <strong>לוח שנה אישי</strong> ⭐ - calendar עם כל ה-bookings
+              והססיות (week/month view)
+            </li>
+            <li><strong>משימות והערות צוות</strong> ⭐ - timeline כרונולוגי</li>
+            <li><strong>תיעוד שיחות</strong> - call log</li>
+            <li>
+              <strong>הודעות</strong> - שליחה ידנית מ-templates + היסטוריה
+            </li>
+            <li>
+              <strong>היסטוריית פעולות (audit log)</strong> ⭐ - מי שינה מה ומתי
+            </li>
+            <li>
+              <strong>קישורים</strong> - אתר, אינסטגרם, פייסבוק, קבוצות WhatsApp
+            </li>
+          </ol>
+          <p>
+            <strong>כפתורי פעולה</strong>: שליחת WhatsApp, שליחת טופס עדכון,
+            הכנת חוזה, יצירת משימה
+          </p>
+          <h3 id="3">3. ניהול לידים</h3>
+          <ul>
+            <li>צינור (kanban) לפי סטטוס: פניה חדשה → רלוונטי → נסגר</li>
+            <li>
+              View מאוחד ל-<code>לידים</code> + <code>HAKLIKA TALK</code> (עם
+              category)
+            </li>
+            <li>שדות מפתח: מקור, סוג השכרה, מיקום, סוג טיפול</li>
+            <li>Follow-up: לידים ללא מענה X ימים</li>
+            <li>המרה ללקוח (כפתור)</li>
+            <li>שליחת הודעה מ-template</li>
+          </ul>
+          <h3 id="4">4. ניהול ססיות וחוזים</h3>
+          <ul>
+            <li>רשימת מנויים פעילים</li>
+            <li>יצירת מנוי חדש: בחירת לקוח + יום + שעה + חדר + מחיר + הנחה</li>
+            <li>חישוב הנחה אוטומטי לפי מדרגות</li>
+            <li>מעקב אחר הוראות קבע</li>
+            <li>
+              חוזים: רשימת PDFs + שליחת חוזה (אינטגרציה עם Fill Faster - בעתיד)
+            </li>
+          </ul>
+          <h3 id="5">5. ניהול תשלומים</h3>
+          <ul>
+            <li>רשימה עם פילטרים: סוג, סטטוס, תאריך, לקוח, מתחם</li>
+            <li>הוספת תשלום ידני</li>
+            <li>שיוך לחשבונית (URL + קובץ)</li>
+            <li>תשלומים עתידיים: צפי + ביטול לקוחות שעזבו</li>
+            <li>ייבוא מחשבונית ירוקה (אוטומטי)</li>
+          </ul>
+          <h3 id="6-bookings-crud">6. Bookings (CRUD מלא) ⭐ עודכן</h3>
+          <ul>
+            <li>
+              <strong>כל אחד בצוות יכול להוסיף/לערוך/למחוק</strong> (עם audit
+              log מלא)
+            </li>
+            <li>
+              Skedda נשאר source-of-truth לbookings רגילים מלקוחות, אבל admin
+              app מאפשר:
+            </li>
+            <li>
+              <strong>הוספה ידנית</strong> - סדנאות, אירועים מיוחדים, ייבוא
+              היסטורי
+            </li>
+            <li>
+              <strong>עריכה</strong> - תיקון שיוך לקוח/חדר/סטטוס, מעבר
+              כרטיסיה↔ססיה (כמו היום ב-Airtable)
+            </li>
+            <li><strong>ביטול/מחיקה</strong></li>
+            <li>
+              <strong>התראה ויזואלית בולטת</strong> בהוספת booking ידני (למנוע
+              כפילות עם Skedda)
+            </li>
+            <li>
+              List views: היום / השבוע / החודש / חודש שעבר / לפי חדר / לפי לקוח
+              / ביטולים / חורגים
+            </li>
+            <li>
+              <strong>Skedda customer matching</strong>: אם לקוח מ-Skedda לא
+              קיים במערכת → <strong>נוצר אוטומטית</strong> עם status='חדש'
+              (מסומן לבדיקה ידנית)
+            </li>
+          </ul>
+          <h3 id="7-calendar-views">7. Calendar Views ⭐ חדש</h3>
+          <ul>
+            <li>
+              <strong>Master calendar</strong> - כל החדרים, כל ה-bookings (כמו
+              Skedda אבל דינמי עם סינון לפי לקוח/חדר/סוג)
+            </li>
+            <li>
+              <strong>לוח לחדר ספציפי</strong> - לראות ניצול ומי משתמש בחדר X
+            </li>
+            <li>
+              <strong>לוח ללקוח ספציפי</strong> - calendar אישי (מופיע גם בכרטיס
+              הלקוח)
+            </li>
+            <li>Day / Week / Month views</li>
+          </ul>
+          <h3 id="8-skedda-raw-debug">8. Skedda Raw (לdebug)</h3>
+          <ul>
+            <li>צפייה ב-imports גולמיים</li>
+            <li>שגיאות שיוך - matching ידני</li>
+            <li>ייצוא היסטורי</li>
+          </ul>
+          <h3 id="9">9. משימות והתראות</h3>
+          <ul>
+            <li>רשימה אישית (assigned_to)</li>
+            <li>רשימה כללית</li>
+            <li>יצירה ידנית</li>
+            <li>אוטומטיים מ-rules (יתרה במינוס, איחור)</li>
+          </ul>
+          <h3 id="10">10. נוסחי הודעות</h3>
+          <ul>
+            <li>ניהול templates עם משתנים ({{name}}, {{balance}}, וכו')</li>
+            <li>קטגוריות: לידים / שוטף / קליטת לקוחות</li>
+            <li>preview</li>
+          </ul>
+          <h3 id="11">11. תיעוד שיחות</h3>
+          <ul>
+            <li>Call log לכל לקוח/ליד</li>
+            <li>הודעות מתוזמנות (pending sends)</li>
+            <li>הוספה ידנית</li>
+          </ul>
+          <h3 id="12">12. דוחות</h3>
+          <ul>
+            <li>
+              <strong>הכנסות</strong>: עבר/הווה/עתיד, לפי חודש/שנה/חדר/לקוח
+            </li>
+            <li>
+              <strong>ניצול חדרים</strong>: שעות בחודש, אחוז ניצול, חדרים ריקים
+            </li>
+            <li><strong>לקוחות</strong>: LTV, churn rate, חדשים, שעזבו</li>
+            <li><strong>לידים</strong>: מקור הגעה, אחוז המרה, זמן תגובה</li>
+            <li>
+              <strong>ספקולציות</strong>: "מה אם אעלה מחיר ב-10%?", "מה אם אוסיף
+              חדר?"
+            </li>
+            <li>ייצוא ל-CSV/PDF</li>
+          </ul>
+          <h3 id="13">13. הגדרות</h3>
+          <ul>
+            <li>מתחמים, חדרים</li>
+            <li>מדרגות הנחה, מחירון ססיות</li>
+            <li>משתמשי צוות + הרשאות</li>
+            <li>אינטגרציות (Skedda, חשבונית ירוקה, ManyChat, Green API)</li>
+            <li>ניהול templates של הודעות</li>
+          </ul>
+          <h3 id="cross-cutting-features-">
+            Cross-cutting features ⭐ חדש - פיצ'רים שחוצים את כל המודולים
+          </h3>
+          <ul>
+            <li>
+              <strong>Global search (Cmd+K)</strong> - חיפוש מהיר על פני לקוחות
+              / לידים / תשלומים / bookings
+            </li>
+            <li><strong>Recent items</strong> - 10 רשומות שנפתחו לאחרונה</li>
+            <li>
+              <strong>Favorites / pinned</strong> - לקוחות "אהובים" שצריך לעקוב
+              אחריהם
+            </li>
+            <li>
+              <strong>Bulk operations</strong> - בחירה מרובה → פעולה (שליחת
+              הודעה, עדכון סטטוס, ייצוא)
+            </li>
+            <li><strong>Export</strong> - CSV / PDF / Excel מכל view</li>
+            <li>
+              <strong>Mobile responsive</strong> - הצוות לפעמים בשטח (טאבלט /
+              טלפון)
+            </li>
+            <li>
+              <strong>Saved views אישיים ושיתופיים</strong> - שמירה של
+              פילטרים+סדר+עמודות, שיתוף עם הצוות (כמו Airtable)
+            </li>
+          </ul>
+          <hr />
+          <h2 id="_7">שלבי ביצוע</h2>
+          <p>
+            <strong>עיקרון מנחה</strong>: פיתוח עם seed data. מיגרציה אמיתית רק
+            ב-cutover.
+          </p>
+          <h3 id="phase-0-poc-1">Phase 0: POC (שבוע 1)</h3>
+          <ul>
+            <li>הקמת Supabase project (free tier)</li>
+            <li>מיגרציה של טבלת <code>לקוחות</code> בלבד (read-only)</li>
+            <li>
+              query speed test: SELECT עם JOIN, GROUP BY - השוואה ל-Airtable API
+            </li>
+            <li>אם POC מצליח (הוכחה &lt;500ms ל-dashboard query) → ממשיכים</li>
+          </ul>
+          <h3 id="phase-1-foundation-2-4">Phase 1: Foundation (שבועות 2-4)</h3>
+          <ul>
+            <li>מימוש schema מלא ב-Supabase (כל הטבלאות שזיהינו)</li>
+            <li>
+              Seed data ריאליסטי: 20 לקוחות, 5 מתחמים, 30 חדרים, מאות
+              bookings/תשלומים
+            </li>
+            <li>RLS policies</li>
+            <li>views ו-functions לחישוב יתרה</li>
+            <li>Audit log triggers על כל הטבלאות</li>
+            <li>
+              Monorepo setup (Turborepo): apps/portal + apps/admin +
+              packages/shared
+            </li>
+          </ul>
+          <h3 id="phase-2-portal-migration-5-6">
+            Phase 2: Portal Migration (שבועות 5-6)
+          </h3>
+          <ul>
+            <li>
+              החלפת <code>src/lib/airtable/</code> ב-<code
+                >src/lib/supabase/</code
+              >
+            </li>
+            <li>אותו interface, אותה תוצאה</li>
+            <li>בדיקה שהפורטל עובד זהה מול Supabase seed data</li>
+            <li><strong>production עדיין על Airtable</strong></li>
+          </ul>
+          <h3 id="phase-3-admin-app-core-7-14">
+            Phase 3: Admin App - Core (שבועות 7-14)
+          </h3>
+          <p>לפי סדר עדיפויות:</p>
+          <ol>
+            <li>Auth (Supabase Auth + Google SSO)</li>
+            <li>Layout + nav</li>
+            <li>ניהול לקוחות (CRUD + tabs)</li>
+            <li>ניהול תשלומים</li>
+            <li>ניהול ססיות + חוזים</li>
+            <li>Bookings view (read-only)</li>
+            <li>דאשבורד בסיסי</li>
+          </ol>
+          <h3 id="phase-4-admin-app-advanced-15-22">
+            Phase 4: Admin App - Advanced (שבועות 15-22)
+          </h3>
+          <ol>
+            <li>ניהול לידים (kanban)</li>
+            <li>נוסחי הודעות</li>
+            <li>תיעוד שיחות + תזמון</li>
+            <li>משימות והתראות</li>
+            <li>דוחות</li>
+            <li>הגדרות</li>
+          </ol>
+          <h3 id="phase-5-sync-layer-23-25">
+            Phase 5: Sync Layer (שבועות 23-25)
+          </h3>
+          <ul>
+            <li>Supabase Edge Functions לקבלת data מ-Make</li>
+            <li>עדכון Make scenarios (14):</li>
+            <li>M1-M11 לעבוד מול Supabase</li>
+            <li>מיגרציה של M2 החסר (ביטול תשלומים עתידיים)</li>
+            <li>בדיקה end-to-end עם seed data</li>
+          </ul>
+          <h3 id="phase-6-manychat-migration-26-28">
+            Phase 6: ManyChat Migration (שבועות 26-28)
+          </h3>
+          <ul>
+            <li>חיבור ManyChat ל-WhatsApp Business</li>
+            <li>העברת flows מ-Green API ל-ManyChat (ללידים, שידור ללקוחות)</li>
+            <li>שמירת Green API לפנים-צוותי</li>
+            <li>בדיקות</li>
+          </ul>
+          <h3 id="phase-7-cutover-29">Phase 7: Cutover (שבוע 29)</h3>
+          <ul>
+            <li>
+              migration script: כל הנתונים מ-Airtable ל-Supabase production
+            </li>
+            <li>validation מלאה: counts, sums, balance per customer</li>
+            <li>החלפת Make scenarios ל-Supabase</li>
+            <li>שינוי portal production ל-Supabase</li>
+            <li>מעבר admin app ל-production</li>
+            <li>Airtable → read-only (גיבוי 60 יום)</li>
+          </ul>
+          <h3 id="phase-8-stabilization-30-32">
+            Phase 8: Stabilization (שבועות 30-32)
+          </h3>
+          <ul>
+            <li>מעקב + תיקוני באגים</li>
+            <li>audit log review</li>
+            <li>performance tuning</li>
+            <li>documentation לצוות</li>
+          </ul>
+          <p>
+            <strong>סה"כ</strong>: ~32 שבועות / 7 חודשים בקצב נינוח (חלקיות
+            זמן).
+          </p>
+          <hr />
+          <h2 id="_8">החלטות שנקבעו</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>נושא</th>
+                <th>החלטה</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>גישת מיגרציה</strong></td>
+                <td>פיתוח עם seed data, מיגרציה רק ב-cutover</td>
+              </tr>
+              <tr>
+                <td><strong>Admin auth</strong></td>
+                <td>שם משתמש + סיסמה + Google SSO</td>
+              </tr>
+              <tr>
+                <td><strong>Audit log</strong></td>
+                <td>כן, מפורט (מי/מתי/לפני/אחרי)</td>
+              </tr>
+              <tr>
+                <td><strong>Monorepo</strong></td>
+                <td>Turborepo עם apps/portal + apps/admin + packages/shared</td>
+              </tr>
+              <tr>
+                <td><strong>Skedda</strong></td>
+                <td>נשאר. Booking system עצמאי בעתיד הרחוק</td>
+              </tr>
+              <tr>
+                <td><strong>WhatsApp</strong></td>
+                <td>Green API → ManyChat (לקוחות). Green API נשאר לצוות</td>
+              </tr>
+              <tr>
+                <td><strong>Fillout</strong></td>
+                <td>נשאר ללקוחות. טופס הכנת חוזה פנימי - להעביר ל-admin</td>
+              </tr>
+              <tr>
+                <td><strong>Fill Faster</strong></td>
+                <td>נשאר לעת עתה. דחיית פיתוח חתימה דיגיטלית</td>
+              </tr>
+              <tr>
+                <td><strong>HAKLIKA TALK</strong></td>
+                <td>
+                  מאוחד עם <code>leads</code> תחת
+                  <code>category='dreamlab'</code>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>כרטיסיות table</strong></td>
+                <td>לא צריך (היא ריקה). הלוגיקה בתוך <code>payments</code></td>
+              </tr>
+              <tr>
+                <td><strong>תשלומים עתידיים</strong></td>
+                <td>נשאר אבל לוגיקה משופרת + תיקון M2 החסר</td>
+              </tr>
+              <tr>
+                <td><strong>דוחות</strong></td>
+                <td>הכנסות + ניצול חדרים + LTV + churn + lead funnel</td>
+              </tr>
+              <tr>
+                <td><strong>התראות</strong></td>
+                <td>ליד חדש, ליד ללא מענה, איחור תשלום, יתרה במינוס</td>
+              </tr>
+              <tr>
+                <td><strong>מדרגות הנחה</strong></td>
+                <td>1500+ = 5%, 2500+ = 10% (table-driven)</td>
+              </tr>
+              <tr>
+                <td><strong>דאטה רטנשן</strong></td>
+                <td>
+                  המלצה: שמור הכל. Postgres עם indexes טוב במיליוני שורות. אם
+                  בעתיד יהיה צורך - archive table
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <h2 id="_9">שאלות פתוחות / לבירור בהמשך</h2>
+          <ol>
+            <li>
+              <strong>שיעור המרה ליד → לקוח</strong> - לא ידוע, נחשב מהנתונים
+              אחרי מיגרציה
+            </li>
+            <li>
+              <strong>חדרים פעילים מדויק</strong> - ~30 אבל לא ידוע מספר מדויק.
+              לסנן <code>is_active=true</code> במיגרציה
+            </li>
+            <li>
+              <strong>תמהיל הכנסות ססיה vs כרטיסיה</strong> - לא ידוע. נחשב
+              בדוחות
+            </li>
+            <li>
+              <strong>Skedda customer matching</strong> - אם לקוח חדש מזמין דרך
+              Skedda לפני שיש לו שורה ב-<code>customers</code>, מה קורה? (כנראה:
+              זה לא יקרה כי הוא חייב להירשם קודם)
+            </li>
+            <li>
+              <strong>Booking system עתידי</strong> - לא בסקופ. מספר חודשים אחרי
+              launch של admin app
+            </li>
+          </ol>
+          <hr />
+          <h2 id="_10">מסמכים נלווים</h2>
+          <ul>
+            <li>
+              <code>docs/airtable-schema-raw.json</code> - schema מלא של
+              Airtable (91KB)
+            </li>
+            <li><code>docs/migration-plan.md</code> - מסמך זה</li>
+            <li>
+              <code>~/.claude/plans/ticklish-singing-koala.md</code> - גרסה
+              תמציתית של התוכנית
+            </li>
+          </ul>
+        </div>
+      </main>
+    </div>
+    <script>
+      // Build TOC from h2/h3 in content
+      (function () {
+        const content = document.getElementById("content");
+        const headings = content.querySelectorAll("h2, h3");
+        const tocPlaceholder = document.getElementById("toc-placeholder");
+        let html = "<ul>";
+        let inSubList = false;
+        headings.forEach((h) => {
+          if (!h.id) {
+            h.id = h.textContent
+              .trim()
+              .replace(/\s+/g, "-")
+              .replace(/[^\w\u0590-\u05ff-]/g, "");
+          }
+          const text = h.textContent.trim();
+          if (h.tagName === "H2") {
+            if (inSubList) {
+              html += "</ul></li>";
+              inSubList = false;
+            }
+            html += `<li><a href="#${h.id}">${text}</a>`;
+          } else {
+            if (!inSubList) {
+              html += "<ul>";
+              inSubList = true;
+            }
+            html += `<li><a href="#${h.id}">${text}</a></li>`;
+          }
+        });
+        if (inSubList) html += "</ul></li>";
+        html += "</ul>";
+        tocPlaceholder.innerHTML = html;
+      })();
+    </script>
+  </body>
+</html>

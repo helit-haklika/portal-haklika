@@ -1,0 +1,192 @@
+/* Auth pages (login, verify, check-email) */
+
+/* ── Auth pages ─────────────────────────────────── */
+.hk-auth {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px 32px;
+  background: var(--bg);
+}
+.hk-auth__brand {
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.hk-logo {
+  width: 160px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(138, 92, 0, 0.18));
+}
+.hk-brand-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.hk-brand-tagline {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+.hk-auth__head {
+  margin-bottom: 28px;
+}
+.hk-auth__title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.hk-auth__sub {
+  font-size: 14.5px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+.hk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+.hk-field__label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  padding-inline-start: 2px;
+}
+.hk-input {
+  height: 50px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--ink);
+  font:
+    500 15px var(--font-heebo, "Heebo"),
+    system-ui;
+  outline: none;
+  direction: ltr;
+  text-align: right;
+  transition:
+    border-color 0.12s,
+    box-shadow 0.12s;
+  width: 100%;
+}
+.hk-input:focus {
+  border-color: var(--ink);
+  box-shadow: var(--shadow-glow);
+}
+.hk-btn {
+  height: 52px;
+  border-radius: 100px;
+  border: 0;
+  background: var(--ink);
+  color: var(--bg);
+  font:
+    600 15px var(--font-heebo, "Heebo"),
+    system-ui;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+  width: 100%;
+}
+.hk-btn:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+.hk-btn:active {
+  transform: translateY(0) scale(0.99);
+}
+.hk-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--border-strong);
+  box-shadow: none;
+}
+.hk-btn--ghost:hover {
+  background: var(--surface-2);
+  box-shadow: var(--shadow-sm);
+}
+
+.hk-auth__help {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+.hk-auth__help a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.hk-auth__legal {
+  margin-top: auto;
+  padding-top: 32px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-faint);
+  line-height: 1.5;
+}
+
+/* ── Check-email screen ─────────────────────────── */
+.hk-check {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 24px;
+  gap: 8px;
+}
+.hk-check__icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  position: relative;
+}
+.hk-check__icon::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1px dashed var(--primary);
+  opacity: 0.4;
+}
+.hk-check__email-box {
+  margin-top: 18px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--ink);
+  direction: ltr;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}

@@ -12,6 +12,7 @@ export type RequestLinkOutcome =
 
 export type ErrorSource =
   | "airtable"
+  | "supabase"
   | "make"
   | "kv"
   | "dashboard"

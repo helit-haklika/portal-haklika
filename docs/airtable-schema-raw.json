@@ -1,0 +1,4890 @@
+{
+  "tables": [
+    {
+      "id": "tblIUoXFMdWuFldvr",
+      "name": "לקוחות",
+      "primaryFieldId": "fld8q4HfntgiePbuF",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fldtS1kfrNowtUhnq}&\" \"&{fldgjS6qIzr6z3v0P}",
+            "referencedFieldIds": ["fldtS1kfrNowtUhnq", "fldgjS6qIzr6z3v0P"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fld8q4HfntgiePbuF",
+          "name": "שם לקוח"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldtS1kfrNowtUhnq",
+          "name": "שם פרטי"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldgjS6qIzr6z3v0P",
+          "name": "שם משפחה"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldQ1m7afoLjSUhBU",
+          "name": "שם לחשבונית"
+        },
+        { "type": "singleLineText", "id": "fldz7BYiaCZCBY0JW", "name": "S/B" },
+        { "type": "phoneNumber", "id": "fldnT6EZke6P3ZMru", "name": "טלפון" },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({fldnT6EZke6P3ZMru}, \"(\", \"\"), \")\", \"\"), \"-\", \"\"), \" \", \"\")\n",
+            "referencedFieldIds": ["fldnT6EZke6P3ZMru"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fld9nR31HBulkFgxz",
+          "name": "טלפון מפורמט"
+        },
+        { "type": "button", "id": "fldTJ6Ju4ca1UEO26", "name": "להתקשר" },
+        {
+          "type": "button",
+          "id": "fldF5C9xqHmDPjqse",
+          "name": "שליחת וואטסאפ"
+        },
+        { "type": "email", "id": "fldN0Oc8acHyGvv4U", "name": "אימייל" },
+        { "type": "email", "id": "fldbNTjxkyDCRl8iS", "name": "אימייל נוסף" },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selrfyDkx0aO1NQL3",
+                "name": "חדש",
+                "color": "greenLight1"
+              },
+              {
+                "id": "selhJ5rFagN0IqeqT",
+                "name": "נשלח חוזה לחתימה",
+                "color": "blueLight1"
+              },
+              {
+                "id": "seleHhHXfbm8RALup",
+                "name": "פעיל",
+                "color": "greenBright"
+              },
+              {
+                "id": "selVJRfOQtHhKQ21L",
+                "name": "מושהה",
+                "color": "yellowBright"
+              },
+              {
+                "id": "selzohV1HAjE6eAtv",
+                "name": "לא פעיל",
+                "color": "orangeBright"
+              }
+            ]
+          },
+          "id": "fldRskI911bRrB9Fe",
+          "name": "סטטוס לקוח"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selrVLBWp7laqKlaZ",
+                "name": "כרטיסיות בלבד",
+                "color": "cyanLight1"
+              },
+              {
+                "id": "selwJFaujXY0LJ9N6",
+                "name": "ססיה בלבד",
+                "color": "yellowBright"
+              },
+              {
+                "id": "selbKgr6jyAa2uJjt",
+                "name": "ססיה וכרטיסיה",
+                "color": "pinkBright"
+              },
+              {
+                "id": "sel3VOdGRc1yb8JkJ",
+                "name": "חדר שלם",
+                "color": "tealBright"
+              }
+            ]
+          },
+          "id": "fldUx4zVEW7MuARm5",
+          "name": "סוג תשלומים"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selJozu2bS4wXivL8",
+                "name": "סטנד ביי",
+                "color": "tealBright"
+              }
+            ]
+          },
+          "id": "fldSHIm0dTXYs6m4g",
+          "name": "לקוח בסטנד ביי"
+        },
+        { "type": "multilineText", "id": "fldjBrbS0X2GLdaQ8", "name": "הערות" },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblp3BzSRFpcqVsXR",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldGN3UCcvWqESc8Y"
+          },
+          "id": "fldyuVtSqyA8hSvCg",
+          "name": "ססיות"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldCaQAomXZQkHdmP",
+            "fieldIdInLinkedTable": "fldjuPqeTxQvzHadB",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selFORMULADEFAULT",
+                    "name": "איחור בתשלום",
+                    "color": "redBright"
+                  },
+                  {
+                    "id": "selwrRPYnRQX69ozV",
+                    "name": "בזמן",
+                    "color": "greenLight1"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldXiDkpxGZkwpzDW",
+          "name": "עברו 35 יום מאז תשלום אחרון לעסקת ססיה?"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblfGq7ezJ45irjed",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldRpyGjjkDhK7Cbn"
+          },
+          "id": "fldRb7Ta14YbpL4O9",
+          "name": "תשלומים"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldRb7Ta14YbpL4O9",
+            "fieldIdInLinkedTable": "fldTahg864cVNCC1a",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "flddelXQ4185Qb1mj",
+          "name": "תשלום לשעה (לפי תשלום אחרון)"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldRb7Ta14YbpL4O9",
+            "fieldIdInLinkedTable": "fld7ERUfgEUa7Trf7",
+            "referencedFieldIds": [],
+            "result": {
+              "type": "currency",
+              "options": { "precision": 2, "symbol": "₪" }
+            }
+          },
+          "id": "fldOKlqqVye2hWQ4p",
+          "name": "סה״כ תשלומים"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 2 },
+          "id": "fldOdZQW64J8ZPSle",
+          "name": "קרדיט - 2024"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldRb7Ta14YbpL4O9",
+            "fieldIdInLinkedTable": "fld5dzXeI6QWicGok",
+            "referencedFieldIds": [],
+            "result": { "type": "number", "options": { "precision": 1 } }
+          },
+          "id": "fld0H7tme2Vynrihn",
+          "name": "שעות כרטיסיה שנרכשו (from תשלומים)"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldtPWvtHt6qj2rRK",
+            "fieldIdInLinkedTable": "fldED62LdOV6xZGDD",
+            "referencedFieldIds": [],
+            "result": { "type": "number", "options": { "precision": 2 } }
+          },
+          "id": "fldlCbIhgVNeJhcYC",
+          "name": "סה״כ שימושים בשעות - כרטיסיות"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fld0H7tme2Vynrihn}-{fldlCbIhgVNeJhcYC}+{fldOdZQW64J8ZPSle}",
+            "referencedFieldIds": [
+              "fld0H7tme2Vynrihn",
+              "fldlCbIhgVNeJhcYC",
+              "fldOdZQW64J8ZPSle"
+            ],
+            "result": { "type": "number", "options": { "precision": 2 } }
+          },
+          "id": "fldGvMaggPVdHi7oJ",
+          "name": "ייתרה לפי חישוב"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fldGvMaggPVdHi7oJ} * 60",
+            "referencedFieldIds": ["fldGvMaggPVdHi7oJ"],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fld1f9kTnHOuU6Fy5",
+          "name": "ייתרת שעות בדקות",
+          "description": "ממיר את יתרה כוללת מכרטיסיות משעות לדקות על ידי הכפלה ב-60."
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  {fldGvMaggPVdHi7oJ}<0,\n  \"ייתרה במינוס\"\n)",
+            "referencedFieldIds": ["fldGvMaggPVdHi7oJ"],
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selFORMULADEFAULT",
+                    "name": "ייתרה במינוס",
+                    "color": "redBright"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldtoGqgMPIzqgWYM",
+          "name": "ייתרה במינוס?"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldtPWvtHt6qj2rRK",
+            "fieldIdInLinkedTable": "fldED62LdOV6xZGDD",
+            "referencedFieldIds": [],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fldHPUSRSWoqTnUBQ",
+          "name": "סה״כ שימושים בשעות - ססיות"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblZKbBcLserEDH9D",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldqG4qKJ6r9vtLMS"
+          },
+          "id": "fldtPWvtHt6qj2rRK",
+          "name": "שימושים"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldtPWvtHt6qj2rRK",
+            "fieldIdInLinkedTable": "fldED62LdOV6xZGDD",
+            "referencedFieldIds": [],
+            "result": { "type": "number", "options": { "precision": 2 } }
+          },
+          "id": "fldpeCNVyeGR1flvE",
+          "name": "שימושים בכרטיסיות בחודש שעבר"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldtPWvtHt6qj2rRK",
+            "fieldIdInLinkedTable": "fldED62LdOV6xZGDD",
+            "referencedFieldIds": [],
+            "result": { "type": "number", "options": { "precision": 2 } }
+          },
+          "id": "fldpsiWenlSm8XkMv",
+          "name": "סהכ שימושים בחודש שעבר"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldgnd1hvGPZVhEZW",
+          "name": "recID"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblFXSXS2lWzT19ym",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldiudAzBxsbT6mP9"
+          },
+          "id": "fldWxMnnxOhWtwV35",
+          "name": "התראות ומשימות"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selCxXLC6dBag6F7S",
+                "name": "סוטין",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel6LRsZY2vpBarMy",
+                "name": "טשרנוביץ",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selP4MCp4PTNdRruI",
+                "name": "יהודה הלוי",
+                "color": "tealLight2"
+              },
+              {
+                "id": "sel8tsnimVwFVDcNj",
+                "name": "אחר",
+                "color": "greenLight2"
+              }
+            ]
+          },
+          "id": "fldTYCNMJ5ZNRH35x",
+          "name": "מתחם"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblXpOBGIzlAirfhl",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldh0pdbjksjUj8tQ"
+          },
+          "id": "fldTPdPpantsCGkkQ",
+          "name": "מתחם 1"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldTPdPpantsCGkkQ",
+            "fieldIdInLinkedTable": "fld0YOVgmaECdOTyK",
+            "result": { "type": "url" }
+          },
+          "id": "fldMl7vtBHF5NnKFe",
+          "name": "קבוצת וואטסאפ (from מתחם 1)"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fldPoWQ4cQcM0pk1o",
+          "name": "תאריך עדכון אחרון"
+        },
+        {
+          "type": "multipleAttachments",
+          "options": { "isReversed": false },
+          "id": "fldhpwdmnqHH2W7o0",
+          "name": "חוזים"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldOjuVCn6t76nKuP",
+          "name": "חפ/עמ"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldRb7Ta14YbpL4O9",
+            "fieldIdInLinkedTable": "fld7ERUfgEUa7Trf7",
+            "referencedFieldIds": [],
+            "result": {
+              "type": "currency",
+              "options": { "precision": 0, "symbol": "₪" }
+            }
+          },
+          "id": "fld1XYEz7Sq7rei94",
+          "name": "סה״כ תשלומים עבור שעות"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  AND(\n    {fld1XYEz7Sq7rei94} != BLANK(),\n    {fld0H7tme2Vynrihn} != BLANK(),\n    {fld0H7tme2Vynrihn} != 0\n  ),\n  {fld1XYEz7Sq7rei94} / {fld0H7tme2Vynrihn},\n  BLANK()\n)",
+            "referencedFieldIds": ["fld1XYEz7Sq7rei94", "fld0H7tme2Vynrihn"],
+            "result": {
+              "type": "currency",
+              "options": { "precision": 2, "symbol": "₪" }
+            }
+          },
+          "id": "fldQo6nlYM93vv0ok",
+          "name": "ממוצע תשלום לשעה"
+        },
+        {
+          "type": "checkbox",
+          "options": { "icon": "check", "color": "greenBright" },
+          "id": "fldG5EMrHsE8HcWqw",
+          "name": "לא לשלוח הודעה על חריגה"
+        },
+        {
+          "type": "multilineText",
+          "id": "fldiPYWOMTIphi3CQ",
+          "name": "סיכום טופס קליטת לקוח"
+        },
+        {
+          "type": "multilineText",
+          "id": "fld2D1wFwZFCUQDtL",
+          "name": "סיכום טופס הכנת חוזה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblbbLNP4xhKDHSYj",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldQfYvoGAf85wGJx"
+          },
+          "id": "fldvZYYfL7vGI1Knv",
+          "name": "לידים"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldaxWYA7xHeNF7OB",
+          "name": "MORNING CLIENT ID"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  {fldaxWYA7xHeNF7OB},\n  \"https://app.greeninvoice.co.il/incomes/clients/\" & {fldaxWYA7xHeNF7OB} & \"/accounting\"\n)",
+            "referencedFieldIds": ["fldaxWYA7xHeNF7OB"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldANcz5Ghg6oJaip",
+          "name": "כרטיס לקוח במורנינג"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "\"https://hook.us2.make.com/20duxgmnlbu2a6qe4t9ebqcwsvlh9usy?id=\" & RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldiAN4E8Nu30EbtL",
+          "name": "טופס פנימי - הכנת חוזה"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "\"https://forms.fillout.com/t/nnpxgYnYs4us?id=\" & RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldXJznKge3FrGKU8",
+          "name": "טופס עדכון פרטי לקוח"
+        },
+        {
+          "type": "button",
+          "id": "fldS1mvvCOPcIEskC",
+          "name": "שליחת טופס עדכון פרטים ללקוח"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fld9DamD9gHBHQoNG",
+          "name": "תאריך התחלה"
+        },
+        {
+          "type": "multipleAttachments",
+          "options": { "isReversed": false },
+          "id": "flduiPl2yD4I6fkcE",
+          "name": "תמונה"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldmmyfDiihHax2wO",
+          "name": "תאריך לידה"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldRfGtTNPUYX3Dj6",
+          "name": "כתובת מגורים"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldcDxUR4fYshOMSx",
+          "name": "תעודת זהות"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selDig9JCJ00FeoAW",
+                "name": "טופס נשלח",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel82F6QhX4kHA6f8",
+                "name": "טופס התמלא",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selQIJcAsbmdtQxYU",
+                "name": "פולאו אפ",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "fldRXYLT7ShzERy8J",
+          "name": "סטטוס עדכון פרטים"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fld1APlq1YTTb7hpV",
+          "name": "Created"
+        },
+        {
+          "type": "multipleSelects",
+          "options": {
+            "choices": [
+              {
+                "id": "selb4sVfPnBhv3lwn",
+                "name": "ראשון",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selhd1zv2vr2CyegE",
+                "name": "שני",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "sel5QszBvZdO6c5xg",
+                "name": "שלישי",
+                "color": "tealLight2"
+              },
+              {
+                "id": "sels4rv6vwzPb2pEM",
+                "name": "רביעי",
+                "color": "greenLight2"
+              },
+              {
+                "id": "sel3YCtJfA4knEgva",
+                "name": "חמישי",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "selkzkOcbGznbCIUA",
+                "name": "שישי",
+                "color": "orangeLight2"
+              },
+              {
+                "id": "selE14COD7fc0Go2E",
+                "name": "בוקר",
+                "color": "redLight2"
+              },
+              {
+                "id": "selwKS6xQx8cyosOI",
+                "name": "ערב",
+                "color": "pinkLight2"
+              },
+              {
+                "id": "selnJqNWXa2vNcZC4",
+                "name": "סוטין",
+                "color": "purpleLight2"
+              },
+              {
+                "id": "seluBOcxIOtLVgwfV",
+                "name": "יהודה הלוי",
+                "color": "grayLight2"
+              },
+              {
+                "id": "selcsOwpl2PcTiJXo",
+                "name": "הדר יוסף",
+                "color": "blueLight1"
+              }
+            ]
+          },
+          "id": "fld4pML3BhQnPe3kZ",
+          "name": "סטנד ביי ליום"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbltJwGoN4OUtKaHq",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldKtY188Ul8HHUSx"
+          },
+          "id": "fldCaQAomXZQkHdmP",
+          "name": "עסקאות ססיה"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldCaQAomXZQkHdmP",
+            "fieldIdInLinkedTable": "fldkMlQ2PzXXAlcJg",
+            "result": { "type": "multilineText" }
+          },
+          "id": "fldI2TmayQMqBj4Pr",
+          "name": "הערות (from עסקאות ססיה)"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldCaQAomXZQkHdmP",
+            "fieldIdInLinkedTable": "fldv9IV7CDxvQX2BJ",
+            "result": {
+              "type": "currency",
+              "options": { "precision": 2, "symbol": "₪" }
+            }
+          },
+          "id": "fldGgMru8Aw0YaCPm",
+          "name": "מחיר אחרי הנחה (from עסקאות ססיה)"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldCaQAomXZQkHdmP",
+            "fieldIdInLinkedTable": "fldiZWgVaUAvawdHa",
+            "result": { "type": "percent", "options": { "precision": 0 } }
+          },
+          "id": "flddkNIQWIUJ1NvMB",
+          "name": "אחוז הנחה (from עסקאות ססיה)"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldCaQAomXZQkHdmP",
+            "fieldIdInLinkedTable": "fld9QwmXvf6qJ7VFp",
+            "result": {
+              "type": "date",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+              }
+            }
+          },
+          "id": "fldVmiumHOoQdMXhJ",
+          "name": "תאריך תחילת הוראת קבע (from עסקאות ססיה)"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldcgVZcFQqwkwTWh",
+          "name": "חודשי התחייבות"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldyrI47FkLhlg2lV",
+          "name": "סוג טיפול"
+        },
+        {
+          "type": "multipleSelects",
+          "options": {
+            "choices": [
+              {
+                "id": "selh4tvOQnfEnGUCi",
+                "name": "ססיה קבועה",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selYdaRmEfdpX8Uub",
+                "name": "כרטיסיה",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selSOLplLEAzJIi0o",
+                "name": "חדר שלם",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "fldxewPr6l0ER0M6F",
+          "name": "סןג שכירות"
+        },
+        {
+          "type": "multipleSelects",
+          "options": {
+            "choices": [
+              {
+                "id": "sel52ci3vwDjeNwmy",
+                "name": "טיפול שיחתי",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selIDG2HROI1WT8wO",
+                "name": "מיטת טיפולים",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selDsQZP3LvZozWIA",
+                "name": "קבוצה/סדנה",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selWZk6FdEVCE30kr",
+                "name": "אוהל סדנאות",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selxGKPZvilC5gL2k",
+                "name": "שירותי כביסה",
+                "color": "yellowLight2"
+              }
+            ]
+          },
+          "id": "fldpyvacqwYtPx4YS",
+          "name": "שימושים מוצרים"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 0 },
+          "id": "fldoUuWvKfjSCClCN",
+          "name": "כמות מטופלים מקסימלית בחדר"
+        },
+        {
+          "type": "checkbox",
+          "options": { "icon": "check", "color": "greenBright" },
+          "id": "fldzTX89BtKggp9o7",
+          "name": "לקוח סיים תהליך קליטה"
+        },
+        {
+          "type": "checkbox",
+          "options": { "icon": "check", "color": "greenBright" },
+          "id": "fld1myWbiaE3hrpMS",
+          "name": "נשלחה הוראת קבע לאישור לקוח"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fld4e89ImeBrypT2y",
+          "name": "תאריך שליחת הוק לאישור"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selgFzvtxZxKBOI7s",
+                "name": "נשלח חוזה",
+                "color": "blueLight1"
+              },
+              {
+                "id": "sellM9dDy9F5eR6Jv",
+                "name": "חוזה נחתם",
+                "color": "cyanBright"
+              },
+              {
+                "id": "sellc5nWcCqbGjSr4",
+                "name": "התקבלו פרטי אשראי",
+                "color": "blueLight2"
+              },
+              {
+                "id": "seluoA8ieATpgPSr7",
+                "name": "נשלחה הוראת קבע לאישור",
+                "color": "greenLight1"
+              },
+              {
+                "id": "sel3WCfuNSjZI33GC",
+                "name": "פולאו אפ אישור הוראת קבע",
+                "color": "greenBright"
+              },
+              {
+                "id": "selfBFcskEuYhNPm5",
+                "name": "אישר הוראת קבע",
+                "color": "redLight1"
+              }
+            ]
+          },
+          "id": "flde6hzqUusyDH9gw",
+          "name": "סטטוס קליטה ותשלום"
+        },
+        {
+          "type": "checkbox",
+          "options": { "icon": "check", "color": "greenBright" },
+          "id": "fldX7mG7QY090M0pO",
+          "name": "לקוח קיבל מפתח"
+        },
+        {
+          "type": "button",
+          "id": "fldv3BU0rGton2XD0",
+          "name": "הכנת חוזה ללקוח"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldUdtG8N2KAMDg6H",
+          "name": "תאריך תחילת עבודה בקליקה"
+        },
+        {
+          "type": "checkbox",
+          "options": { "icon": "check", "color": "greenBright" },
+          "id": "fldyckxUQgPAU6x0B",
+          "name": "לא לשלוח הודעות ייתרה קרובה לסיום באוטומציה"
+        },
+        {
+          "type": "checkbox",
+          "options": { "icon": "check", "color": "greenBright" },
+          "id": "fldxSUs5xBjxqzpLg",
+          "name": "לא לשלוח הודעות חריגה באוטומציה"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldpQI83SSeRXBwnr",
+          "name": "תאריך תחילת הוראת קבע"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbl63jrEIUMhp5pkC",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldL7w9dkXKFRUd5Q"
+          },
+          "id": "fldqRwC4pu0duphJO",
+          "name": "לידים copy"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "fldI18maMCO2776ab",
+          "name": "מחיר לחד שלם"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "fld3x5d0qI1mczUXG",
+          "name": "מחיר לניקיון חדר שלם"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "fldSHcIREKbD38w3G",
+          "name": "מחיר לריהוט חדר שלם"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblYNbWVSwP5U6ake",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldPr6gNyCNrcnbw0"
+          },
+          "id": "fldRJXWqk0usZwk51",
+          "name": "מה לשלוח ללקוח?"
+        },
+        {
+          "type": "button",
+          "id": "fld4tyhCMDpqwLPDZ",
+          "name": "שליחת הודעה ללקוח"
+        },
+        {
+          "type": "multilineText",
+          "id": "fld99NAjzbOHEfy6v",
+          "name": "הערות לחוזה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblNU6fgUdzbXopLE",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldL3p7I0c2S14qWY"
+          },
+          "id": "fldjViIJXi3kHcvuf",
+          "name": "תיעוד שיחות"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selDGe9qv2IPlniS2",
+                "name": "60 דקות או יותר",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selt5uy6peWX2ItTd",
+                "name": "50 דקות/פחות משעה",
+                "color": "cyanLight2"
+              }
+            ]
+          },
+          "id": "fldGGt2QrTx7haLmL",
+          "name": "משך זמן הטיפול שלי"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldtLyegWS1G32Bo4",
+          "name": "מה הדברים המיוחדים שנחוצים לי בשימוש בחדר?"
+        },
+        {
+          "type": "multilineText",
+          "id": "fld2d6u0vUt8sx3FD",
+          "name": "קצת על עצמי"
+        },
+        { "type": "url", "id": "fldZAb2GzTjD1LFYX", "name": "אתר" },
+        { "type": "url", "id": "fldCxJUJqeDFlpmXx", "name": "אינסטגרם" },
+        { "type": "url", "id": "fld96cZa0zUP0zykP", "name": "פייסבוק" },
+        { "type": "url", "id": "fldLAX9LGswZnEZCG", "name": "אחר" },
+        {
+          "type": "singleLineText",
+          "id": "fldtbz07BhsDFauzp",
+          "name": "גיל הממוצע של המטופלים שלי"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selWN8yIPIjQOmuDG",
+                "name": "מהאיזור",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selUEvrqSoK9mGWpO",
+                "name": "מחוץ לעיר",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selbuXhaR9jIRskgP",
+                "name": "אין לי כרגע מטופלים",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "fldTqFndAwD37DI8K",
+          "name": "מאיזה איזור מגיעים רוב המטופלים שלי?"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selWN8yIPIjQOmuDG",
+                "name": "בטח",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selUEvrqSoK9mGWpO",
+                "name": "לא תודה",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selbuXhaR9jIRskgP",
+                "name": "אולי בהמשך",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "fldVggwpXhJSQmy0M",
+          "name": "האם תרצה/י לקבל במה/פוסט ברשת החברתית של הקליקה?"
+        }
+      ],
+      "views": [
+        { "id": "viweG1yPoUNBQT65g", "name": "כל הלקוחות", "type": "grid" },
+        { "id": "viwltKG9n7OOw0mcO", "name": "לקוחות פעילים", "type": "grid" },
+        { "id": "viw2EhEr25ObwHuB5", "name": "Grid 3", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblxW311X5S7A9VWv",
+      "name": "חדרים",
+      "primaryFieldId": "fldF98uOkuFPsxkIX",
+      "fields": [
+        {
+          "type": "singleLineText",
+          "id": "fldF98uOkuFPsxkIX",
+          "name": "שם חדר"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "sel7ufQv9V0XqEcf7",
+                "name": "סוטין",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selGph6n2y50rwyI6",
+                "name": "טשרנוביץ",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selclHgoCN3cXVy2Y",
+                "name": "יהודה הלוי",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selVOWAz6nl7LX5Ri",
+                "name": "אחר",
+                "color": "greenLight2"
+              }
+            ]
+          },
+          "id": "fldbFhcAVHxR2F8pu",
+          "name": "מתחם"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "sel7AOmAeQisz9fAP",
+                "name": "טיפול יחיד",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel9EdaGNUik4Oefr",
+                "name": "קבוצות",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selTbFYT3BLIB3dxC",
+                "name": "אבחון",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selBzzeCfaRwCqfMQ",
+                "name": "אחר",
+                "color": "greenLight2"
+              }
+            ]
+          },
+          "id": "fldyUtzeE0vetf077",
+          "name": "סוג חדר"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldXlFKFdboLGti6A",
+          "name": "כתובת"
+        },
+        {
+          "type": "multilineText",
+          "id": "fldUQQrwxFR9p79Yf",
+          "name": "שעות פתיחה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblZKbBcLserEDH9D",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldkUrKfQ0Yhjk7C8"
+          },
+          "id": "fldgXP883G5La7JYT",
+          "name": "שימושים"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldgXP883G5La7JYT",
+            "fieldIdInLinkedTable": "fldED62LdOV6xZGDD",
+            "result": { "type": "number", "options": { "precision": 1 } }
+          },
+          "id": "fldQtJRCK1JFtQfIE",
+          "name": "משך בשעות (from שימושים)"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fld8JfP8kxjxN5ja2",
+          "name": "תמחור ברירת מחדל"
+        },
+        {
+          "type": "count",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldgXP883G5La7JYT"
+          },
+          "id": "fldKLuXA6dj571CDr",
+          "name": "Count (שימושים)"
+        }
+      ],
+      "views": [
+        { "id": "viwR0wtYVQXveqL0o", "name": "כל החדרים", "type": "grid" },
+        { "id": "viwq1Qon5XXtNqyuK", "name": "לפי סוג חדר", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblp3BzSRFpcqVsXR",
+      "name": "ססיות",
+      "primaryFieldId": "fldoVaNSJigYdJVF2",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fldGN3UCcvWqESc8Y}&\" - \"&{fldNXp4KKnimkHeR3}",
+            "referencedFieldIds": ["fldGN3UCcvWqESc8Y", "fldNXp4KKnimkHeR3"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldoVaNSJigYdJVF2",
+          "name": "ססיה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldyuVtSqyA8hSvCg"
+          },
+          "id": "fldGN3UCcvWqESc8Y",
+          "name": "לקוח"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldiBfvspRNsOu9ez",
+          "name": "תאריך התחלה"
+        },
+        { "type": "multilineText", "id": "fldg6qJwTayfxwuZH", "name": "הערות" },
+        {
+          "type": "singleLineText",
+          "id": "fldn6MKTpMObQZm36",
+          "name": "תמחור מנוי"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": false,
+            "recordLinkFieldId": "fldn6MKTpMObQZm36",
+            "fieldIdInLinkedTable": null,
+            "result": null
+          },
+          "id": "fldKBHNZzJrONLPmW",
+          "name": "שעות כלולות בחודש"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblZKbBcLserEDH9D",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldsbN8yAbn6YPVjk"
+          },
+          "id": "fldIRcP2Wx4e8AXko",
+          "name": "שימושים בססיה"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldIRcP2Wx4e8AXko",
+            "fieldIdInLinkedTable": "fldED62LdOV6xZGDD",
+            "referencedFieldIds": [],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fldeLPlfAIOCurZaN",
+          "name": "שעות שנוצלו (חודש נוכחי)"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblfGq7ezJ45irjed",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldNCOBRmH6JmcVdT"
+          },
+          "id": "fldm4zxSBdTKLH2Qq",
+          "name": "תשלומים"
+        },
+        {
+          "type": "autoNumber",
+          "id": "fldNXp4KKnimkHeR3",
+          "name": "מספר ססיה"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selYj95DucKG8eYSl",
+                "name": "פעיל",
+                "color": "greenLight1"
+              },
+              {
+                "id": "selrRehHkCGJkYHo9",
+                "name": "לא פעיל",
+                "color": "orangeBright"
+              }
+            ]
+          },
+          "id": "fldvFtn7s5dvKVSnc",
+          "name": "סטטוס ססיה"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "fld3FqXJzn1lekZRf",
+          "name": "מחיר לפני הנחה"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "fldrtNOBGe8NN8kRa",
+          "name": "מחיר אחרי הנחה"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldGN3UCcvWqESc8Y",
+            "fieldIdInLinkedTable": "fldgnd1hvGPZVhEZW",
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldoULR1EdrGxljzg",
+          "name": "recID (from לקוח)"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldGN3UCcvWqESc8Y",
+            "fieldIdInLinkedTable": "fldRskI911bRrB9Fe",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selrfyDkx0aO1NQL3",
+                    "name": "חדש",
+                    "color": "greenLight1"
+                  },
+                  {
+                    "id": "selhJ5rFagN0IqeqT",
+                    "name": "נשלח חוזה לחתימה",
+                    "color": "blueLight1"
+                  },
+                  {
+                    "id": "seleHhHXfbm8RALup",
+                    "name": "פעיל",
+                    "color": "greenBright"
+                  },
+                  {
+                    "id": "selVJRfOQtHhKQ21L",
+                    "name": "מושהה",
+                    "color": "yellowBright"
+                  },
+                  {
+                    "id": "selzohV1HAjE6eAtv",
+                    "name": "לא פעיל",
+                    "color": "orangeBright"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "flduDLp8m6zXWkBmU",
+          "name": "סטטוס לקוח (from לקוח)"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "sel9V1vpJCiTChaLm",
+                "name": "ראשון",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel4ZmS0aEUBaT3nD",
+                "name": "שני",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selKMKykEnLndGCJn",
+                "name": "שלישי",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selor8pFsAM78zmMW",
+                "name": "רביעי",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selWanwJ00KbAJUdR",
+                "name": "חמישי",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "seludAKWWKmKjg6ij",
+                "name": "שישי",
+                "color": "orangeLight2"
+              },
+              { "id": "selt1qsogESewO539", "name": "שבת", "color": "redLight2" }
+            ]
+          },
+          "id": "fldIyz5UZLVK9qnXD",
+          "name": "יום"
+        },
+        { "type": "singleLineText", "id": "flds9NnrYmgCjFu2v", "name": "חדר" },
+        {
+          "type": "singleLineText",
+          "id": "fldx44h95QDTbgKbE",
+          "name": "שעת התחלה"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 2 },
+          "id": "fldtRGAWOKWNyvJaV",
+          "name": "שעות"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldGoEXt7rz6jqH4i",
+          "name": "עסקאות ססיה"
+        },
+        {
+          "type": "lastModifiedTime",
+          "options": {
+            "isValid": true,
+            "referencedFieldIds": [],
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "local", "format": "l" },
+                "timeFormat": { "name": "12hour", "format": "h:mma" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fld0LpRyzIDzBa1WR",
+          "name": "Last Modified"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  AND({fldx44h95QDTbgKbE}, {fldtRGAWOKWNyvJaV}),\n  DATETIME_FORMAT(\n    DATEADD(\n      DATETIME_PARSE({fldx44h95QDTbgKbE}, 'HH:mm'),\n      {fldtRGAWOKWNyvJaV},\n      'hours'\n    ),\n    'HH:mm'\n  )\n)",
+            "referencedFieldIds": ["fldx44h95QDTbgKbE", "fldtRGAWOKWNyvJaV"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldS9h8eb8pSptdkY",
+          "name": "שעת סיום מחושב"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbltJwGoN4OUtKaHq",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldxgnSMldd3WRdLY"
+          },
+          "id": "fldeEX23WBJl8HAB5",
+          "name": "עסקת ססיה מקושרת"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldmePLGXkt195B9w",
+          "name": "שעת סיום"
+        }
+      ],
+      "views": [
+        { "id": "viwzJjJO2vcsdfyz1", "name": "מנויים פעילים", "type": "grid" },
+        { "id": "viw2lWwJmqILo5JMN", "name": "כמעט ואזל", "type": "grid" },
+        { "id": "viwVOJFm9JS7LnFZ6", "name": "אזל", "type": "grid" },
+        { "id": "viwcDtecDZHTLnUdv", "name": "חידוש החודש", "type": "grid" },
+        { "id": "viwseQRtt8Sk60uFu", "name": "הכל", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblveLcsiMnZzGAgX",
+      "name": "כרטיסיות",
+      "primaryFieldId": "fldjNXdyhNetjvPOY",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fldtS3TSGWR25PzLk}&\" - \"&{fld1vRIPW1cIt3bRv}",
+            "referencedFieldIds": ["fldtS3TSGWR25PzLk", "fld1vRIPW1cIt3bRv"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldjNXdyhNetjvPOY",
+          "name": "כרטיסיה"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selU9DWktUiQZSRlA",
+                "name": "כרטיסיה",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selmxqnQrQVvLMNSt",
+                "name": "בודדות",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selaPvJVbWHFtf503",
+                "name": "סדנה",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selhttarLGoKUZpif",
+                "name": "קורס",
+                "color": "greenLight2"
+              }
+            ]
+          },
+          "id": "fldoWw94CHA0x0qGV",
+          "name": "סוג כרטיסיה"
+        },
+        { "type": "singleLineText", "id": "fldtS3TSGWR25PzLk", "name": "לקוח" },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldxNt7uG9EwT85Hf",
+          "name": "תאריך התחלה"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldZZiPsPYEngTiwh",
+          "name": "תאריך תפוגה"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "fldwrXK8CgxDsufPu",
+          "name": "תשלום בפועל"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 0 },
+          "id": "fldNoFBQavWmahb6k",
+          "name": "שעות שנרכשו בפועל"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 1 },
+          "id": "fld9Fs6Rkq67fUMjQ",
+          "name": "ייתרת שעות חדש מספר"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fld9Fs6Rkq67fUMjQ}*60",
+            "referencedFieldIds": ["fld9Fs6Rkq67fUMjQ"],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fldXrUTmV3ZOfxFy2",
+          "name": "ייתרת שעות בדקות"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblZKbBcLserEDH9D",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldZjyZJgfFyrUk4b"
+          },
+          "id": "fldDXDHc6lhMM0GKv",
+          "name": "שימושים בכרטיסיה"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF({fldsXZvxfM90LywrC}>=100,\"נגמרה\",\"פעילה\")",
+            "referencedFieldIds": ["fldsXZvxfM90LywrC"],
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selFORMULADEFAULT",
+                    "name": "פעילה",
+                    "color": "greenLight2"
+                  },
+                  {
+                    "id": "selfnGQjfOdEm9NDG",
+                    "name": "נגמרה",
+                    "color": "pinkLight2"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldtLQZpCe8tLSOqd",
+          "name": "סטטוס ניצול",
+          "description": "Displays 'נגמרה' if utilization is 100% or more, otherwise 'פעילה'."
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF({fldNoFBQavWmahb6k},\n  ROUND(100 * ({fldNoFBQavWmahb6k} - {fld9Fs6Rkq67fUMjQ}) / {fldNoFBQavWmahb6k}, 0)\n)",
+            "referencedFieldIds": ["fldNoFBQavWmahb6k", "fld9Fs6Rkq67fUMjQ"],
+            "result": { "type": "number", "options": { "precision": 1 } }
+          },
+          "id": "fldsXZvxfM90LywrC",
+          "name": "% ניצול",
+          "description": "אחוז השעות שנוצלו מתוך השעות שנרכשו בפועל"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(AND({fldsXZvxfM90LywrC}>=80,{fldsXZvxfM90LywrC}<100),\"🟠 80% נוצל\",\"\")\n",
+            "referencedFieldIds": ["fldsXZvxfM90LywrC"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldaVifrgI7CRRoQ9",
+          "name": "התראת 80%"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF({fldsXZvxfM90LywrC}>=100,\"🔴 100% נוצל\",\"\")",
+            "referencedFieldIds": ["fldsXZvxfM90LywrC"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldLYCProKVqfM7J8",
+          "name": "התראת 100%"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblfGq7ezJ45irjed",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldi9gcgw9k3VHh7w"
+          },
+          "id": "fldoazXZmFnr0Mebk",
+          "name": "תשלום"
+        },
+        { "type": "multilineText", "id": "fld32Zqzkyx9DWWjr", "name": "הערות" },
+        {
+          "type": "autoNumber",
+          "id": "fld1vRIPW1cIt3bRv",
+          "name": "מספר כרטיסיה"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldG0xMjwG6yEubaP",
+          "name": "recid"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": false,
+            "recordLinkFieldId": null,
+            "fieldIdInLinkedTable": "fldgnd1hvGPZVhEZW",
+            "result": null
+          },
+          "id": "fldG949g6Zkf6v4El",
+          "name": "recID (from לקוח)"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldLYmF9B9N5UqnE2",
+          "name": "Created"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldDXDHc6lhMM0GKv",
+            "fieldIdInLinkedTable": "fldED62LdOV6xZGDD",
+            "referencedFieldIds": [],
+            "result": { "type": "number", "options": { "precision": 1 } }
+          },
+          "id": "fldSDAjrjAt1bmpzs",
+          "name": "שעות שנוצלו"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fldNoFBQavWmahb6k}-{fldSDAjrjAt1bmpzs}",
+            "referencedFieldIds": ["fldNoFBQavWmahb6k", "fldSDAjrjAt1bmpzs"],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fldYDtWoHBYUCKwBb",
+          "name": "ייתרת שעות"
+        }
+      ],
+      "views": [
+        { "id": "viwM57bxVJqpKLU9m", "name": "כל הכרטיסיות", "type": "grid" },
+        {
+          "id": "viwkdUJcKuNEnJ1mX",
+          "name": "כרטיסיות פעילות",
+          "type": "grid"
+        },
+        {
+          "id": "viwz25aEWfS0xLXeh",
+          "name": "כמעט נגמרה כרטיסיה",
+          "type": "grid"
+        },
+        { "id": "viwMiFugXxpgrf0Sy", "name": "אזל/פג תוקף", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblZKbBcLserEDH9D",
+      "name": "שימושים",
+      "primaryFieldId": "fld4FsRByxdq2LGgE",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "CONCATENATE({fldqG4qKJ6r9vtLMS},\" | \",{fldkzhj5MirIWcYi0})",
+            "referencedFieldIds": ["fldqG4qKJ6r9vtLMS", "fldkzhj5MirIWcYi0"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fld4FsRByxdq2LGgE",
+          "name": "שימוש"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldtPWvtHt6qj2rRK"
+          },
+          "id": "fldqG4qKJ6r9vtLMS",
+          "name": "לקוח"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldqG4qKJ6r9vtLMS",
+            "fieldIdInLinkedTable": "fldTYCNMJ5ZNRH35x",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selCxXLC6dBag6F7S",
+                    "name": "סוטין",
+                    "color": "blueLight2"
+                  },
+                  {
+                    "id": "sel6LRsZY2vpBarMy",
+                    "name": "טשרנוביץ",
+                    "color": "cyanLight2"
+                  },
+                  {
+                    "id": "selP4MCp4PTNdRruI",
+                    "name": "יהודה הלוי",
+                    "color": "tealLight2"
+                  },
+                  {
+                    "id": "sel8tsnimVwFVDcNj",
+                    "name": "אחר",
+                    "color": "greenLight2"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldwSLXaHgp3QZrc2",
+          "name": "מתחם (from לקוח) 2"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldqG4qKJ6r9vtLMS",
+            "fieldIdInLinkedTable": "flddelXQ4185Qb1mj",
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldcVWh3l3FCvufBd",
+          "name": "ממוצע תשלום לשעה (from לקוח)"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldqG4qKJ6r9vtLMS",
+            "fieldIdInLinkedTable": "fldTYCNMJ5ZNRH35x",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selCxXLC6dBag6F7S",
+                    "name": "סוטין",
+                    "color": "blueLight2"
+                  },
+                  {
+                    "id": "sel6LRsZY2vpBarMy",
+                    "name": "טשרנוביץ",
+                    "color": "cyanLight2"
+                  },
+                  {
+                    "id": "selP4MCp4PTNdRruI",
+                    "name": "יהודה הלוי",
+                    "color": "tealLight2"
+                  },
+                  {
+                    "id": "sel8tsnimVwFVDcNj",
+                    "name": "אחר",
+                    "color": "greenLight2"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldX3AdhvXQyZCThg",
+          "name": "מתחם (from לקוח)"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblxW311X5S7A9VWv",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldgXP883G5La7JYT"
+          },
+          "id": "fldkUrKfQ0Yhjk7C8",
+          "name": "חדר"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldkUrKfQ0Yhjk7C8",
+            "fieldIdInLinkedTable": "fldF98uOkuFPsxkIX",
+            "result": { "type": "singleLineText" }
+          },
+          "id": "flddbuSSDRPL50dlT",
+          "name": "שם חדר (from חדר)"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldkUrKfQ0Yhjk7C8",
+            "fieldIdInLinkedTable": "fldbFhcAVHxR2F8pu",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "sel7ufQv9V0XqEcf7",
+                    "name": "סוטין",
+                    "color": "blueLight2"
+                  },
+                  {
+                    "id": "selGph6n2y50rwyI6",
+                    "name": "טשרנוביץ",
+                    "color": "cyanLight2"
+                  },
+                  {
+                    "id": "selclHgoCN3cXVy2Y",
+                    "name": "יהודה הלוי",
+                    "color": "tealLight2"
+                  },
+                  {
+                    "id": "selVOWAz6nl7LX5Ri",
+                    "name": "אחר",
+                    "color": "greenLight2"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldgZr0SCPdJorXsV",
+          "name": "מתחם (from חדר)"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "ROUND({fldWK9Dm8i5uPjFRV}/60, 2)",
+            "referencedFieldIds": ["fldWK9Dm8i5uPjFRV"],
+            "result": { "type": "number", "options": { "precision": 2 } }
+          },
+          "id": "fldED62LdOV6xZGDD",
+          "name": "משך בשעות"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF({fldta4eIUL4O7UwHZ}=\"שעתי\", \n  {fldED62LdOV6xZGDD} * SUM({fldcVWh3l3FCvufBd})\n)",
+            "referencedFieldIds": [
+              "fldta4eIUL4O7UwHZ",
+              "fldED62LdOV6xZGDD",
+              "fldcVWh3l3FCvufBd"
+            ],
+            "result": {
+              "type": "currency",
+              "options": { "precision": 2, "symbol": "₪" }
+            }
+          },
+          "id": "fldpUTpju4LEEbup0",
+          "name": "הכנסה לשימוש (ממוצע)"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "flduXFvuxYv8bL88e",
+          "name": "הכנסה לשימוש (לפי תשלום אחרון)"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblp3BzSRFpcqVsXR",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldIRcP2Wx4e8AXko"
+          },
+          "id": "fldsbN8yAbn6YPVjk",
+          "name": "ססיה"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fldb1pozBdo1PhnFi",
+          "name": "תאריך"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fld3M7bYSsHvSncRD",
+          "name": "התחלה"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fldq1K9gbUtJcsKPr",
+          "name": "סיום"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selhAyPo1hYnmRJHb",
+                "name": "ססיה",
+                "color": "yellowLight1"
+              },
+              {
+                "id": "selk7v1tRgAimpoUS",
+                "name": "שעתי",
+                "color": "redLight1"
+              },
+              {
+                "id": "sel8qX5dbWgGk0OFV",
+                "name": "סדנה/קורס",
+                "color": "tealLight1"
+              },
+              {
+                "id": "selaZYGSWNxB9lNrX",
+                "name": "חד פעמי",
+                "color": "greenLight1"
+              },
+              {
+                "id": "self2NP3Ejj87MzgF",
+                "name": "paid",
+                "color": "purpleLight1"
+              }
+            ]
+          },
+          "id": "fldta4eIUL4O7UwHZ",
+          "name": "Booking Title"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selhOEnpoiM3I3enX",
+                "name": "מתוכנן",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selZkYdzuthrp4ppS",
+                "name": "בוצע",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "sel5AdqWhlrbYQ8Yl",
+                "name": "מבוטל",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "fldwvMv144GdA36PN",
+          "name": "סטטוס שימוש"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selpfFyGhIGmYbdrC",
+                "name": "ידני",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selrbRocr6m90qt4C",
+                "name": "ייבוא שבועי",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selkvGPf3xSzyX4u0",
+                "name": "ייבוא היסטורי 2025",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "fld1zDI2dLjH9t902",
+          "name": "מקור"
+        },
+        { "type": "multilineText", "id": "fldZrOPRnVni2Vcpl", "name": "הערות" },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(REGEX_MATCH({fldZrOPRnVni2Vcpl},\"במקום\"),\"🚩 'במקום' בהערות\",\"\")\n",
+            "referencedFieldIds": ["fldZrOPRnVni2Vcpl"],
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selFORMULADEFAULT",
+                    "name": "🚩 'במקום' בהערות",
+                    "color": "pinkBright"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldxtGD5awtit2xRd",
+          "name": "במקום בהערות 🚩"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF({fldwvMv144GdA36PN}='מבוטל', 0, DATETIME_DIFF({fldq1K9gbUtJcsKPr}, {fld3M7bYSsHvSncRD}, 'minutes'))",
+            "referencedFieldIds": [
+              "fldwvMv144GdA36PN",
+              "fldq1K9gbUtJcsKPr",
+              "fld3M7bYSsHvSncRD"
+            ],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fldWK9Dm8i5uPjFRV",
+          "name": "משך בדקות"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "DATETIME_FORMAT(SET_TIMEZONE({fldb1pozBdo1PhnFi}, 'Asia/Jerusalem'), 'YYYY-MM')",
+            "referencedFieldIds": ["fldb1pozBdo1PhnFi"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fld1BtbCkrF8TZshQ",
+          "name": "חודש-שנה"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(DATETIME_FORMAT(SET_TIMEZONE({fldb1pozBdo1PhnFi}, 'Asia/Jerusalem'), 'YYYY-MM') = DATETIME_FORMAT(SET_TIMEZONE(TODAY(), 'Asia/Jerusalem'), 'YYYY-MM'), 1, 0)",
+            "referencedFieldIds": ["fldb1pozBdo1PhnFi"],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fldI31qBkvi7Mos6o",
+          "name": "בחודש הנוכחי?"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  DATETIME_FORMAT(SET_TIMEZONE({fldb1pozBdo1PhnFi}, 'Asia/Jerusalem'), 'YYYY-MM')\n  = DATETIME_FORMAT(\n      DATEADD(SET_TIMEZONE(TODAY(), 'Asia/Jerusalem'), -1, 'month'),\n      'YYYY-MM'\n    ),\n  1,\n  0\n)\n",
+            "referencedFieldIds": ["fldb1pozBdo1PhnFi"],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fldBJsaG6N6PEv89a",
+          "name": "בחודש שעבר?"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fld04TutRVyiLpwdk",
+          "name": "ID ייבוא מקור"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "DATETIME_FORMAT({fld3M7bYSsHvSncRD},'HH:mm')",
+            "referencedFieldIds": ["fld3M7bYSsHvSncRD"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldO7UHvnmGGuHTsU",
+          "name": "שעת התחלה מפורמט"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "DATETIME_FORMAT({fldq1K9gbUtJcsKPr},'HH:mm')",
+            "referencedFieldIds": ["fldq1K9gbUtJcsKPr"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldZJLO7bpdG3t01L",
+          "name": "שעת סיום מפורמט"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldlkE9zGpCNeyGRA",
+          "name": "Created"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "DATETIME_FORMAT({fldb1pozBdo1PhnFi}, \"YYYY-MM-DD\")",
+            "referencedFieldIds": ["fldb1pozBdo1PhnFi"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldz6Jar43dcneFBS",
+          "name": "Calculation 2"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldB2egxdNQjqEimI",
+          "name": "ייתרת שעות לאחר שימוש"
+        },
+        {
+          "type": "autoNumber",
+          "id": "fldkzhj5MirIWcYi0",
+          "name": "מספר שימוש"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldqG4qKJ6r9vtLMS",
+            "fieldIdInLinkedTable": "fldgnd1hvGPZVhEZW",
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldWghw5rwYLaX1fD",
+          "name": "recID (from לקוח)"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblveLcsiMnZzGAgX",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldDXDHc6lhMM0GKv"
+          },
+          "id": "fldZjyZJgfFyrUk4b",
+          "name": "כרטיסיה"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldsbN8yAbn6YPVjk",
+            "fieldIdInLinkedTable": "fldvFtn7s5dvKVSnc",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selYj95DucKG8eYSl",
+                    "name": "פעיל",
+                    "color": "greenLight1"
+                  },
+                  {
+                    "id": "selrRehHkCGJkYHo9",
+                    "name": "לא פעיל",
+                    "color": "orangeBright"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldqTa7FV2Shg4e4F",
+          "name": "סטטוס ססיה (from ססיה)"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldS1aDA7dloYUylO",
+          "name": "Calculation"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fld7EGqJoop5EVxgG",
+          "name": "סיכומים לפי חודש ומתחם"
+        },
+        {
+          "type": "manualSort",
+          "id": "fldbl9E9RdqWYUOMz",
+          "name": "Manual sort"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldqG4qKJ6r9vtLMS",
+            "fieldIdInLinkedTable": "fldRskI911bRrB9Fe",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selrfyDkx0aO1NQL3",
+                    "name": "חדש",
+                    "color": "greenLight1"
+                  },
+                  {
+                    "id": "selhJ5rFagN0IqeqT",
+                    "name": "נשלח חוזה לחתימה",
+                    "color": "blueLight1"
+                  },
+                  {
+                    "id": "seleHhHXfbm8RALup",
+                    "name": "פעיל",
+                    "color": "greenBright"
+                  },
+                  {
+                    "id": "selVJRfOQtHhKQ21L",
+                    "name": "מושהה",
+                    "color": "yellowBright"
+                  },
+                  {
+                    "id": "selzohV1HAjE6eAtv",
+                    "name": "לא פעיל",
+                    "color": "orangeBright"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldAJDnyV17M0v7jZ",
+          "name": "סטטוס לקוח (from לקוח)"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldwRIf4wAMO1ED3T",
+          "name": "ססיות copy"
+        }
+      ],
+      "views": [
+        { "id": "viwNmrgRfp5ey6vic", "name": "כל השימושים", "type": "grid" },
+        { "id": "viwp66c5YJPNqTz0b", "name": "השבוע", "type": "grid" },
+        { "id": "viweBpEFp2X2ENgsp", "name": "להשלמת חיוב", "type": "grid" },
+        { "id": "viw8zUOBxZj7P8LJs", "name": "לפי לקוחות", "type": "grid" },
+        {
+          "id": "viwcDQz7ORU9sG1RO",
+          "name": "לפי לקוחות חודש שעבר",
+          "type": "grid"
+        },
+        { "id": "viwZntmBLuZSEEXwB", "name": "לפי חדרים", "type": "grid" },
+        { "id": "viwSBfc8n4GzssPvz", "name": "חריגים", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblfGq7ezJ45irjed",
+      "name": "תשלומים",
+      "primaryFieldId": "fldP1h5vLkphasc5Q",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "CONCATENATE({fldfUNcPWvNlh5Ok1},\" | \",{fldRpyGjjkDhK7Cbn},\" | \",DATETIME_FORMAT({fldPbVxXkjtLnEoSy},\"DD/MM/YY\"))",
+            "referencedFieldIds": [
+              "fldfUNcPWvNlh5Ok1",
+              "fldRpyGjjkDhK7Cbn",
+              "fldPbVxXkjtLnEoSy"
+            ],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldP1h5vLkphasc5Q",
+          "name": "תשלום"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "sel06aI6BNG4KYzHJ",
+                "name": "אשראי",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selnSBWJkxNr5RN8M",
+                "name": "מזומן",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selWljplySXDg3Zsa",
+                "name": "העברה",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selbbIP1gXcLY9v8v",
+                "name": "הוראת קבע",
+                "color": "greenLight2"
+              }
+            ]
+          },
+          "id": "fld1YqzW6cEAtdXhA",
+          "name": "אמצעי תשלום"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldPJgDIdfV6bqczW",
+          "name": "אסמכתא / מס׳ מסמך"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldPbVxXkjtLnEoSy",
+          "name": "תאריך תשלום"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldRb7Ta14YbpL4O9"
+          },
+          "id": "fldRpyGjjkDhK7Cbn",
+          "name": "לקוח"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldRpyGjjkDhK7Cbn",
+            "fieldIdInLinkedTable": "fldTYCNMJ5ZNRH35x",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selCxXLC6dBag6F7S",
+                    "name": "סוטין",
+                    "color": "blueLight2"
+                  },
+                  {
+                    "id": "sel6LRsZY2vpBarMy",
+                    "name": "טשרנוביץ",
+                    "color": "cyanLight2"
+                  },
+                  {
+                    "id": "selP4MCp4PTNdRruI",
+                    "name": "יהודה הלוי",
+                    "color": "tealLight2"
+                  },
+                  {
+                    "id": "sel8tsnimVwFVDcNj",
+                    "name": "אחר",
+                    "color": "greenLight2"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldDNakvAjHCIcgSP",
+          "name": "מתחם (from לקוח)"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldRpyGjjkDhK7Cbn",
+            "fieldIdInLinkedTable": "fld8q4HfntgiePbuF",
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldEz9zj16J4qLR14",
+          "name": "שם לקוח (from לקוח)"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldRpyGjjkDhK7Cbn",
+            "fieldIdInLinkedTable": "fldN0Oc8acHyGvv4U",
+            "result": { "type": "email" }
+          },
+          "id": "fldJc3Td15fsaLV4U",
+          "name": "אימייל (from לקוח)"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblveLcsiMnZzGAgX",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldoazXZmFnr0Mebk"
+          },
+          "id": "fldi9gcgw9k3VHh7w",
+          "name": "כרטיסיה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblp3BzSRFpcqVsXR",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldm4zxSBdTKLH2Qq"
+          },
+          "id": "fldNCOBRmH6JmcVdT",
+          "name": "ססיה"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "sel5xN9sv1UckdE0c",
+                "name": "כרטיסיה",
+                "color": "blueLight1"
+              },
+              {
+                "id": "selxEgMXm9KEXAqw9",
+                "name": "ססיה",
+                "color": "cyanBright"
+              },
+              {
+                "id": "selBstY4vJzZonrXD",
+                "name": "קורס",
+                "color": "greenBright"
+              },
+              {
+                "id": "selRJMBIPOeY4SvOw",
+                "name": "סדנא",
+                "color": "yellowBright"
+              },
+              {
+                "id": "selh461sp2AYmgpAR",
+                "name": "אחר",
+                "color": "orangeBright"
+              },
+              {
+                "id": "sel8G9AzBRrZeLolc",
+                "name": "שעת שימוש",
+                "color": "purpleBright"
+              }
+            ]
+          },
+          "id": "fldfUNcPWvNlh5Ok1",
+          "name": "סוג תשלום"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 2 },
+          "id": "fld5dzXeI6QWicGok",
+          "name": "שעות כרטיסיה שנרכשו"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 0, "symbol": "₪" },
+          "id": "fld7ERUfgEUa7Trf7",
+          "name": "סכום שולם"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selgq5blt0ONySyXS",
+                "name": "שולם",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selrYE3uGzSFKC64Y",
+                "name": "ממתין",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selCgwYOpEJC7UA7S",
+                "name": "נכשל",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selUfH69Lk9WRyNTK",
+                "name": "בוטל",
+                "color": "greenLight2"
+              }
+            ]
+          },
+          "id": "flddTh4xE6MhsEmEs",
+          "name": "סטטוס"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldAmN0JKzCb9REgF",
+          "name": "תיאור תשלום ממורנינג"
+        },
+        {
+          "type": "multipleAttachments",
+          "options": { "isReversed": false },
+          "id": "flddaBliflZ4TOc61",
+          "name": "חשבונית"
+        },
+        { "type": "url", "id": "fldkTOcVDFhlRTJzN", "name": "קישור לחשבונית" },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "DATETIME_FORMAT({fldPbVxXkjtLnEoSy}, 'MM/YY')",
+            "referencedFieldIds": ["fldPbVxXkjtLnEoSy"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldwBEz6KuiMJJaTq",
+          "name": "חודש/שנה",
+          "description": "מציג את תאריך התשלום בפורמט MM/YY"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  {fld5dzXeI6QWicGok} != BLANK(),\n  {fld7ERUfgEUa7Trf7} / {fld5dzXeI6QWicGok}\n)",
+            "referencedFieldIds": ["fld5dzXeI6QWicGok", "fld7ERUfgEUa7Trf7"],
+            "result": {
+              "type": "currency",
+              "options": { "precision": 2, "symbol": "₪" }
+            }
+          },
+          "id": "fldTahg864cVNCC1a",
+          "name": "תשלום לשעה"
+        },
+        { "type": "multilineText", "id": "fld8irWMfwDcOonkW", "name": "הערות" },
+        {
+          "type": "manualSort",
+          "id": "fldD0lWO5dUTqLCxu",
+          "name": "Manual sort"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldWzajPrIK3D9FU4",
+          "name": "Created"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldRpyGjjkDhK7Cbn",
+            "fieldIdInLinkedTable": "fldRskI911bRrB9Fe",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selrfyDkx0aO1NQL3",
+                    "name": "חדש",
+                    "color": "greenLight1"
+                  },
+                  {
+                    "id": "selhJ5rFagN0IqeqT",
+                    "name": "נשלח חוזה לחתימה",
+                    "color": "blueLight1"
+                  },
+                  {
+                    "id": "seleHhHXfbm8RALup",
+                    "name": "פעיל",
+                    "color": "greenBright"
+                  },
+                  {
+                    "id": "selVJRfOQtHhKQ21L",
+                    "name": "מושהה",
+                    "color": "yellowBright"
+                  },
+                  {
+                    "id": "selzohV1HAjE6eAtv",
+                    "name": "לא פעיל",
+                    "color": "orangeBright"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldOJglLd1LL4hkbb",
+          "name": "סטטוס לקוח (from לקוח)"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbltJwGoN4OUtKaHq",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldqKuEoxCisOwKAZ"
+          },
+          "id": "fldRiJIni6vrp1DXs",
+          "name": "עסקה מקושרת"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldRpyGjjkDhK7Cbn",
+            "fieldIdInLinkedTable": "fldgnd1hvGPZVhEZW",
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldvUdzZ6R7calvxq",
+          "name": "recID (from לקוח)"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "AND(\n  IS_AFTER({fldPbVxXkjtLnEoSy}, TODAY()),\n  {fldfUNcPWvNlh5Ok1} = \"ססיה\",\n  FIND(\"recPjB6Sf6Offy2To\", {fldvUdzZ6R7calvxq})\n)",
+            "referencedFieldIds": [
+              "fldPbVxXkjtLnEoSy",
+              "fldfUNcPWvNlh5Ok1",
+              "fldvUdzZ6R7calvxq"
+            ],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fld3sEQCNzp0KPXHl",
+          "name": "ססיה עתידית ללקוח 123456789",
+          "description": "בודק אם תאריך התשלום עתידי, סוג התשלום ססיה, והלקוח עם מזהה 123456789."
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selgVeRTCIB9oIeRv",
+                "name": "סוטין",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selOCWG7xmZP0RUnc",
+                "name": "טשרנוביץ",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selPz5ss8HjsyfY2N",
+                "name": "יהודה הלוי",
+                "color": "greenLight2"
+              },
+              {
+                "id": "sel2uB2IDayqGkzwD",
+                "name": "אחר",
+                "color": "yellowLight2"
+              }
+            ]
+          },
+          "id": "fldE6h6yKCI3XfSd3",
+          "name": "מתחם"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldWUKLcYvCXE6p2u",
+          "name": "record id"
+        }
+      ],
+      "views": [
+        { "id": "viwtwZXDmq60ZOomZ", "name": "הכל", "type": "grid" },
+        { "id": "viwPBV1bGBVtsHIjV", "name": "ססיות", "type": "grid" },
+        { "id": "viweDAvGWlvFQ8w4q", "name": "Grid 3", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tbldGMKpprhJvz9Q4",
+      "name": "ייבוא Skedda (Raw)",
+      "primaryFieldId": "fldOwnhTYY7TqioTG",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "DATETIME_FORMAT({fldAJCzMlCbxTBTpI}, \"DD/MM/YY HH:mm\")\n& \"-\" & LOWER({fldjgAsUvQIhG0Swq})\n& \"-\" & TRIM({fldFPHXNcYBlT3FQz})\n& \" \"\n& TRIM({fldDx6TPTT23YELuj})",
+            "referencedFieldIds": [
+              "fldAJCzMlCbxTBTpI",
+              "fldjgAsUvQIhG0Swq",
+              "fldFPHXNcYBlT3FQz",
+              "fldDx6TPTT23YELuj"
+            ],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldOwnhTYY7TqioTG",
+          "name": "מזהה הזמנה"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "Asia/Jerusalem"
+          },
+          "id": "fldAJCzMlCbxTBTpI",
+          "name": "תאריך התחלה"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fld4mcACzImo5C3H1",
+          "name": "תאריך סיום"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 1 },
+          "id": "fld6f20kIHKJ2ze6d",
+          "name": "משך בדקות"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldaukXc8dHSqvzi1",
+          "name": "כותרת / שם פעילות"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldFPHXNcYBlT3FQz",
+          "name": "שם פרטי"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldDx6TPTT23YELuj",
+          "name": "שם משפחה"
+        },
+        { "type": "email", "id": "fldjgAsUvQIhG0Swq", "name": "אימייל" },
+        { "type": "phoneNumber", "id": "fldy1zgRksFoarx4b", "name": "טלפון" },
+        { "type": "singleLineText", "id": "fldJfr7Z7dMF3Zqgh", "name": "חדר" },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "fldzWPkZTecCQbBvh",
+          "name": "מחיר"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selGALGTVpwQGhFuU",
+                "name": "שולם",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel9GvpSYapn5HIsn",
+                "name": "לא שולם",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selw2zt03uHzh9nIE",
+                "name": "אחר",
+                "color": "tealLight2"
+              },
+              {
+                "id": "sel1fezhjKHyFwGEd",
+                "name": "Unpaid",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selP1wlXGmrm7GEmw",
+                "name": "unpaid",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selV7ZS5zVwLzguuS",
+                "name": "paid",
+                "color": "blueLight2"
+              }
+            ]
+          },
+          "id": "fldQ3J0PTcW4tlq88",
+          "name": "סטטוס תשלום"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldTuPT0cCjlntWuL",
+          "name": "תאריך יצירה"
+        },
+        {
+          "type": "checkbox",
+          "options": { "icon": "thumbsUp", "color": "greenBright" },
+          "id": "fldc4ZOt7K8ozFRNM",
+          "name": "סומן כמעובד?"
+        },
+        {
+          "type": "multilineText",
+          "id": "fldIVmiTkJdiD3b4v",
+          "name": "שגיאה / הערות"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldzzm5FhcP1bJVYE",
+          "name": "Calculation"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fld32FynMGgI2bfwD",
+          "name": "ID ייבוא מקור"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldcltPc5S3qtQYFq",
+          "name": "Created"
+        }
+      ],
+      "views": [
+        { "id": "viwdnwbuTW8U91c9s", "name": "Grid view", "type": "grid" },
+        { "id": "viwUORqSZSoZ3c3NM", "name": "לא עובדו", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblbbLNP4xhKDHSYj",
+      "name": "לידים",
+      "primaryFieldId": "fldcOSMfzWSeNa1Ar",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fldlzQiaiWkAF1nhR}",
+            "referencedFieldIds": ["fldlzQiaiWkAF1nhR"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldcOSMfzWSeNa1Ar",
+          "name": "לקוח"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldlzQiaiWkAF1nhR",
+          "name": "שם לקוח"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "sel9SZlcMlHKQtzif",
+                "name": "פניה חדשה",
+                "color": "blueDark1"
+              },
+              {
+                "id": "sel8GITB6k2OPaXqU",
+                "name": "רלוונטי",
+                "color": "yellowDark1"
+              },
+              {
+                "id": "sel0FWfp4Lf4QUu7g",
+                "name": "לא רלוונטי",
+                "color": "grayLight1"
+              },
+              {
+                "id": "selfvg2I6Lg1aL4Qs",
+                "name": "אחר",
+                "color": "blueBright"
+              },
+              {
+                "id": "selAD8Lbb433ngr9i",
+                "name": "נסגר",
+                "color": "pinkLight1"
+              },
+              {
+                "id": "sellLggtLWjmPoCFN",
+                "name": "לא מגיב",
+                "color": "yellowDark1"
+              },
+              {
+                "id": "sell0ZmwcCUN078Xr",
+                "name": "להתקשר",
+                "color": "yellowBright"
+              },
+              {
+                "id": "seletyRX8wgkXVopx",
+                "name": "נקבעה פגישה",
+                "color": "tealBright"
+              },
+              {
+                "id": "selPagciKQmHkgCo8",
+                "name": "היתה פגישה",
+                "color": "pinkDark1"
+              },
+              {
+                "id": "selfGKlSh66m47GRb",
+                "name": "לקבוע מחדש פגישה",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "sel23EsBcNxDD4zaY",
+                "name": "שיחה הילית",
+                "color": "redLight1"
+              },
+              {
+                "id": "sel1t3VB0v9T1IBxh",
+                "name": "שיחה אביגיל",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "selPvnA1Lj1K3YbQ7",
+                "name": "להתקשר אליהבתאריך.....",
+                "color": "greenBright"
+              },
+              {
+                "id": "selpHBMhmLFS9GVbJ",
+                "name": "יהודה הלוי",
+                "color": "cyanBright"
+              },
+              {
+                "id": "selpg5FqYfglBDPvw",
+                "name": "סטנד ביי",
+                "color": "orangeDark1"
+              },
+              {
+                "id": "selV4GdMeD9UB04Oa",
+                "name": "אמנות",
+                "color": "blueLight1"
+              },
+              {
+                "id": "selYxsqRsS70NwK4l",
+                "name": "follow-up",
+                "color": "purpleBright"
+              },
+              {
+                "id": "sel1KoyRKh5frOhFj",
+                "name": "נשלח חוזה לחתימה",
+                "color": "cyanBright"
+              },
+              {
+                "id": "sel0CETHjze4X3epz",
+                "name": "אין מענה",
+                "color": "yellowLight1"
+              },
+              {
+                "id": "sel2SwynMvtcex0lG",
+                "name": "דחוף אביגיל",
+                "color": "redBright"
+              },
+              {
+                "id": "selaieXnHnVtCFT4p",
+                "name": "דחוף הילית",
+                "color": "redBright"
+              },
+              {
+                "id": "selqV4kX4ysixgGcJ",
+                "name": "נשלח מחירון - לא היתה שיחה",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selQggJZt25Kkl1P9",
+                "name": "F/U- מה קורה",
+                "color": "pinkBright"
+              },
+              {
+                "id": "seljuYH5LEyQ9SJfF",
+                "name": "F/U- תיאום פגישה",
+                "color": "pinkDark1"
+              },
+              {
+                "id": "selkts0zBbat50kDX",
+                "name": "F/U- בעוד שבועיים",
+                "color": "greenLight2"
+              }
+            ]
+          },
+          "id": "fldifoicwnNReZtyk",
+          "name": "סטטוס",
+          "description": "הילית דחוף"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selO2HULikcWFI2Mq",
+                "name": "שיחה",
+                "color": "pinkDark1"
+              },
+              {
+                "id": "selK9YmU7B14h2dpN",
+                "name": "גוף",
+                "color": "cyanBright"
+              },
+              {
+                "id": "seljsEY6xbd5gOBcF",
+                "name": "אמנות",
+                "color": "redLight1"
+              },
+              {
+                "id": "selpGEccYGmGiarPP",
+                "name": "אחר",
+                "color": "blueBright"
+              },
+              {
+                "id": "seldDue1IBAs05ZQ5",
+                "name": "סדנא הדר יוסף",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selC3VrK7OHjlwFav",
+                "name": "סדנה יהודה הלוי",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selZ8sQsjrq3LSGBc",
+                "name": "אחר",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selOMQf6qqFGm3CsU",
+                "name": "טיפולי_גוף_הדורשים_מיטת_טיפולים_או_מזרון_(רפואה_סינית,_מסאג',_טיפול_אנרגטי_ועוד_)",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel3PlHEsmUcRBkz9",
+                "name": "סדנא יהודה הלוי",
+                "color": "blueLight2"
+              }
+            ]
+          },
+          "id": "fldMPkRPFWtNV4cGM",
+          "name": "סוג טיפול"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selpMPdgWIjPodLXq",
+                "name": "ססיה קבועה",
+                "color": "yellowBright"
+              },
+              {
+                "id": "selO84IGjEUPQHUOZ",
+                "name": "השכרה שעתית",
+                "color": "tealBright"
+              },
+              {
+                "id": "sel2ogPSs6Tf31S41",
+                "name": "השכרת חדר שלם",
+                "color": "purpleBright"
+              },
+              {
+                "id": "sel0YN8n5h7CFA55f",
+                "name": "סדנא הדר יוסף",
+                "color": "cyanBright"
+              },
+              {
+                "id": "sel6HSsBBzrxdU6hY",
+                "name": "סדנא יהודה הלוי",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel7pcY8Q4gTNS219",
+                "name": "השכרה חודשית",
+                "color": "blueLight2"
+              },
+              { "id": "selbfyulwer3EqHRw", "name": " ", "color": "blueLight2" }
+            ]
+          },
+          "id": "fldWW7pxv7bcr6PcK",
+          "name": "סוג השכרה"
+        },
+        {
+          "type": "button",
+          "id": "fldyOPqJk2l613Mq7",
+          "name": "טופס קביעת פגישה"
+        },
+        {
+          "type": "button",
+          "id": "fldRgkJHusUk294f4",
+          "name": "שליחת וואטסאפ"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fldbZDgwSi5CapB7j",
+          "name": "תאריך ושעת פגישה"
+        },
+        { "type": "phoneNumber", "id": "fldrMAduYXYAC0PVO", "name": "טלפון" },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "RIGHT(REGEX_REPLACE({fldrMAduYXYAC0PVO}, \"[^0-9]\", \"\"), 9)",
+            "referencedFieldIds": ["fldrMAduYXYAC0PVO"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldSuRUIz1P8Yi5WU",
+          "name": "Calculation"
+        },
+        {
+          "type": "multilineText",
+          "id": "fldcpmqGALOBvHAYP",
+          "name": "הערות לקוח"
+        },
+        { "type": "multilineText", "id": "fldHTEbtXXuQeXZjc", "name": "הערות" },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selV2k6YKpP5t1rt7",
+                "name": "סוטין",
+                "color": "pinkBright"
+              },
+              {
+                "id": "selBi21e6DshV9UT8",
+                "name": "הדר יוסף",
+                "color": "greenLight1"
+              },
+              {
+                "id": "selT90n5yxwhalD9U",
+                "name": "יהודה הלוי",
+                "color": "cyanBright"
+              },
+              {
+                "id": "selR86ehRdw6dtXum",
+                "name": "גם וגם",
+                "color": "tealBright"
+              },
+              {
+                "id": "selirpQshSk2DwPy1",
+                "name": "סוטין, יהודה הלוי",
+                "color": "blueLight2"
+              },
+              {
+                "id": "seltYOS6q0gox7rpC",
+                "name": "יהודה הלוי, סוטין",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selDqVG6HZhZCX07E",
+                "name": "הדר יוסף, יהודה הלוי",
+                "color": "tealLight2"
+              },
+              {
+                "id": "seld4LP0f2DGmUSu9",
+                "name": "גם_וגם",
+                "color": "tealBright"
+              },
+              {
+                "id": "sel9grG1M82bu2pQb",
+                "name": "הדר_יוסף_",
+                "color": "greenLight1"
+              },
+              {
+                "id": "selPvRKJRErCn67xr",
+                "name": "הדר יוסף, סוטין",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selqZN9TrbeAFT5d3",
+                "name": "סוטין_22_תל_אביב",
+                "color": "yellowBright"
+              },
+              {
+                "id": "selo11jQcf92gfCdP",
+                "name": "טלפון",
+                "color": "greenLight2"
+              },
+              {
+                "id": "sel1rwk9x5NrSsPaH",
+                "name": "לא בטוח",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "seliirmrEQBuej6Kb",
+                "name": "סוטין_22,_תל_אביב",
+                "color": "blueLight2"
+              }
+            ]
+          },
+          "id": "fldDvdaU6FgBXJmyI",
+          "name": "מיקום"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selV2k6YKpP5t1rt7",
+                "name": "סוטין",
+                "color": "pinkBright"
+              },
+              {
+                "id": "selBi21e6DshV9UT8",
+                "name": "הדר יוסף",
+                "color": "greenLight1"
+              },
+              {
+                "id": "selT90n5yxwhalD9U",
+                "name": "יהודה הלוי",
+                "color": "cyanBright"
+              },
+              {
+                "id": "selo11jQcf92gfCdP",
+                "name": "טלפון",
+                "color": "greenLight2"
+              }
+            ]
+          },
+          "id": "fldal7ISrvfjq9txd",
+          "name": "מיקום פגישה"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fld20MFJDngsDra7o",
+          "name": "משימה הילית"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldCRhEAmT9rw6uga",
+          "name": "משימה אביגיל"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldBmbUt5wiVwXf3g",
+          "name": "Created"
+        },
+        { "type": "button", "id": "fldF38j76k7CDIkrR", "name": "להתקשר" },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "\"https://forms.fillout.com/t/bpgrV82xhBus?id=\" & RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fld5k4SHf2Hd6j4OI",
+          "name": "טופס קליטת לקוח"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selgYgBf1PeNyNynH",
+                "name": "מחירון",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selOqnWabu876MAoA",
+                "name": "תמונות הדר יוסף",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selMnO3y86lC8wKF4",
+                "name": "תמונות סוטין",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selurCHL5itvPkSlg",
+                "name": "תמונות יהודה הלוי",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selE4savwPeI0fhXx",
+                "name": "תמונות אוהל סדנאות",
+                "color": "yellowLight2"
+              }
+            ]
+          },
+          "id": "fldKOlD4pGTpCVyfo",
+          "name": "מה לשלוח לליד?"
+        },
+        {
+          "type": "button",
+          "id": "fldk9i1i5AaEGZikw",
+          "name": "שליחת הודעה לליד"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblYNbWVSwP5U6ake",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldLJ09hjWGZCnIeH"
+          },
+          "id": "fld6AlDMsNmAJs2ZD",
+          "name": "נוסח הודעה"
+        },
+        {
+          "type": "multilineText",
+          "id": "fldjeTxl33NndL7f8",
+          "name": "הודעות אוטומציה"
+        },
+        {
+          "type": "url",
+          "id": "fldGPS0x6mcPdTND2",
+          "name": "לינק מקוצר לליד באינטרפייס"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "AND(\n  IS_BEFORE({fldbZDgwSi5CapB7j}, TODAY()),\n  DATETIME_DIFF(TODAY(), {fldbZDgwSi5CapB7j}, 'days') <= 7\n)",
+            "referencedFieldIds": ["fldbZDgwSi5CapB7j"],
+            "result": { "type": "number", "options": { "precision": 0 } }
+          },
+          "id": "fldCJMEfBD2O7M0Aj",
+          "name": "פגישה בשבוע האחרון (עבר)",
+          "description": "בודק אם תאריך ושעת פגישה הוא לפני היום אך לא יותר משבוע אחורה."
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "sel4ra41B67e9oesO",
+                "name": "נשלח fu אחרי פגישה",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selMXyIY6JdTdvWWs",
+                "name": "נשלח fu לתאום פגישה",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selAvRm5lXfnmaHdi",
+                "name": "נשלח fu מה קורה",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "fld31Hcn81sZNgBUn",
+          "name": "סטטוס פולאו אפ"
+        },
+        { "type": "email", "id": "flddfWzJIj9YIRDrt", "name": "אימייל" },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selP6E4R8tGuZznfg",
+                "name": "פייסבוק קמפיין",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selvofTlQMqRDod9B",
+                "name": "אינסטגרם",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selAjQDFQF3UeWBe7",
+                "name": "מטפל בקלינקיה",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selPBC5tJ64LJAekO",
+                "name": "פייסבוק אורגני",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selVRGU9CAFho0Ln5",
+                "name": "אחר",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "selmHiVMP23B7yKy8",
+                "name": "פייסבוק פרסום",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selfgioneoUmWxtH6",
+                "name": "פרסום פייס-פנו ישירות",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "seloyXVnEQDWH6lut",
+                "name": "מטפל בקליניקה",
+                "color": "tealLight2"
+              },
+              {
+                "id": "sel5T9jk4o1Hwj7zw",
+                "name": "ליד מפרסום עבר",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel5VxQhuY3sXjXOv",
+                "name": "instgram",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel83zXdyCUNftyPm",
+                "name": "facebook",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selt5NeosUeEtEEz9",
+                "name": "אתר",
+                "color": "blueLight2"
+              }
+            ]
+          },
+          "id": "fld4WOQXESSEAU50Q",
+          "name": "מקור הגעה"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldkkiWGGKeb0T6Gk",
+          "name": "תאריך יצירה באקסל"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fldazLZSfpoYBOHzN",
+          "name": "תאריך פולאואפ אחרון"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldvZYYfL7vGI1Knv"
+          },
+          "id": "fldQfYvoGAf85wGJx",
+          "name": "לקוחות"
+        },
+        {
+          "type": "multipleSelects",
+          "options": {
+            "choices": [
+              {
+                "id": "sel3jVhiiB4cEa8Lb",
+                "name": "ראשון",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selJ9c4UaIncH1nnN",
+                "name": "שני",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selr4anddyRyRSCqO",
+                "name": "שלישי",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selMNEirmXHKaq4Bw",
+                "name": "רביעי",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selXeJHQz035g3nZE",
+                "name": "חמישי",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "selp8BmOghqWRB7XW",
+                "name": "שישי",
+                "color": "orangeLight2"
+              },
+              {
+                "id": "selUFzOJydC3DK2wA",
+                "name": "בוקר",
+                "color": "redLight2"
+              },
+              {
+                "id": "sel3dD13N69xlLakV",
+                "name": "ערב",
+                "color": "pinkLight2"
+              },
+              {
+                "id": "seledA3nPtqc9d4WE",
+                "name": "סוטין",
+                "color": "purpleLight2"
+              },
+              {
+                "id": "sel0JuN2v83kQqs0L",
+                "name": "יהודה הלוי",
+                "color": "grayLight2"
+              },
+              {
+                "id": "selxXl8YxqfwSOMvW",
+                "name": "הדר יוסף",
+                "color": "blueLight1"
+              }
+            ]
+          },
+          "id": "fldDH5Xnsi7EWRlZW",
+          "name": "סטנד ביי ליום"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fld45c0OUlU17FbVQ",
+          "name": "תאריך יצירת רשומה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblNU6fgUdzbXopLE",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fld47FFQ0UyYvxVn2"
+          },
+          "id": "fld1tjTFIhWK0dexH",
+          "name": "תיעוד שיחות"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selLqZNB14wOqxJwi",
+                "name": "קמפיין",
+                "color": "blueLight2"
+              },
+              {
+                "id": "seluZyO35S6evU0NA",
+                "name": "אורגני",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selEPIy1gUmij1AQo",
+                "name": "טלפון",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "fldcMCS03FkkzDyoR",
+          "name": "מקור ליד"
+        }
+      ],
+      "views": [
+        { "id": "viwbEUEGnRJ4YCh8D", "name": "Grid view", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblFXSXS2lWzT19ym",
+      "name": "התראות ומשימות",
+      "primaryFieldId": "fldozcTkvmwYwNwLW",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "CONCATENATE({fldr3EeNudhbotWeF}, \" - \",{fldiudAzBxsbT6mP9})",
+            "referencedFieldIds": ["fldr3EeNudhbotWeF", "fldiudAzBxsbT6mP9"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldozcTkvmwYwNwLW",
+          "name": "התראה/משימה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldWxMnnxOhWtwV35"
+          },
+          "id": "fldiudAzBxsbT6mP9",
+          "name": "לקוח"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF({fldr3EeNudhbotWeF} = '', BLANK(), DATEADD({fldWfNSKDI3luEiys}, 7, 'days'))",
+            "referencedFieldIds": ["fldr3EeNudhbotWeF", "fldWfNSKDI3luEiys"],
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "Asia/Jerusalem"
+              }
+            }
+          },
+          "id": "fldOUwKFa8JaeekoZ",
+          "name": "יעד לביצוע"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selPWP0SCk7ntX5MD",
+                "name": "לטיפול",
+                "color": "purpleBright"
+              },
+              {
+                "id": "selHeZWCmRB2waYYT",
+                "name": "בטיפול",
+                "color": "cyanLight1"
+              },
+              {
+                "id": "selD9z1HTsmvDYLCb",
+                "name": "בוצע",
+                "color": "greenBright"
+              },
+              {
+                "id": "selxzPEPMIOPW2v6s",
+                "name": "תקוע",
+                "color": "redBright"
+              }
+            ]
+          },
+          "id": "fldqv5LNMayFPiaGC",
+          "name": "סטטוס"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldr3EeNudhbotWeF",
+          "name": "משימה/התראה"
+        },
+        { "type": "multilineText", "id": "fldqOolfWy0gOe78G", "name": "הערות" },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldWfNSKDI3luEiys",
+          "name": "נוצרה רשומה"
+        }
+      ],
+      "views": [
+        { "id": "viwfRA710hMYWDxER", "name": "Grid view", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblNSLv2pDUBxcPLM",
+      "name": "דוחות שימוש מסקדה",
+      "primaryFieldId": "fld45HG0HsoInB89q",
+      "fields": [
+        { "type": "autoNumber", "id": "fld45HG0HsoInB89q", "name": "דוח מספר" },
+        {
+          "type": "multipleAttachments",
+          "options": { "isReversed": false },
+          "id": "fldAqwOjZfqXa5q0w",
+          "name": "קובץ מסקדה"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldQIJL5WW2Wppg0N",
+          "name": "Created"
+        }
+      ],
+      "views": [
+        { "id": "viwfzOJzT6AJUNv07", "name": "Grid view", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblYNbWVSwP5U6ake",
+      "name": "נוסחי הודעות",
+      "primaryFieldId": "fldlcAO6SMW9MmIdv",
+      "fields": [
+        {
+          "type": "singleLineText",
+          "id": "fldlcAO6SMW9MmIdv",
+          "name": "הודעה"
+        },
+        {
+          "type": "multilineText",
+          "id": "fldxtOOQYvqcDaD25",
+          "name": "תוכן הודעה"
+        },
+        {
+          "type": "multipleAttachments",
+          "options": { "isReversed": false },
+          "id": "fldFiT9tgql9l14Kj",
+          "name": "תמונה"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldpXAAiH2NQMNyQv",
+          "name": "recordid"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selsbvsnD0VAJRFzN",
+                "name": "לידים",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selWMZsLIDhReAO2z",
+                "name": "שוטף",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "sel9dY8fdbsjke2V9",
+                "name": "קליטת לקוחות",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "flddcHqHLVlOreY3u",
+          "name": "קטגוריה"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 0 },
+          "id": "fldPStlnOka5BSMac",
+          "name": "מספר הודעה"
+        },
+        { "type": "multilineText", "id": "fldnPJ5jYGwkvd552", "name": "תיאור" },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblbbLNP4xhKDHSYj",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fld6AlDMsNmAJs2ZD"
+          },
+          "id": "fldLJ09hjWGZCnIeH",
+          "name": "לידים"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbl63jrEIUMhp5pkC",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fld1sThB6aR7vQzlW"
+          },
+          "id": "fldGByN6XjbwoLfA0",
+          "name": "לידים copy"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldRJXWqk0usZwk51"
+          },
+          "id": "fldPr6gNyCNrcnbw0",
+          "name": "לקוחות"
+        },
+        {
+          "type": "lastModifiedTime",
+          "options": {
+            "isValid": true,
+            "referencedFieldIds": [],
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldESnzsGHHZRfmjT",
+          "name": "Last Modified"
+        }
+      ],
+      "views": [
+        { "id": "viwAyoLWusyQTD8HM", "name": "Grid view", "type": "grid" },
+        { "id": "viw0tpHUZwD8wQitN", "name": "לידים", "type": "grid" },
+        { "id": "viwCZmTex1m2xdT96", "name": "קליטת לקוחות", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblYpDuHHZ5q20g3i",
+      "name": "dreamlab",
+      "primaryFieldId": "fld5mV6e6NhluwXGD",
+      "fields": [
+        { "type": "singleLineText", "id": "fld5mV6e6NhluwXGD", "name": "Name" },
+        { "type": "multilineText", "id": "fldxoTQqfGN5oIwKn", "name": "Notes" },
+        {
+          "type": "singleCollaborator",
+          "id": "fldEi5FEWqn9LhK1w",
+          "name": "Assignee"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selGRIoe6oWO9zTRV",
+                "name": "Todo",
+                "color": "redLight2"
+              },
+              {
+                "id": "sel7AsHXFfFc1GgiN",
+                "name": "In progress",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "sellRnnV09q5C88rB",
+                "name": "Done",
+                "color": "greenLight2"
+              }
+            ]
+          },
+          "id": "fldlP2YYsPMTVYofS",
+          "name": "Status"
+        },
+        {
+          "type": "multipleAttachments",
+          "options": { "isReversed": false },
+          "id": "fldSXSaCqBTvqnsvM",
+          "name": "Attachments"
+        },
+        {
+          "type": "aiText",
+          "options": {
+            "referencedFieldIds": ["fldSXSaCqBTvqnsvM"],
+            "prompt": [
+              "You are a professional document analyst specializing in summarizing content from various file types. Your task is to extract key points and provide a concise summary of the content found in the attached files. Ensure that the summary captures the main ideas and any important details without including unnecessary information.\n\nAnalyze the content of the attached files to identify the main themes and significant details. Summarize these points clearly and concisely, ensuring that the summary is informative and relevant to the document's purpose.\n\nFormat your response as plain text, keeping it concise and to the point. If you cannot summarize the content, output \"Unable to summarize the content.\" Example: \"The document discusses the impact of climate change on polar bears, highlighting the loss of habitat and food sources.\" (Real examples should be longer and more detailed.)\n\nFiles:\n",
+              { "field": { "fieldId": "fldSXSaCqBTvqnsvM" } }
+            ]
+          },
+          "id": "fldnI0ybWGESSyUcl",
+          "name": "Attachment Summary",
+          "description": "An AI generated summary of the Attachments field. Upload files to Attachments to generate a summary."
+        }
+      ],
+      "views": [
+        { "id": "viwPx0xo3W85gF0fo", "name": "Grid view", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblnQH1RjbTwEzTFB",
+      "name": "מחירון ססיות",
+      "primaryFieldId": "fld94YWzLIGLZfUPw",
+      "fields": [
+        {
+          "type": "number",
+          "options": { "precision": 1 },
+          "id": "fld94YWzLIGLZfUPw",
+          "name": "כמות שעות"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 0 },
+          "id": "fldrOxq5XnwoPeU8V",
+          "name": "מחיר"
+        }
+      ],
+      "views": [
+        { "id": "viwCplJJiYobW18JI", "name": "Grid view", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tbl41omZjBaUTzWYJ",
+      "name": "מדרגות הנחה",
+      "primaryFieldId": "fldQfFhHL8X9efX8E",
+      "fields": [
+        {
+          "type": "number",
+          "options": { "precision": 1 },
+          "id": "fldQfFhHL8X9efX8E",
+          "name": "סכום מינימלי"
+        },
+        {
+          "type": "number",
+          "options": { "precision": 0 },
+          "id": "fld8ZeLdXNNM4eXr3",
+          "name": "אחוז הנחה"
+        }
+      ],
+      "views": [
+        { "id": "viwjA24RioFzb1b2Q", "name": "Grid view", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblXpOBGIzlAirfhl",
+      "name": "מתחמים",
+      "primaryFieldId": "fldYqUxRsCRpaQE2Q",
+      "fields": [
+        {
+          "type": "singleLineText",
+          "id": "fldYqUxRsCRpaQE2Q",
+          "name": "שם מתחם"
+        },
+        { "type": "url", "id": "fld0YOVgmaECdOTyK", "name": "קבוצת וואטסאפ" },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldTPdPpantsCGkkQ"
+          },
+          "id": "fldh0pdbjksjUj8tQ",
+          "name": "לקוחות"
+        }
+      ],
+      "views": [
+        { "id": "viwQWsMlaD6L1ukBE", "name": "Grid view", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tbltJwGoN4OUtKaHq",
+      "name": "עסקאות ססיה",
+      "primaryFieldId": "fldsB5UoFHFGgyDpB",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fldKtY188Ul8HHUSx}&\" - \"&{fldRDkbgGMH4nwWBC}",
+            "referencedFieldIds": ["fldKtY188Ul8HHUSx", "fldRDkbgGMH4nwWBC"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldsB5UoFHFGgyDpB",
+          "name": "עסקה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldCaQAomXZQkHdmP"
+          },
+          "id": "fldKtY188Ul8HHUSx",
+          "name": "לקוח"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selJvlSxuJZU0nyjT",
+                "name": "פעיל",
+                "color": "greenBright"
+              },
+              {
+                "id": "selxWLWg9zEtrPcFM",
+                "name": "לא פעיל",
+                "color": "orangeBright"
+              }
+            ]
+          },
+          "id": "fldd7ndh39oEOPKU6",
+          "name": "סטטוס עסקה"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldmhaCYlgcaRjRY8",
+          "name": "תאריך התחלה"
+        },
+        { "type": "multilineText", "id": "fldkMlQ2PzXXAlcJg", "name": "הערות" },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  {fldKGRKOsUGKCuHn2},\n  DATEADD({fldKGRKOsUGKCuHn2}, 1, 'month'),\n  DATEADD({fldmhaCYlgcaRjRY8}, 1, 'month')\n)",
+            "referencedFieldIds": ["fldKGRKOsUGKCuHn2", "fldmhaCYlgcaRjRY8"],
+            "result": {
+              "type": "date",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+              }
+            }
+          },
+          "id": "fldRS0JaZYy4YsRsb",
+          "name": "יום חידוש מנוי"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblfGq7ezJ45irjed",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldRiJIni6vrp1DXs"
+          },
+          "id": "fldqKuEoxCisOwKAZ",
+          "name": "תשלומים"
+        },
+        {
+          "type": "autoNumber",
+          "id": "fldRDkbgGMH4nwWBC",
+          "name": "מספר עסקה"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "fld7ll4fvMq3h9HBO",
+          "name": "מחיר לפני הנחה"
+        },
+        {
+          "type": "currency",
+          "options": { "precision": 2, "symbol": "₪" },
+          "id": "fldv9IV7CDxvQX2BJ",
+          "name": "מחיר אחרי הנחה"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldxgnSMldd3WRdLY",
+            "fieldIdInLinkedTable": "fld3FqXJzn1lekZRf",
+            "referencedFieldIds": [],
+            "result": {
+              "type": "currency",
+              "options": { "precision": 2, "symbol": "₪" }
+            }
+          },
+          "id": "fldcH5P4XMArAc6nW",
+          "name": "סהכ מחיר לפני הנחה (סיכום ססיות)"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  {fldcH5P4XMArAc6nW} > 0,\n  ({fldcH5P4XMArAc6nW} - {fldv9IV7CDxvQX2BJ}) / {fldcH5P4XMArAc6nW},\n  0\n)",
+            "referencedFieldIds": ["fldcH5P4XMArAc6nW", "fldv9IV7CDxvQX2BJ"],
+            "result": { "type": "percent", "options": { "precision": 0 } }
+          },
+          "id": "fldiZWgVaUAvawdHa",
+          "name": "אחוז הנחה"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldKtY188Ul8HHUSx",
+            "fieldIdInLinkedTable": "fldgnd1hvGPZVhEZW",
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldsAGYxACQoAa1jP",
+          "name": "recID (from לקוח)"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldqKuEoxCisOwKAZ",
+            "fieldIdInLinkedTable": "fldPbVxXkjtLnEoSy",
+            "referencedFieldIds": [],
+            "result": {
+              "type": "date",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+              }
+            }
+          },
+          "id": "fldKGRKOsUGKCuHn2",
+          "name": "תשלום אחרון בפועל"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  AND(\n    {fldRS0JaZYy4YsRsb} != BLANK(),\n    DATETIME_DIFF(TODAY(), {fldRS0JaZYy4YsRsb}, 'days') >= 1,\n    OR(\n      {fldKGRKOsUGKCuHn2} = BLANK(),\n      {fldKGRKOsUGKCuHn2} < {fldRS0JaZYy4YsRsb}\n    )\n  ),\n  \"איחור בתשלום\",\n  \"בזמן\"\n)",
+            "referencedFieldIds": ["fldRS0JaZYy4YsRsb", "fldKGRKOsUGKCuHn2"],
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selFORMULADEFAULT",
+                    "name": "איחור בתשלום",
+                    "color": "redBright"
+                  },
+                  {
+                    "id": "selwrRPYnRQX69ozV",
+                    "name": "בזמן",
+                    "color": "greenLight1"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldjuPqeTxQvzHadB",
+          "name": "עברו 35 יום מאז תשלום אחרון לעסקה?",
+          "description": "מציג 'איחור בתשלום' אם התשלום האחרון היה לפני 40 יום או יותר, אחרת 'בזמן'."
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldKtY188Ul8HHUSx",
+            "fieldIdInLinkedTable": "fldRskI911bRrB9Fe",
+            "result": {
+              "type": "singleSelect",
+              "options": {
+                "choices": [
+                  {
+                    "id": "selrfyDkx0aO1NQL3",
+                    "name": "חדש",
+                    "color": "greenLight1"
+                  },
+                  {
+                    "id": "selhJ5rFagN0IqeqT",
+                    "name": "נשלח חוזה לחתימה",
+                    "color": "blueLight1"
+                  },
+                  {
+                    "id": "seleHhHXfbm8RALup",
+                    "name": "פעיל",
+                    "color": "greenBright"
+                  },
+                  {
+                    "id": "selVJRfOQtHhKQ21L",
+                    "name": "מושהה",
+                    "color": "yellowBright"
+                  },
+                  {
+                    "id": "selzohV1HAjE6eAtv",
+                    "name": "לא פעיל",
+                    "color": "orangeBright"
+                  }
+                ]
+              }
+            }
+          },
+          "id": "fldyjGwEivYFZ9j6t",
+          "name": "סטטוס לקוח (from לקוח)"
+        },
+        {
+          "type": "lastModifiedTime",
+          "options": {
+            "isValid": true,
+            "referencedFieldIds": [],
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "local", "format": "l" },
+                "timeFormat": { "name": "12hour", "format": "h:mma" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldtvCm9TECxGwDFK",
+          "name": "Last Modified"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fld9QwmXvf6qJ7VFp",
+          "name": "תאריך תחילת הוראת קבע"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fld3wOC0KxgyCzVS4",
+          "name": "RECORD_ID"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldqKuEoxCisOwKAZ",
+            "fieldIdInLinkedTable": "fld7ERUfgEUa7Trf7",
+            "referencedFieldIds": [],
+            "result": {
+              "type": "currency",
+              "options": { "precision": 0, "symbol": "₪" }
+            }
+          },
+          "id": "fldKhGEghsUaalgAn",
+          "name": "כמה שולם עד היום?"
+        },
+        {
+          "type": "rollup",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldqKuEoxCisOwKAZ",
+            "fieldIdInLinkedTable": "fld7ERUfgEUa7Trf7",
+            "referencedFieldIds": [],
+            "result": {
+              "type": "currency",
+              "options": { "precision": 0, "symbol": "₪" }
+            }
+          },
+          "id": "fldRu0v7oRjz8aJrX",
+          "name": "תשלומים סהכ עד שנה קדימה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblp3BzSRFpcqVsXR",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldeEX23WBJl8HAB5"
+          },
+          "id": "fldxgnSMldd3WRdLY",
+          "name": "ססיות"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "DATETIME_FORMAT({fldKGRKOsUGKCuHn2},\"DD/MM/YY\")",
+            "referencedFieldIds": ["fldKGRKOsUGKCuHn2"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldtXXnitK5t2G748",
+          "name": "תשלום אחרון - תאריך בפורמט רגיל"
+        }
+      ],
+      "views": [
+        { "id": "viwDpeQkYUBag4gjA", "name": "מנויים פעילים", "type": "grid" },
+        { "id": "viw61RDfiP7trUrwm", "name": "כמעט ואזל", "type": "grid" },
+        { "id": "viwZuEMS58hPOcnJF", "name": "אזל", "type": "grid" },
+        { "id": "viwgjolIzo6BOcCX4", "name": "חידוש החודש", "type": "grid" },
+        { "id": "viwwULYZpxh29Pcp3", "name": "הכל", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tblNU6fgUdzbXopLE",
+      "name": "תיעוד שיחות",
+      "primaryFieldId": "fldx3A03vGJkEInux",
+      "fields": [
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fldx3A03vGJkEInux",
+          "name": "תאריך ושעה"
+        },
+        { "type": "multilineText", "id": "fldPa0mrLcvRglLXb", "name": "תיאור" },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selD3BkJeTFkQqgTa",
+                "name": "הילית",
+                "color": "blueLight2"
+              },
+              {
+                "id": "seldCMvplwLkx0ggW",
+                "name": "אביגיל",
+                "color": "cyanLight2"
+              }
+            ]
+          },
+          "id": "fld0z8SizfCeSEaXq",
+          "name": "אחראי"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblbbLNP4xhKDHSYj",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fld1tjTFIhWK0dexH"
+          },
+          "id": "fld47FFQ0UyYvxVn2",
+          "name": "ליד"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fld47FFQ0UyYvxVn2",
+            "fieldIdInLinkedTable": "fldrMAduYXYAC0PVO",
+            "result": { "type": "phoneNumber" }
+          },
+          "id": "fldNTLsF7eCitGaBw",
+          "name": "טלפון (from ליד)"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbl63jrEIUMhp5pkC",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldWlRxumErhMBLT0"
+          },
+          "id": "fldZZdjFEh3vhVsJl",
+          "name": "לידים copy"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selVCsupaPdL8FCPw",
+                "name": "שיחה טלפונית",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel5Vd0GDe13u7Qmg",
+                "name": "הודעת וואטסאפ",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "seltmKtcGVeMITQVl",
+                "name": "תזמון הודעת וואטסאפ",
+                "color": "tealLight2"
+              }
+            ]
+          },
+          "id": "fldDwoHrTvCUp7tbo",
+          "name": "סוג"
+        },
+        {
+          "type": "multilineText",
+          "id": "fld5Fh6hMURpYgEc5",
+          "name": "תוכן הודעה מתוזמנת"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fld83LhqZAew6Evc2",
+          "name": "תאריך ושעת תזמון"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(\n  {fld83LhqZAew6Evc2},\n  IF(\n    AND(\n      DATETIME_FORMAT(SET_TIMEZONE({fld83LhqZAew6Evc2}, 'Asia/Jerusalem'), 'YYYY-MM-DD HH:mm') <= DATETIME_FORMAT(SET_TIMEZONE(NOW(), 'Asia/Jerusalem'), 'YYYY-MM-DD HH:mm'),\n      {fldDwoHrTvCUp7tbo} = \"תזמון הודעת וואטסאפ\"\n    ),\n    \"הודעה\"\n  )\n)",
+            "referencedFieldIds": ["fld83LhqZAew6Evc2", "fldDwoHrTvCUp7tbo"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fld7QlIbYQeu71yud",
+          "name": "הודעה אם תזמון עכשיו",
+          "description": "מציג ״הודעה״ אם תאריך ושעת תזמון הוא עכשיו וסוג הוא תזמון הודעת וואטסאפ."
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fldGx25HQOsnXBwJe",
+          "name": "RECORD_ID"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldjViIJXi3kHcvuf"
+          },
+          "id": "fldL3p7I0c2S14qWY",
+          "name": "לקוחות"
+        },
+        {
+          "type": "multipleLookupValues",
+          "options": {
+            "isValid": true,
+            "recordLinkFieldId": "fldL3p7I0c2S14qWY",
+            "fieldIdInLinkedTable": "fldnT6EZke6P3ZMru",
+            "result": { "type": "phoneNumber" }
+          },
+          "id": "fldxoH1YuaJFiWnLN",
+          "name": "טלפון (from לקוחות)"
+        }
+      ],
+      "views": [
+        { "id": "viwRtUJaWSaAi2648", "name": "Grid view", "type": "grid" }
+      ]
+    },
+    {
+      "id": "tbl63jrEIUMhp5pkC",
+      "name": "HAKLIKA TALK",
+      "primaryFieldId": "fld7Gqq4djnLzyyWK",
+      "fields": [
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "{fldgroWZWjP7rpUDa} & \" \" & {fld9RlDY4u1KD1HIp}",
+            "referencedFieldIds": ["fldgroWZWjP7rpUDa", "fld9RlDY4u1KD1HIp"],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fld7Gqq4djnLzyyWK",
+          "name": "לקוח",
+          "description": "מציג את השם הפרטי ושם המשפחה יחד כשם מלא."
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldgroWZWjP7rpUDa",
+          "name": "שם פרטי"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fld9RlDY4u1KD1HIp",
+          "name": "שם משפחה"
+        },
+        { "type": "phoneNumber", "id": "fldmE8RjCkt7oomh7", "name": "טלפון" },
+        { "type": "email", "id": "fld87udymGEvufaNM", "name": "אימייל" },
+        {
+          "type": "singleLineText",
+          "id": "fldHHSvEjjYkHsJ25",
+          "name": "סוג טיפול"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "sel9SZlcMlHKQtzif",
+                "name": "ברור  sure",
+                "color": "blueDark1"
+              },
+              {
+                "id": "selGLKqoz5RsS7osb",
+                "name": "קצת  little ",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selC0lkFR8cUcXIWx",
+                "name": "לא     no",
+                "color": "orangeLight2"
+              }
+            ]
+          },
+          "id": "fldd7WW1aKio0n0UD",
+          "name": "האם עובד.ת עם חלומות בחדר הטיפולים?"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selpMPdgWIjPodLXq",
+                "name": "1",
+                "color": "yellowBright"
+              },
+              { "id": "selsrsB1q9IVts52j", "name": "2", "color": "cyanLight2" },
+              { "id": "sellPDJzfPp095Ri3", "name": "3", "color": "tealLight2" }
+            ]
+          },
+          "id": "fldROF3m9uGJdumy3",
+          "name": "כמה אנחנו ?"
+        },
+        {
+          "type": "button",
+          "id": "fldtGn4yYpQDNrjMq",
+          "name": "טופס קביעת פגישה"
+        },
+        {
+          "type": "button",
+          "id": "fldM8Snw8PpROxBBn",
+          "name": "שליחת וואטסאפ"
+        },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fld6RbUlwFA9WN8tC",
+          "name": "תאריך ושעת פגישה"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selP6E4R8tGuZznfg",
+                "name": "פייסבוק קמפיין",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selvofTlQMqRDod9B",
+                "name": "אינסטגרם",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selAjQDFQF3UeWBe7",
+                "name": "מטפל בקלינקיה",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selPBC5tJ64LJAekO",
+                "name": "פייסבוק אורגני",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selVRGU9CAFho0Ln5",
+                "name": "אחר",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "selmHiVMP23B7yKy8",
+                "name": "פייסבוק פרסום",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selfgioneoUmWxtH6",
+                "name": "פרסום פייס-פנו ישירות",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "seloyXVnEQDWH6lut",
+                "name": "מטפל בקליניקה",
+                "color": "tealLight2"
+              },
+              {
+                "id": "sel5T9jk4o1Hwj7zw",
+                "name": "ליד מפרסום עבר",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel5VxQhuY3sXjXOv",
+                "name": "instgram",
+                "color": "blueLight2"
+              },
+              {
+                "id": "sel83zXdyCUNftyPm",
+                "name": "facebook",
+                "color": "blueLight2"
+              }
+            ]
+          },
+          "id": "fldZOmuMifnbmiCm9",
+          "name": "מקור הגעה"
+        },
+        {
+          "type": "multilineText",
+          "id": "fld7hU4ve8j8h57k8",
+          "name": "תשובות מהטופס"
+        },
+        { "type": "multilineText", "id": "fldCLcPiBkZn0lwFv", "name": "הערות" },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selV2k6YKpP5t1rt7",
+                "name": "מתעניין",
+                "color": "pinkBright"
+              },
+              {
+                "id": "selbMnXH4duGkyXJi",
+                "name": "שילם",
+                "color": "orangeLight2"
+              },
+              {
+                "id": "selhwRhjS4ndq8Fay",
+                "name": "מגיע",
+                "color": "redLight2"
+              },
+              {
+                "id": "selsVqAA07G4eDavf",
+                "name": "להזכיר",
+                "color": "pinkLight2"
+              }
+            ]
+          },
+          "id": "fldynLOJK2L8J7TU1",
+          "name": "סטטוס"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldXSkjyhKLZpPHtH",
+          "name": "משימה הילית"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fldxJPip0gEYiu1Ct",
+          "name": "משימה אביגיל"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" }
+          },
+          "id": "fldfcQAvk7JIMhD2D",
+          "name": "תאריך יצירה באקסל"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldweJyiJTNsilMpz",
+          "name": "Created"
+        },
+        { "type": "button", "id": "fldAVGXWKHC9p6RNa", "name": "להתקשר" },
+        {
+          "type": "dateTime",
+          "options": {
+            "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+            "timeFormat": { "name": "24hour", "format": "HH:mm" },
+            "timeZone": "client"
+          },
+          "id": "fld5rjDHTMTvnceV6",
+          "name": "תאריך פולאואפ אחרון"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "\"https://forms.fillout.com/t/bpgrV82xhBus?id=\" & RECORD_ID()",
+            "referencedFieldIds": [],
+            "result": { "type": "singleLineText" }
+          },
+          "id": "fld0cCwwTpcKSHBa1",
+          "name": "טופס קליטת לקוח"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblIUoXFMdWuFldvr",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldqRwC4pu0duphJO"
+          },
+          "id": "fldL7w9dkXKFRUd5Q",
+          "name": "לקוחות"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selgYgBf1PeNyNynH",
+                "name": "dreamlab",
+                "color": "blueLight2"
+              }
+            ]
+          },
+          "id": "fldFGThT33oWoj5BH",
+          "name": "קטגוריה"
+        },
+        { "type": "button", "id": "fldf1QF7JXFbsnPGP", "name": "שליחת הודעה" },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblYNbWVSwP5U6ake",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldGByN6XjbwoLfA0"
+          },
+          "id": "fld1sThB6aR7vQzlW",
+          "name": "נוסח הודעה"
+        },
+        {
+          "type": "multipleSelects",
+          "options": {
+            "choices": [
+              {
+                "id": "sel3jVhiiB4cEa8Lb",
+                "name": "ראשון",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selJ9c4UaIncH1nnN",
+                "name": "שני",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selr4anddyRyRSCqO",
+                "name": "שלישי",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selMNEirmXHKaq4Bw",
+                "name": "רביעי",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selXeJHQz035g3nZE",
+                "name": "חמישי",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "selp8BmOghqWRB7XW",
+                "name": "שישי",
+                "color": "orangeLight2"
+              },
+              {
+                "id": "selUFzOJydC3DK2wA",
+                "name": "בוקר",
+                "color": "redLight2"
+              },
+              {
+                "id": "sel3dD13N69xlLakV",
+                "name": "ערב",
+                "color": "pinkLight2"
+              },
+              {
+                "id": "seledA3nPtqc9d4WE",
+                "name": "סוטין",
+                "color": "purpleLight2"
+              },
+              {
+                "id": "sel0JuN2v83kQqs0L",
+                "name": "יהודה הלוי",
+                "color": "grayLight2"
+              },
+              {
+                "id": "selxXl8YxqfwSOMvW",
+                "name": "הדר יוסף",
+                "color": "blueLight1"
+              }
+            ]
+          },
+          "id": "fldyzDBc6FCbIfSlf",
+          "name": "סטנד ביי ליום"
+        },
+        {
+          "type": "multilineText",
+          "id": "flde6rbaHqiUZ9EBr",
+          "name": "הודעות אוטומציה"
+        },
+        {
+          "type": "createdTime",
+          "options": {
+            "result": {
+              "type": "dateTime",
+              "options": {
+                "dateFormat": { "name": "european", "format": "D/M/YYYY" },
+                "timeFormat": { "name": "24hour", "format": "HH:mm" },
+                "timeZone": "client"
+              }
+            }
+          },
+          "id": "fldZXKEDyIpyT3Ih9",
+          "name": "תאריך יצירת רשומה"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblNU6fgUdzbXopLE",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldZZdjFEh3vhVsJl"
+          },
+          "id": "fldWlRxumErhMBLT0",
+          "name": "תיעוד שיחות"
+        }
+      ],
+      "views": [
+        { "id": "viw6wsiv1eeBK0OuW", "name": "Grid view", "type": "grid" }
+      ]
+    }
+  ]
+}

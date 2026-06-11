@@ -41,11 +41,19 @@ yarn-error.log*
 next-env.d.ts
 
 # Screenshots from playwright/testing
+# Root-level screenshots (may contain real customer data) - never commit
+/*.png
+/*.jpeg
+/*.jpg
 login-*.png
 login-*.jpeg
+_archive-screenshots/
 .playwright-mcp/
 .claude/
 .env*.local
 
 # Local dev scripts (contain real customer IDs / generate live tokens)
 mktoken.mjs
+
+# Make.com blueprint exports (9MB, contain real customer emails - PII)
+docs/make-blueprints/

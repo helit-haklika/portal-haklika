@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>פורטל הקליקה - 7 סקיצות עיצוב</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Heebo", system-ui, sans-serif;
+        background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+        color: #fafafa;
+        min-height: 100vh;
+        padding: 60px 24px;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .intro {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .intro h1 {
+        font-family: "Frank Ruhl Libre", serif;
+        font-size: 56px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, #fafafa 0%, #a3a3a3 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .intro p {
+        font-size: 18px;
+        color: #a3a3a3;
+        line-height: 1.6;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 24px;
+      }
+      .card {
+        background: #1f1f1f;
+        border: 1px solid #2a2a2a;
+        border-radius: 20px;
+        padding: 32px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: #404040;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 4px;
+        background: var(--accent);
+      }
+      .card.a {
+        --accent: linear-gradient(90deg, #1f4842, #d4a574);
+      }
+      .card.b {
+        --accent: linear-gradient(90deg, #1a1a1a, #4a6b8a);
+      }
+      .card.c {
+        --accent: linear-gradient(90deg, #c2410c, #fb923c);
+      }
+      .card.d {
+        --accent: linear-gradient(90deg, #a13c2a, #5a6b3f);
+      }
+      .card.e {
+        --accent: linear-gradient(90deg, #0a0907, #e54827);
+      }
+      .card.f {
+        --accent: linear-gradient(90deg, #8a9a7b, #c89490);
+      }
+      .card.g {
+        --accent: linear-gradient(90deg, #f5ddb8, #e8b8dc);
+      }
+      .badge-new {
+        position: absolute;
+        top: 16px;
+        inset-inline-start: 16px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: #fafafa;
+        color: #0a0a0a;
+        padding: 3px 8px;
+        border-radius: 100px;
+      }
+      .section-divider {
+        margin: 56px 0 32px;
+        text-align: center;
+        position: relative;
+      }
+      .section-divider::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        height: 1px;
+        background: #2a2a2a;
+      }
+      .section-divider span {
+        position: relative;
+        background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+        padding: 0 24px;
+        font-family: "Frank Ruhl Libre", serif;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #737373;
+      }
+      .card-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #737373;
+        margin-bottom: 12px;
+      }
+      .card-title {
+        font-family: "Frank Ruhl Libre", serif;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin-bottom: 8px;
+        color: #fafafa;
+      }
+      .card-subtitle {
+        font-size: 15px;
+        color: #a3a3a3;
+        margin-bottom: 24px;
+        line-height: 1.5;
+      }
+      .palette {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .swatch {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 28px;
+      }
+      .tag {
+        font-size: 12px;
+        padding: 4px 10px;
+        background: #2a2a2a;
+        border-radius: 100px;
+        color: #d4d4d4;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fafafa;
+      }
+      .cta::after {
+        content: "←";
+        transition: transform 0.2s;
+      }
+      .card:hover .cta::after {
+        transform: translateX(-4px);
+      }
+      .footer {
+        margin-top: 80px;
+        text-align: center;
+        color: #737373;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .footer strong {
+        color: #d4d4d4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="intro">
+        <h1>7 כיווני עיצוב לבחירה</h1>
+        <p>
+          פורטל הקליקה - שדרוג עיצוב דרמטי. כל סקיצה מציגה גם תצוגת מובייל
+          (375px) וגם דסקטופ (1440px) באותו עמוד. הסבב הראשון (A-C) היה SaaS
+          סטנדרטי. הסבב השני (D-F) מציע 3 כיוונים נועזים יותר עם זהות ויזואלית
+          מובחנת. סבב 3 (G) מבוסס השראה מ-Lustra Luxury (Behance).
+        </p>
+      </div>
+
+      <div class="section-divider">
+        <span>סבב 3 · השראת Behance</span>
+      </div>
+
+      <div class="grid">
+        <a href="g-lustra.html" class="card g">
+          <span class="badge-new">חדש</span>
+          <div class="card-label">סקיצה G</div>
+          <div class="card-title">Lustra Luxury Pastel</div>
+          <div class="card-subtitle">
+            השראה מ-Lustra Luxury Jewellery (Behance). דשבורד פסטלי luxury -
+            כרטיסי KPI באפרסק, תכלת, לילך ופוקסיה, אייקונים בעיגולים שחורים,
+            פינות מעוגלות מאוד (28px), רקע בז'-קרם. נווט-פיל עליון ו-3 status
+            chips. תחושה של dashboard ניהול תכשיטים יוקרתי שהותאם ללקוחות
+            הקליקה.
+          </div>
+          <div class="palette">
+            <div class="swatch" style="background: #f5efe6"></div>
+            <div class="swatch" style="background: #f5ddb8"></div>
+            <div class="swatch" style="background: #c8d4f0"></div>
+            <div class="swatch" style="background: #e8b8dc"></div>
+          </div>
+          <div class="tags">
+            <span class="tag">Heebo בלבד (sans clean)</span>
+            <span class="tag">6 KPI pastel</span>
+            <span class="tag">עיגולי אייקון שחורים</span>
+            <span class="tag">פינות 28px</span>
+          </div>
+          <span class="cta">פתח סקיצה</span>
+        </a>
+      </div>
+
+      <div class="section-divider">
+        <span>סבב 2 · כיוונים נועזים</span>
+      </div>
+
+      <div class="grid">
+        <a href="d-mediterranean-atelier.html" class="card d">
+          <span class="badge-new">חדש</span>
+          <div class="card-label">סקיצה D</div>
+          <div class="card-title">Mediterranean Atelier</div>
+          <div class="card-subtitle">
+            אסתטיקה עיתונאית-ארכיונית. מספור פרקים רומי (I. II. III.). היתרה
+            כמספר serif ענק (140px) ששובר את הגריד. טרקוטה + זית על קרם, ללא
+            צללים. תחושה של קליניקה פרטית בת"א שהעיצוב חשוב לה.
+          </div>
+          <div class="palette">
+            <div class="swatch" style="background: #f1e8d8"></div>
+            <div class="swatch" style="background: #a13c2a"></div>
+            <div class="swatch" style="background: #5a6b3f"></div>
+            <div class="swatch" style="background: #1f1611"></div>
+          </div>
+          <div class="tags">
+            <span class="tag">Frank Ruhl 900 + Newsreader italic</span>
+            <span class="tag">מספור פרקים I-V</span>
+            <span class="tag">Hero שובר גריד</span>
+            <span class="tag">ללא צללים</span>
+          </div>
+          <span class="cta">פתח סקיצה</span>
+        </a>
+
+        <a href="e-clinic-mono.html" class="card e">
+          <span class="badge-new">חדש</span>
+          <div class="card-label">סקיצה E</div>
+          <div class="card-title">Clinic Mono</div>
+          <div class="card-subtitle">
+            ברוטליסט טכני. JetBrains Mono לכל המספרים, ASCII dividers, אנוטציות
+            <code>// SECTION 01</code>. שחור על bone עם vermilion אחד. אפס
+            shadows, אפס gradients, אפס פינות עגולות. נראה כמו dashboard מעבדה.
+          </div>
+          <div class="palette">
+            <div class="swatch" style="background: #ece9e2"></div>
+            <div class="swatch" style="background: #0a0907"></div>
+            <div class="swatch" style="background: #e54827"></div>
+          </div>
+          <div class="tags">
+            <span class="tag">JetBrains Mono + Heebo</span>
+            <span class="tag">ASCII dividers ═══</span>
+            <span class="tag">Top bar בלבד</span>
+            <span class="tag">Terminal cards 2px ink</span>
+          </div>
+          <span class="cta">פתח סקיצה</span>
+        </a>
+
+        <a href="f-soft-apothecary.html" class="card f">
+          <span class="badge-new">חדש</span>
+          <div class="card-label">סקיצה F</div>
+          <div class="card-title">Soft Apothecary</div>
+          <div class="card-subtitle">
+            יומן צמחי אורגני. ❦ קישוטים בוטניים בין סקציות, Cormorant italic
+            למספר היתרה (96px, רך לא צועק). סייג' + ורד עמוק + חמאה. פינות
+            מעוגלות 24px, צללים רכים. תחושת ספר עם max-width 960px גם בדסקטופ.
+          </div>
+          <div class="palette">
+            <div class="swatch" style="background: #8a9a7b"></div>
+            <div class="swatch" style="background: #c89490"></div>
+            <div class="swatch" style="background: #f6efde"></div>
+            <div class="swatch" style="background: #3d3528"></div>
+          </div>
+          <div class="tags">
+            <span class="tag">Cormorant italic + Frank Ruhl</span>
+            <span class="tag">SVG ornaments בוטניים</span>
+            <span class="tag">פינות 24px</span>
+            <span class="tag">ספר ולא dashboard</span>
+          </div>
+          <span class="cta">פתח סקיצה</span>
+        </a>
+      </div>
+
+      <div class="section-divider">
+        <span>סבב 1 · כיוונים ראשונים (לעיון)</span>
+      </div>
+
+      <div class="grid">
+        <a href="a-premium-wellness.html" class="card a">
+          <div class="card-label">סקיצה A</div>
+          <div class="card-title">Premium Wellness</div>
+          <div class="card-subtitle">
+            תחושת ספא/בריאות פרימיום - ירוק עמוק עם זהב חם, sidebar דביק עם
+            KPIs, bottom nav במובייל
+          </div>
+          <div class="palette">
+            <div class="swatch" style="background: #1f4842"></div>
+            <div class="swatch" style="background: #d4a574"></div>
+            <div class="swatch" style="background: #faf6ed"></div>
+            <div class="swatch" style="background: #4a7c59"></div>
+          </div>
+          <div class="tags">
+            <span class="tag">Heebo + Frank Ruhl Libre</span>
+            <span class="tag">Sidebar + Main</span>
+            <span class="tag">Bottom Nav (mobile)</span>
+            <span class="tag">Sparklines</span>
+          </div>
+          <span class="cta">פתח סקיצה</span>
+        </a>
+
+        <a href="b-bento-editorial.html" class="card b">
+          <div class="card-label">סקיצה B</div>
+          <div class="card-title">Bento Editorial</div>
+          <div class="card-subtitle">
+            סגנון מגזין - bento grid 12 עמודות, טיפוגרפיה היא הכוכבת, מספרים
+            ענקיים ב-Frank Ruhl Libre, הרבה white space
+          </div>
+          <div class="palette">
+            <div class="swatch" style="background: #1a1a1a"></div>
+            <div class="swatch" style="background: #f7f3eb"></div>
+            <div class="swatch" style="background: #4a6b8a"></div>
+            <div class="swatch" style="background: #e5dfd1"></div>
+          </div>
+          <div class="tags">
+            <span class="tag">Heebo + Frank Ruhl Libre</span>
+            <span class="tag">Bento Grid 12-col</span>
+            <span class="tag">Editorial Typography</span>
+            <span class="tag">Pull Quotes</span>
+          </div>
+          <span class="cta">פתח סקיצה</span>
+        </a>
+
+        <a href="c-glass-sidebar.html" class="card c">
+          <div class="card-label">סקיצה C</div>
+          <div class="card-title">Glass + Sidebar</div>
+          <div class="card-subtitle">
+            SaaS מודרני בסגנון Linear/Vercel - sidebar קבוע, KPI cards צפופים,
+            טבלאות מודרניות, drawer במובייל
+          </div>
+          <div class="palette">
+            <div class="swatch" style="background: #fafafa"></div>
+            <div class="swatch" style="background: #0a0a0a"></div>
+            <div class="swatch" style="background: #c2410c"></div>
+            <div class="swatch" style="background: #f5f5f5"></div>
+          </div>
+          <div class="tags">
+            <span class="tag">Heebo (משקלים 300-700)</span>
+            <span class="tag">Sidebar קבוע</span>
+            <span class="tag">Drawer (mobile)</span>
+            <span class="tag">Data Density</span>
+          </div>
+          <span class="cta">פתח סקיצה</span>
+        </a>
+      </div>
+
+      <div class="footer">
+        <p>
+          <strong>איך לצפות:</strong> פתח כל סקיצה בדפדפן. תראה את שתי התצוגות
+          (מובייל ודסקטופ) זו לצד זו באותו עמוד.<br />התמקד בסבב 2 (D, E, F) -
+          אלה הכיוונים הנועזים החדשים. בחר אחד או שילוב.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

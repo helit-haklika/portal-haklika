@@ -53,6 +53,7 @@ export function ExportToolbar({
           className="hk-chipbtn"
           disabled={disabled}
           onClick={() => downloadCsv(data, csvFilename)}
+          aria-label="ייצוא הנתונים לקובץ CSV"
           title={disabled ? "אין נתונים לייצוא" : undefined}
         >
           <DownloadIcon /> CSV

@@ -40,12 +40,12 @@ export function PurchaseSection({ payments }: Props) {
         <table className="hk-table hk-table--stack">
           <thead>
             <tr>
-              <th className="hk-table__th-day">תאריך</th>
-              <th className="hk-table__th-desc">תיאור</th>
-              <th className="hk-table__th-num">שעות</th>
-              <th className="hk-table__th-num">סכום</th>
-              <th className="hk-table__th-num">יתרה לאחר רכישה</th>
-              <th className="hk-table__th-invoice">חשבונית</th>
+              <th scope="col" className="hk-table__th-day">תאריך</th>
+              <th scope="col" className="hk-table__th-desc">תיאור</th>
+              <th scope="col" className="hk-table__th-num">שעות</th>
+              <th scope="col" className="hk-table__th-num">סכום</th>
+              <th scope="col" className="hk-table__th-num">יתרה לאחר רכישה</th>
+              <th scope="col" className="hk-table__th-invoice">חשבונית</th>
             </tr>
           </thead>
           <tbody>

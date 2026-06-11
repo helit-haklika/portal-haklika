@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Heebo } from "next/font/google";
 import "./globals.css";
 
@@ -21,11 +22,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Reading headers() opts every page into dynamic rendering, so the
+  // per-request CSP nonce from src/proxy.ts is applied to Next's inline
+  // scripts (statically prerendered pages cannot receive a nonce).
+  await headers();
   return (
     <html lang="he" dir="rtl" className={heebo.variable}>
       <body className={`hk min-h-dvh bg-[var(--bg)]`}>{children}</body>

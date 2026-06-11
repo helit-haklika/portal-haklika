@@ -25,11 +25,11 @@ export function ActiveSessionsSection({ sessions }: Props) {
         <table className="hk-table hk-table--stack">
           <thead>
             <tr>
-              <th className="hk-table__th-day">יום</th>
-              <th className="hk-table__th-time">שעות</th>
-              <th className="hk-table__th-room">חדר</th>
-              <th className="hk-table__th-num">מחיר בסיס</th>
-              <th className="hk-table__th-status">סטטוס</th>
+              <th scope="col" className="hk-table__th-day">יום</th>
+              <th scope="col" className="hk-table__th-time">שעות</th>
+              <th scope="col" className="hk-table__th-room">חדר</th>
+              <th scope="col" className="hk-table__th-num">מחיר בסיס</th>
+              <th scope="col" className="hk-table__th-status">סטטוס</th>
             </tr>
           </thead>
           <tbody>

@@ -45,11 +45,11 @@ export function BookingsSection({ bookings }: Props) {
         <table className="hk-table hk-table--stack">
           <thead>
             <tr>
-              <th className="hk-table__th-day">יום</th>
-              <th className="hk-table__th-time">שעות</th>
-              <th className="hk-table__th-room">חדר</th>
-              <th className="hk-table__th-num">סך שעות</th>
-              <th className="hk-table__th-num">יתרה לאחר שימוש</th>
+              <th scope="col" className="hk-table__th-day">יום</th>
+              <th scope="col" className="hk-table__th-time">שעות</th>
+              <th scope="col" className="hk-table__th-room">חדר</th>
+              <th scope="col" className="hk-table__th-num">סך שעות</th>
+              <th scope="col" className="hk-table__th-num">יתרה לאחר שימוש</th>
             </tr>
           </thead>
           <tbody>
